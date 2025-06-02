@@ -79,10 +79,10 @@
             display: none;
         }
         
-        /* Hero content adjusted for left alignment */
+        /* Hero content - mixed alignment */
         .hero-content {
-            text-align: left;
-            max-width: 1200px;
+            text-align: center;
+            max-width: 800px;
             width: 100%;
             padding: 0 2rem;
             margin-top: 60px; /* Account for header */
@@ -95,14 +95,23 @@
             font-weight: 700;
             color: white;
             text-transform: none;
+            text-align: left;
         }
         
-        /* Track selector moved up */
+        /* Music controls section */
+        .music-controls-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 1.5rem 0 3rem 0;
+            justify-content: flex-start;
+        }
+        
+        /* Track selector */
         .track-selector {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin: 1.5rem 0;
         }
         
         .track-selector label {
@@ -142,13 +151,9 @@
             color: white;
             margin-bottom: 2rem;
             max-width: 600px;
-        }
-        
-        /* Music player controls */
-        .music-controls {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
         }
         
         .play-button {
@@ -177,6 +182,7 @@
             color: white;
             margin-top: 1rem;
             font-style: italic;
+            text-align: center;
         }
     </style>
 </head>
@@ -205,27 +211,28 @@
                 Hi, I'm Klaire
             </h1>
             
-            <div class="track-selector">
-                <label>Select Track:</label>
-                <div class="track-buttons">
-                    <button class="track-btn active" onclick="selectTrack(1)">Track 1</button>
-                    <button class="track-btn" onclick="selectTrack(2)">Track 2</button>
+            <div class="music-controls-section">
+                <div class="track-selector">
+                    <label>Select Track:</label>
+                    <div class="track-buttons">
+                        <button class="track-btn active" onclick="selectTrack(1)">Track 1</button>
+                        <button class="track-btn" onclick="selectTrack(2)">Track 2</button>
+                    </div>
                 </div>
+                
+                <button class="play-button" onclick="togglePlay()">
+                    <i class="fas fa-play" id="play-icon"></i>
+                </button>
             </div>
             
             <p class="hero-description">
                 Welcome to my creative space. I'm a UI/UX designer and recent graduate exploring the intersection of 
-                game design, AI technology, and brand experiences. Currently developing an indie iOS game while 
+                game design, AI technology, and brand experiences. I'm currently starting to develop an indie iOS game while 
                 experimenting with AI-powered creative tools. Below you'll find two ambient shoegaze tracks I created 
-                using AI – a small glimpse into how I blend technology with artistic expression.
+                using AI.
             </p>
             
-            <div class="music-controls">
-                <button class="play-button" onclick="togglePlay()">
-                    <i class="fas fa-play" id="play-icon"></i>
-                </button>
-                <div class="now-playing" id="now-playing"></div>
-            </div>
+            <div class="now-playing" id="now-playing"></div>
         </div>
     </section>
 
