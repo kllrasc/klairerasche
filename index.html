@@ -14,6 +14,7 @@
             height: 100vh;
             margin: 0;
             padding: 0;
+            background-color: #CCCCFF;
         }
         
         .hero {
@@ -22,9 +23,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background-color: #CCCCFF;
         }
         
         /* Navigation updates */
+        .navbar {
+            background-color: transparent;
+            padding: 2rem 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
         .nav-menu {
             display: none;
         }
@@ -32,6 +48,8 @@
         .nav-logo a {
             font-size: 1.5rem;
             text-transform: lowercase;
+            color: white;
+            text-decoration: none;
         }
         
         /* Social links in header */
@@ -42,7 +60,7 @@
         }
         
         .social-links a {
-            color: var(--text-color, #333);
+            color: white;
             font-size: 1.2rem;
             transition: opacity 0.3s ease;
         }
@@ -64,23 +82,18 @@
         }
         
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 5rem;
             line-height: 1.2;
             margin-bottom: 2rem;
             font-weight: 700;
-        }
-        
-        .hero-title .highlight {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            text-transform: capitalize;
         }
         
         .hero-description {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #666;
+            color: white;
             margin-bottom: 3rem;
             max-width: 600px;
             margin-left: auto;
@@ -97,9 +110,9 @@
         }
         
         .play-button {
-            background: #333;
+            background: white;
             border: none;
-            color: white;
+            color: #CCCCFF;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -113,8 +126,8 @@
         }
         
         .play-button:hover {
-            background: #555;
             transform: scale(1.1);
+            opacity: 0.9;
         }
         
         .track-selector {
@@ -126,7 +139,7 @@
         
         .track-selector label {
             font-size: 0.9rem;
-            color: #666;
+            color: white;
             margin-bottom: 0.25rem;
         }
         
@@ -137,7 +150,8 @@
         
         .track-btn {
             background: transparent;
-            border: 2px solid #333;
+            border: 2px solid white;
+            color: white;
             padding: 0.5rem 1rem;
             border-radius: 25px;
             cursor: pointer;
@@ -146,18 +160,18 @@
         }
         
         .track-btn.active {
-            background: #333;
-            color: white;
+            background: white;
+            color: #CCCCFF;
         }
         
         .track-btn:hover {
-            background: #333;
-            color: white;
+            background: white;
+            color: #CCCCFF;
         }
         
         .now-playing {
             font-size: 0.9rem;
-            color: #666;
+            color: white;
             margin-top: 1rem;
             font-style: italic;
         }
@@ -171,10 +185,10 @@
                 <a href="#home">klaire rasche</a>
             </div>
             <div class="social-links">
-                <a href="https://www.instagram.com/yourusername" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.instagram.com/klaire.ras" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/klairerasche" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-linkedin"></i>
                 </a>
             </div>
@@ -185,7 +199,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="hero-title">
-                <span class="highlight">hi im klaire</span>
+                Hi Im Klaire
             </h1>
             <p class="hero-description">
                 Welcome to my creative space. I'm a UI/UX designer and recent graduate exploring the intersection of 
