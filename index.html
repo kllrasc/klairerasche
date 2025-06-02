@@ -182,15 +182,16 @@
             font-style: italic;
         }
         
-        /* Mobile responsiveness */
+        /* Mobile responsiveness - keep big title but fix spacing */
         @media (max-width: 768px) {
             .hero-content {
-                margin-top: 100px; /* More space for mobile header */
+                margin-top: 120px; /* More space to clear header on mobile */
                 padding: 0 1.5rem;
             }
             
+            /* Keep the large title size on mobile */
             .hero-title {
-                font-size: 3.5rem; /* Smaller on mobile */
+                font-size: 6rem; /* Keep big marshmallow size */
                 margin-bottom: 1.5rem;
             }
             
@@ -229,11 +230,13 @@
         
         @media (max-width: 480px) {
             .hero-content {
-                margin-top: 120px; /* Even more space for small mobile */
+                margin-top: 140px; /* Even more space for small mobile screens */
+                padding: 0 1rem;
             }
             
+            /* Still keep large title on small mobile */
             .hero-title {
-                font-size: 2.8rem;
+                font-size: 5rem; /* Slightly smaller but still big */
             }
             
             .hero-description {
