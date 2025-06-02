@@ -29,7 +29,7 @@
         /* Navigation updates */
         .navbar {
             background-color: transparent;
-            padding: 1rem 0;  /* Reduced from 2rem to make header thinner */
+            padding: 1rem 0;
             position: absolute;
             top: 0;
             left: 0;
@@ -79,13 +79,11 @@
             display: none;
         }
         
-        /* Hero content - mixed alignment */
+        /* Hero content centered */
         .hero-content {
             text-align: center;
             max-width: 800px;
-            width: 100%;
             padding: 0 2rem;
-            margin-top: 60px; /* Account for header */
         }
         
         .hero-title {
@@ -95,7 +93,6 @@
             font-weight: 700;
             color: white;
             text-transform: none;
-            text-align: left;
         }
         
         .hero-description {
@@ -106,28 +103,49 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            text-align: center;
         }
         
-        /* Music controls section */
-        .music-controls-section {
+        /* Music player controls */
+        .music-controls {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 2rem;
-            margin-bottom: 2rem;
-            justify-content: flex-start;
+            margin-top: 2rem;
         }
         
-        /* Track selector */
+        .play-button {
+            background: white;
+            border: none;
+            color: #CCCCFF;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+        
         .track-selector {
             display: flex;
-            align-items: center;
-            gap: 1rem;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-start;
         }
         
         .track-selector label {
             font-size: 0.9rem;
             color: white;
+            margin-bottom: 0.25rem;
         }
         
         .track-buttons {
@@ -156,33 +174,11 @@
             color: #CCCCFF;
         }
         
-        .play-button {
-            background: white;
-            border: none;
-            color: #CCCCFF;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .play-button:hover {
-            transform: scale(1.1);
-            opacity: 0.9;
-        }
-        
         .now-playing {
             font-size: 0.9rem;
             color: white;
             margin-top: 1rem;
             font-style: italic;
-            text-align: center;
         }
     </style>
 </head>
@@ -218,7 +214,7 @@
                 using AI.
             </p>
             
-            <div class="music-controls-section">
+            <div class="music-controls">
                 <div class="track-selector">
                     <label>Select Track:</label>
                     <div class="track-buttons">
