@@ -91,11 +91,22 @@
         .hero-title {
             font-size: 6rem;
             line-height: 1.2;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             font-weight: 700;
             color: white;
             text-transform: none;
             text-align: left;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: white;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
         }
         
         /* Music controls section */
@@ -103,7 +114,7 @@
             display: flex;
             align-items: center;
             gap: 2rem;
-            margin: 1.5rem 0 3rem 0;
+            margin-bottom: 2rem;
             justify-content: flex-start;
         }
         
@@ -143,17 +154,6 @@
         .track-btn:hover {
             background: white;
             color: #CCCCFF;
-        }
-        
-        .hero-description {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: white;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
         }
         
         .play-button {
@@ -211,6 +211,13 @@
                 Hi, I'm Klaire
             </h1>
             
+            <p class="hero-description">
+                Welcome to my creative space. I'm a UI/UX designer and recent graduate exploring the intersection of 
+                game design, AI technology, and brand experiences. I'm currently starting to develop an indie iOS game while 
+                experimenting with AI-powered creative tools. Below you'll find two ambient shoegaze tracks I created 
+                using AI.
+            </p>
+            
             <div class="music-controls-section">
                 <div class="track-selector">
                     <label>Select Track:</label>
@@ -224,13 +231,6 @@
                     <i class="fas fa-play" id="play-icon"></i>
                 </button>
             </div>
-            
-            <p class="hero-description">
-                Welcome to my creative space. I'm a UI/UX designer and recent graduate exploring the intersection of 
-                game design, AI technology, and brand experiences. I'm currently starting to develop an indie iOS game while 
-                experimenting with AI-powered creative tools. Below you'll find two ambient shoegaze tracks I created 
-                using AI.
-            </p>
             
             <div class="now-playing" id="now-playing"></div>
         </div>
