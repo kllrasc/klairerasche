@@ -29,7 +29,12 @@
         /* Navigation updates */
         .navbar {
             background-color: transparent;
-            padding: 2rem 0;
+            padding: 1rem 0;  /* Reduced from 2rem to make header thinner */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
         }
         
         .nav-container {
@@ -74,73 +79,35 @@
             display: none;
         }
         
-        /* Hero content centered */
+        /* Hero content adjusted for left alignment */
         .hero-content {
-            text-align: center;
-            max-width: 800px;
+            text-align: left;
+            max-width: 1200px;
+            width: 100%;
             padding: 0 2rem;
+            margin-top: 60px; /* Account for header */
         }
         
         .hero-title {
-            font-size: 5rem;
+            font-size: 6rem;
             line-height: 1.2;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             font-weight: 700;
             color: white;
-            text-transform: capitalize;
+            text-transform: none;
         }
         
-        .hero-description {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: white;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* Music player controls */
-        .music-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .play-button {
-            background: white;
-            border: none;
-            color: #CCCCFF;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .play-button:hover {
-            transform: scale(1.1);
-            opacity: 0.9;
-        }
-        
+        /* Track selector moved up */
         .track-selector {
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            align-items: flex-start;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
         }
         
         .track-selector label {
             font-size: 0.9rem;
             color: white;
-            margin-bottom: 0.25rem;
         }
         
         .track-buttons {
@@ -167,6 +134,42 @@
         .track-btn:hover {
             background: white;
             color: #CCCCFF;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: white;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        /* Music player controls */
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .play-button {
+            background: white;
+            border: none;
+            color: #CCCCFF;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
         }
         
         .now-playing {
@@ -199,8 +202,17 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="hero-title">
-                Hi Im Klaire
+                Hi, I'm Klaire
             </h1>
+            
+            <div class="track-selector">
+                <label>Select Track:</label>
+                <div class="track-buttons">
+                    <button class="track-btn active" onclick="selectTrack(1)">Track 1</button>
+                    <button class="track-btn" onclick="selectTrack(2)">Track 2</button>
+                </div>
+            </div>
+            
             <p class="hero-description">
                 Welcome to my creative space. I'm a UI/UX designer and recent graduate exploring the intersection of 
                 game design, AI technology, and brand experiences. Currently developing an indie iOS game while 
@@ -209,20 +221,11 @@
             </p>
             
             <div class="music-controls">
-                <div class="track-selector">
-                    <label>Select Track:</label>
-                    <div class="track-buttons">
-                        <button class="track-btn active" onclick="selectTrack(1)">Track 1</button>
-                        <button class="track-btn" onclick="selectTrack(2)">Track 2</button>
-                    </div>
-                </div>
-                
                 <button class="play-button" onclick="togglePlay()">
                     <i class="fas fa-play" id="play-icon"></i>
                 </button>
+                <div class="now-playing" id="now-playing"></div>
             </div>
-            
-            <div class="now-playing" id="now-playing"></div>
         </div>
     </section>
 
