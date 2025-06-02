@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>klaire rasche - UI/UX Designer</title>
+    <title>klaire rasche</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -12,16 +12,21 @@
         body, html {
             overflow: hidden;
             height: 100vh;
+            margin: 0;
+            padding: 0;
         }
         
         .hero {
             height: 100vh;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        /* Smaller, cleaner navigation */
+        /* Navigation updates */
         .nav-menu {
-            display: none; /* Hide navigation menu on homepage */
+            display: none;
         }
         
         .nav-logo a {
@@ -29,59 +34,21 @@
             text-transform: lowercase;
         }
         
-        /* Custom styles for the play button */
-        .play-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+        /* Social links in header */
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .social-links a {
+            color: var(--text-color, #333);
             font-size: 1.2rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: opacity 0.3s ease;
         }
         
-        .play-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        /* Audio player styles */
-        .audio-player {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            margin-top: 1rem;
-        }
-        
-        .play-pause-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .play-pause-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        audio {
-            flex: 1;
-            height: 40px;
+        .social-links a:hover {
+            opacity: 0.7;
         }
         
         /* Hide hamburger menu on homepage */
@@ -89,10 +56,110 @@
             display: none;
         }
         
+        /* Hero content centered */
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
         .hero-title {
-            font-size: 3rem;
+            font-size: 3.5rem;
             line-height: 1.2;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        
+        .hero-title .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Music player controls */
+        .music-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .play-button {
+            background: #333;
+            border: none;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .play-button:hover {
+            background: #555;
+            transform: scale(1.1);
+        }
+        
+        .track-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-start;
+        }
+        
+        .track-selector label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+        
+        .track-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .track-btn {
+            background: transparent;
+            border: 2px solid #333;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .track-btn.active {
+            background: #333;
+            color: white;
+        }
+        
+        .track-btn:hover {
+            background: #333;
+            color: white;
+        }
+        
+        .now-playing {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 1rem;
+            font-style: italic;
         }
     </style>
 </head>
@@ -103,13 +170,13 @@
             <div class="nav-logo">
                 <a href="#home">klaire rasche</a>
             </div>
-            <ul class="nav-menu">
-                <!-- Navigation items removed for homepage -->
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div class="social-links">
+                <a href="https://www.instagram.com/yourusername" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                </a>
             </div>
         </div>
     </nav>
@@ -117,120 +184,111 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    hi im klaire
-                </h1>
-                <p class="hero-description">
-                    I'm a recent graduate interested in game design, coding with AI, and brand management. 
-                    Right now I'm working on an indie iOS game app, and I love experimenting with creative projects. 
-                    Check out these two AI-generated songs I made based on shoegaze, one of my favorite music genres!
-                </p>
-                <div class="hero-buttons">
-                    <button class="play-button" onclick="document.getElementById('music').scrollIntoView({behavior: 'smooth'})">
-                        <i class="fas fa-play"></i>
-                        Listen to My Music
-                    </button>
+            <h1 class="hero-title">
+                <span class="highlight">hi im klaire</span>
+            </h1>
+            <p class="hero-description">
+                Welcome to my creative space. I'm a UI/UX designer and recent graduate exploring the intersection of 
+                game design, AI technology, and brand experiences. Currently developing an indie iOS game while 
+                experimenting with AI-powered creative tools. Below you'll find two ambient shoegaze tracks I created 
+                using AI – a small glimpse into how I blend technology with artistic expression.
+            </p>
+            
+            <div class="music-controls">
+                <div class="track-selector">
+                    <label>Select Track:</label>
+                    <div class="track-buttons">
+                        <button class="track-btn active" onclick="selectTrack(1)">Track 1</button>
+                        <button class="track-btn" onclick="selectTrack(2)">Track 2</button>
+                    </div>
                 </div>
+                
+                <button class="play-button" onclick="togglePlay()">
+                    <i class="fas fa-play" id="play-icon"></i>
+                </button>
             </div>
-            <div class="hero-visual">
-                <div class="floating-elements">
-                    <div class="element element-1"></div>
-                    <div class="element element-2"></div>
-                    <div class="element element-3"></div>
-                </div>
-            </div>
+            
+            <div class="now-playing" id="now-playing"></div>
         </div>
     </section>
 
-    <!-- Music Section -->
-    <section id="music" class="music-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">My AI-Generated Shoegaze</h2>
-                <p class="section-subtitle">Two experimental tracks created with AI, inspired by the atmospheric sounds of shoegaze</p>
-            </div>
-            <div class="music-grid">
-                <div class="music-item">
-                    <div class="music-artwork">
-                        <i class="fas fa-music"></i>
-                    </div>
-                    <div class="music-info">
-                        <h3>Whispers in Twilight v1.1</h3>
-                        <p>AI-generated atmospheric shoegaze</p>
-                        <div class="audio-player">
-                            <button class="play-pause-btn" onclick="togglePlay('audio1')">
-                                <i class="fas fa-play" id="play-icon-1"></i>
-                            </button>
-                            <audio id="audio1" controls>
-                                <source src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Whispers%20in%20Twilight%20ext%20v1.1.1.wav" type="audio/wav">
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
-                    </div>
-                </div>
-                <div class="music-item">
-                    <div class="music-artwork">
-                        <i class="fas fa-music"></i>
-                    </div>
-                    <div class="music-info">
-                        <h3>Whispers in the Twilight v1.2</h3>
-                        <p>AI-generated atmospheric shoegaze</p>
-                        <div class="audio-player">
-                            <button class="play-pause-btn" onclick="togglePlay('audio2')">
-                                <i class="fas fa-play" id="play-icon-2"></i>
-                            </button>
-                            <audio id="audio2" controls>
-                                <source src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Whispers%20in%20the%20Twilight%20ext%20v1.1.2.wav" type="audio/wav">
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Hidden audio elements -->
+    <audio id="audio1" preload="auto">
+        <source src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Whispers%20in%20Twilight%20ext%20v1.1.1.wav" type="audio/wav">
+    </audio>
+    <audio id="audio2" preload="auto">
+        <source src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Whispers%20in%20the%20Twilight%20ext%20v1.1.2.wav" type="audio/wav">
+    </audio>
 
     <script src="script.js"></script>
     <script>
-        // Function to toggle play/pause
-        function togglePlay(audioId) {
-            const audio = document.getElementById(audioId);
-            const iconId = audioId === 'audio1' ? 'play-icon-1' : 'play-icon-2';
-            const icon = document.getElementById(iconId);
+        let currentTrack = 1;
+        let isPlaying = false;
+        
+        function selectTrack(trackNum) {
+            // Update current track
+            currentTrack = trackNum;
             
-            if (audio.paused) {
-                // Pause other audio if playing
-                const otherAudioId = audioId === 'audio1' ? 'audio2' : 'audio1';
-                const otherAudio = document.getElementById(otherAudioId);
-                const otherIconId = audioId === 'audio1' ? 'play-icon-2' : 'play-icon-1';
-                const otherIcon = document.getElementById(otherIconId);
-                
-                if (!otherAudio.paused) {
-                    otherAudio.pause();
-                    otherIcon.className = 'fas fa-play';
+            // Update button states
+            document.querySelectorAll('.track-btn').forEach((btn, index) => {
+                if (index + 1 === trackNum) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
                 }
-                
-                audio.play();
-                icon.className = 'fas fa-pause';
-            } else {
+            });
+            
+            // Stop current audio and reset
+            const audio1 = document.getElementById('audio1');
+            const audio2 = document.getElementById('audio2');
+            audio1.pause();
+            audio2.pause();
+            audio1.currentTime = 0;
+            audio2.currentTime = 0;
+            
+            // Reset play button
+            document.getElementById('play-icon').className = 'fas fa-play';
+            isPlaying = false;
+            
+            // Update now playing text
+            updateNowPlaying();
+        }
+        
+        function togglePlay() {
+            const audio = document.getElementById(`audio${currentTrack}`);
+            const icon = document.getElementById('play-icon');
+            
+            if (isPlaying) {
                 audio.pause();
                 icon.className = 'fas fa-play';
+                isPlaying = false;
+                document.getElementById('now-playing').textContent = '';
+            } else {
+                audio.play();
+                icon.className = 'fas fa-pause';
+                isPlaying = true;
+                updateNowPlaying();
             }
         }
         
-        // Update icon when audio ends
+        function updateNowPlaying() {
+            if (isPlaying) {
+                const trackName = currentTrack === 1 ? 'Whispers in Twilight v1.1' : 'Whispers in the Twilight v1.2';
+                document.getElementById('now-playing').textContent = `Now playing: ${trackName}`;
+            }
+        }
+        
+        // Handle audio end
         document.getElementById('audio1').addEventListener('ended', function() {
-            document.getElementById('play-icon-1').className = 'fas fa-play';
+            document.getElementById('play-icon').className = 'fas fa-play';
+            isPlaying = false;
+            document.getElementById('now-playing').textContent = '';
         });
         
         document.getElementById('audio2').addEventListener('ended', function() {
-            document.getElementById('play-icon-2').className = 'fas fa-play';
-        });
-        
-        // Allow scrolling for music section
-        document.getElementById('music').addEventListener('wheel', function(e) {
-            e.stopPropagation();
+            document.getElementById('play-icon').className = 'fas fa-play';
+            isPlaying = false;
+            document.getElementById('now-playing').textContent = '';
         });
     </script>
 </body>
