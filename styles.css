@@ -949,8 +949,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Photo carousel styles */
 .photo-carousel {
-    width: 250px;
-    height: 250px;
+    width: 270px;
+    height: 270px;
     margin: 0rem auto;
     position: relative;
     border-radius: 12px;
@@ -1007,8 +1007,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Mobile adjustments for carousel */
 @media (max-width: 767px) {
     .photo-carousel {
-        width: 200px;
-        height: 200px;
+        width: 220px;
+        height: 220px;
         margin: 0rem auto;
     }
 }
