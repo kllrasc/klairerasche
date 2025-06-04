@@ -953,7 +953,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 270px;
     margin: 0rem auto;
     position: relative;
-    border-radius: 12px;
+    border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
