@@ -515,6 +515,13 @@
             </div>
             
             <div class="now-playing" id="now-playing"></div>
+            
+            <!-- Photo Carousel -->
+            <div class="photo-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-loading" id="carousel-loading"></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -601,7 +608,106 @@
         window.addEventListener('load', function() {
             // Cursor is now working with the properly sized image
             console.log('Custom cursor loaded successfully!');
+            
+            // Initialize photo carousel
+            initPhotoCarousel();
         });
+        
+        // Photo carousel functionality
+        const photos = [
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_7918.HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_7688%20(1).HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_7458%20(1).HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_6016_Original.HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_5546%20(1).HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_4001_Original%203.HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_3764.HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_3688.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_3241.HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_2835%20(1).HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_2635%20(1).HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_2271_Original.HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_2217_Original%203.HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1973%20(1).HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1906_Original%203.HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1842_Original%203.HEIC',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_0783_Original%203.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_0190_Original%203.HEIC'
+        ];
+        
+        let currentPhotoIndex = 0;
+        let carouselInterval;
+        
+        function initPhotoCarousel() {
+            const container = document.querySelector('.carousel-container');
+            const loading = document.getElementById('carousel-loading');
+            
+            // Preload all images
+            const loadedImages = [];
+            let loadedCount = 0;
+            
+            photos.forEach((photoUrl, index) => {
+                const img = new Image();
+                img.onload = function() {
+                    loadedCount++;
+                    loadedImages[index] = this;
+                    
+                    // Once all images are loaded, start the carousel
+                    if (loadedCount === photos.length) {
+                        loading.style.display = 'none';
+                        createCarousel(loadedImages);
+                        startCarousel();
+                    }
+                };
+                img.onerror = function() {
+                    console.warn(`Failed to load image: ${photoUrl}`);
+                    loadedCount++;
+                    
+                    // Continue even if some images fail to load
+                    if (loadedCount === photos.length) {
+                        loading.style.display = 'none';
+                        createCarousel(loadedImages.filter(img => img !== undefined));
+                        startCarousel();
+                    }
+                };
+                img.src = photoUrl;
+            });
+        }
+        
+        function createCarousel(images) {
+            const container = document.querySelector('.carousel-container');
+            
+            images.forEach((img, index) => {
+                if (img) {
+                    const carouselImg = img.cloneNode();
+                    carouselImg.className = 'carousel-image';
+                    carouselImg.alt = `Photo ${index + 1}`;
+                    
+                    if (index === 0) {
+                        carouselImg.classList.add('active');
+                    }
+                    
+                    container.appendChild(carouselImg);
+                }
+            });
+        }
+        
+        function startCarousel() {
+            carouselInterval = setInterval(() => {
+                const images = document.querySelectorAll('.carousel-image');
+                if (images.length === 0) return;
+                
+                // Fade out current image
+                images[currentPhotoIndex].classList.remove('active');
+                
+                // Move to next image
+                currentPhotoIndex = (currentPhotoIndex + 1) % images.length;
+                
+                // Fade in new image
+                images[currentPhotoIndex].classList.add('active');
+            }, 4000); // Change image every 4 seconds
+        }
     </script>
 </body>
 </html> 
