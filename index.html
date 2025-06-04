@@ -32,40 +32,84 @@
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.8;
-            animation: twinkle 3s ease-in-out infinite alternate;
+            opacity: 0.9;
+            animation: twinkle 2s ease-in-out infinite alternate;
         }
         
-        .star:nth-child(1) { width: 2px; height: 2px; top: 20%; left: 10%; animation-delay: 0s; }
-        .star:nth-child(2) { width: 1px; height: 1px; top: 30%; left: 20%; animation-delay: 1s; }
-        .star:nth-child(3) { width: 3px; height: 3px; top: 10%; left: 30%; animation-delay: 2s; }
-        .star:nth-child(4) { width: 2px; height: 2px; top: 40%; left: 40%; animation-delay: 0.5s; }
-        .star:nth-child(5) { width: 1px; height: 1px; top: 60%; left: 15%; animation-delay: 1.5s; }
-        .star:nth-child(6) { width: 2px; height: 2px; top: 70%; left: 25%; animation-delay: 2.5s; }
-        .star:nth-child(7) { width: 1px; height: 1px; top: 15%; left: 60%; animation-delay: 3s; }
-        .star:nth-child(8) { width: 3px; height: 3px; top: 25%; left: 70%; animation-delay: 0.8s; }
-        .star:nth-child(9) { width: 2px; height: 2px; top: 45%; left: 80%; animation-delay: 1.8s; }
-        .star:nth-child(10) { width: 1px; height: 1px; top: 65%; left: 90%; animation-delay: 2.8s; }
-        .star:nth-child(11) { width: 2px; height: 2px; top: 80%; left: 85%; animation-delay: 1.2s; }
-        .star:nth-child(12) { width: 1px; height: 1px; top: 90%; left: 75%; animation-delay: 2.2s; }
-        .star:nth-child(13) { width: 2px; height: 2px; top: 35%; left: 5%; animation-delay: 3.2s; }
-        .star:nth-child(14) { width: 1px; height: 1px; top: 55%; left: 45%; animation-delay: 0.3s; }
-        .star:nth-child(15) { width: 3px; height: 3px; top: 75%; left: 55%; animation-delay: 1.3s; }
+        /* Sparkle stars with cross shape */
+        .star.sparkle {
+            background: transparent;
+            animation: sparkle 1.5s ease-in-out infinite alternate;
+        }
+        
+        .star.sparkle::before,
+        .star.sparkle::after {
+            content: '';
+            position: absolute;
+            background: white;
+        }
+        
+        .star.sparkle::before {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+        
+        .star.sparkle::after {
+            width: 2px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .star:nth-child(1) { width: 4px; height: 4px; top: 20%; left: 10%; animation-delay: 0s; }
+        .star:nth-child(2) { width: 3px; height: 3px; top: 30%; left: 20%; animation-delay: 1s; }
+        .star:nth-child(3) { width: 6px; height: 6px; top: 10%; left: 30%; animation-delay: 2s; }
+        .star:nth-child(4) { width: 4px; height: 4px; top: 40%; left: 40%; animation-delay: 0.5s; }
+        .star:nth-child(5) { width: 3px; height: 3px; top: 60%; left: 15%; animation-delay: 1.5s; }
+        .star:nth-child(6) { width: 5px; height: 5px; top: 70%; left: 25%; animation-delay: 2.5s; }
+        .star:nth-child(7) { width: 3px; height: 3px; top: 15%; left: 60%; animation-delay: 3s; }
+        .star:nth-child(8) { width: 6px; height: 6px; top: 25%; left: 70%; animation-delay: 0.8s; }
+        .star:nth-child(9) { width: 4px; height: 4px; top: 45%; left: 80%; animation-delay: 1.8s; }
+        .star:nth-child(10) { width: 3px; height: 3px; top: 65%; left: 90%; animation-delay: 2.8s; }
+        .star:nth-child(11) { width: 5px; height: 5px; top: 80%; left: 85%; animation-delay: 1.2s; }
+        .star:nth-child(12) { width: 3px; height: 3px; top: 90%; left: 75%; animation-delay: 2.2s; }
+        .star:nth-child(13) { width: 4px; height: 4px; top: 35%; left: 5%; animation-delay: 3.2s; }
+        .star:nth-child(14) { width: 3px; height: 3px; top: 55%; left: 45%; animation-delay: 0.3s; }
+        .star:nth-child(15) { width: 6px; height: 6px; top: 75%; left: 55%; animation-delay: 1.3s; }
+        .star:nth-child(16) { width: 4px; height: 4px; top: 5%; left: 50%; animation-delay: 2.7s; }
+        .star:nth-child(17) { width: 3px; height: 3px; top: 85%; left: 35%; animation-delay: 1.7s; }
+        .star:nth-child(18) { width: 5px; height: 5px; top: 50%; left: 65%; animation-delay: 0.7s; }
+        .star:nth-child(19) { width: 3px; height: 3px; top: 12%; left: 85%; animation-delay: 2.3s; }
+        .star:nth-child(20) { width: 4px; height: 4px; top: 78%; left: 12%; animation-delay: 1.9s; }
+        .star:nth-child(21) { width: 6px; height: 6px; top: 22%; left: 95%; animation-delay: 0.9s; }
+        .star:nth-child(22) { width: 3px; height: 3px; top: 95%; left: 50%; animation-delay: 3.1s; }
+        .star:nth-child(23) { width: 5px; height: 5px; top: 3%; left: 8%; animation-delay: 1.1s; }
+        .star:nth-child(24) { width: 4px; height: 4px; top: 68%; left: 78%; animation-delay: 2.9s; }
+        .star:nth-child(25) { width: 3px; height: 3px; top: 38%; left: 88%; animation-delay: 0.4s; }
         
         @keyframes twinkle {
-            0% { opacity: 0.3; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.2); }
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.5); }
+        }
+        
+        @keyframes sparkle {
+            0% { opacity: 0.3; transform: scale(0.5) rotate(0deg); }
+            100% { opacity: 1; transform: scale(1.3) rotate(45deg); }
         }
         
         /* Shooting stars */
         .shooting-star {
             position: absolute;
-            width: 2px;
-            height: 2px;
+            width: 3px;
+            height: 3px;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5);
-            animation: shoot 4s linear infinite;
+            box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.8);
+            animation: shoot 2s linear infinite;
             opacity: 0;
         }
         
@@ -73,30 +117,36 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -20px;
-            width: 20px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, white);
+            left: -40px;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), white);
+            border-radius: 2px;
         }
         
-        .shooting-star:nth-child(16) { top: 10%; left: -10%; animation-delay: 2s; }
-        .shooting-star:nth-child(17) { top: 30%; left: -10%; animation-delay: 6s; }
-        .shooting-star:nth-child(18) { top: 60%; left: -10%; animation-delay: 10s; }
+        .shooting-star:nth-child(26) { top: 10%; left: 20%; animation-delay: 1s; }
+        .shooting-star:nth-child(27) { top: 30%; left: 60%; animation-delay: 3s; }
+        .shooting-star:nth-child(28) { top: 60%; left: 10%; animation-delay: 5s; }
+        .shooting-star:nth-child(29) { top: 15%; left: 80%; animation-delay: 7s; }
+        .shooting-star:nth-child(30) { top: 45%; left: 30%; animation-delay: 9s; }
+        .shooting-star:nth-child(31) { top: 75%; left: 70%; animation-delay: 11s; }
+        .shooting-star:nth-child(32) { top: 25%; left: 5%; animation-delay: 13s; }
+        .shooting-star:nth-child(33) { top: 55%; left: 90%; animation-delay: 15s; }
         
         @keyframes shoot {
             0% { 
                 opacity: 0;
                 transform: translateX(0) translateY(0);
             }
-            10% { 
+            5% { 
                 opacity: 1;
             }
-            90% { 
+            95% { 
                 opacity: 1;
             }
             100% { 
                 opacity: 0;
-                transform: translateX(300px) translateY(150px);
+                transform: translateX(400px) translateY(200px);
             }
         }
         
@@ -305,19 +355,34 @@
     <div class="stars-container">
         <div class="star"></div>
         <div class="star"></div>
+        <div class="star sparkle"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star sparkle"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star sparkle"></div>
         <div class="star"></div>
         <div class="star"></div>
         <div class="star"></div>
         <div class="star"></div>
         <div class="star"></div>
         <div class="star"></div>
+        <div class="star sparkle"></div>
         <div class="star"></div>
         <div class="star"></div>
         <div class="star"></div>
         <div class="star"></div>
+        <div class="star sparkle"></div>
         <div class="star"></div>
         <div class="star"></div>
-        <div class="star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
         <div class="shooting-star"></div>
         <div class="shooting-star"></div>
         <div class="shooting-star"></div>
