@@ -20,21 +20,36 @@
         /* Custom cursor for desktop */
         @media (min-width: 768px) {
             * {
-                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 12 12, auto !important;
+                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, 
+                        url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, 
+                        auto !important;
             }
             
             body, html {
-                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 12 12, auto !important;
+                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, 
+                        url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, 
+                        auto !important;
             }
             
             /* Make sure cursor applies to all interactive elements */
             a, button, .track-btn, .play-button, input, textarea, select {
-                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 12 12, pointer !important;
+                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, 
+                        url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, 
+                        pointer !important;
             }
             
             /* Ensure cursor shows on hover states */
             a:hover, button:hover, .track-btn:hover, .play-button:hover {
-                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 12 12, pointer !important;
+                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, 
+                        url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, 
+                        pointer !important;
+            }
+            
+            /* Force cursor on absolutely everything */
+            html *, body *, div, span, p, h1, h2, h3, section, nav, button, a {
+                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, 
+                        url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, 
+                        auto !important;
             }
         }
         
@@ -615,6 +630,64 @@
             document.getElementById('play-icon').className = 'fas fa-play';
             isPlaying = false;
             document.getElementById('now-playing').textContent = '';
+        });
+
+        // Debug cursor loading
+        function testCursorImage() {
+            const img = new Image();
+            img.onload = function() {
+                console.log('Cursor image loaded successfully:', this.width, 'x', this.height);
+                // Try to apply cursor after confirming image loads
+                document.body.style.cursor = `url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, auto`;
+            };
+            img.onerror = function() {
+                console.error('Cursor image failed to load');
+                // Fallback to a simple custom cursor
+                createCustomCursor();
+            };
+            img.src = 'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG';
+        }
+
+        // Fallback custom cursor using CSS
+        function createCustomCursor() {
+            console.log('Creating fallback custom cursor');
+            // Hide default cursor and create a custom one
+            document.body.style.cursor = 'none';
+            
+            const cursor = document.createElement('div');
+            cursor.id = 'custom-cursor';
+            cursor.style.cssText = `
+                position: fixed;
+                width: 20px;
+                height: 20px;
+                background: white;
+                border: 2px solid #CCCCFF;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                mix-blend-mode: difference;
+                transition: transform 0.1s ease;
+            `;
+            document.body.appendChild(cursor);
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX - 10 + 'px';
+                cursor.style.top = e.clientY - 10 + 'px';
+            });
+            
+            document.addEventListener('mousedown', () => {
+                cursor.style.transform = 'scale(0.8)';
+            });
+            
+            document.addEventListener('mouseup', () => {
+                cursor.style.transform = 'scale(1)';
+            });
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            // Test cursor loading
+            testCursorImage();
         });
     </script>
 </body>
