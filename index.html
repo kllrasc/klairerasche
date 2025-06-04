@@ -17,39 +17,29 @@
             overflow-x: hidden;
         }
         
-        /* Custom cursor for desktop */
+        /* Custom cursor for desktop - Testing with simpler approach */
         @media (min-width: 768px) {
             * {
-                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, 
-                        url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, 
-                        auto !important;
+                cursor: crosshair !important;
             }
             
             body, html {
-                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, 
-                        url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, 
-                        auto !important;
+                cursor: crosshair !important;
+            }
+            
+            /* Test with a simple data URI cursor - red dot */
+            .hero-content * {
+                cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="red" stroke="white" stroke-width="2"/></svg>') 10 10, pointer !important;
             }
             
             /* Make sure cursor applies to all interactive elements */
             a, button, .track-btn, .play-button, input, textarea, select {
-                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, 
-                        url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, 
-                        pointer !important;
+                cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="red" stroke="white" stroke-width="2"/></svg>') 10 10, pointer !important;
             }
             
-            /* Ensure cursor shows on hover states */
-            a:hover, button:hover, .track-btn:hover, .play-button:hover {
-                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, 
-                        url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, 
-                        pointer !important;
-            }
-            
-            /* Force cursor on absolutely everything */
-            html *, body *, div, span, p, h1, h2, h3, section, nav, button, a {
-                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, 
-                        url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, 
-                        auto !important;
+            /* Test area - make title have a different cursor */
+            .hero-title {
+                cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="blue" stroke="white" stroke-width="2"/></svg>') 12 12, pointer !important;
             }
         }
         
@@ -491,6 +481,7 @@
         <div class="star"></div>
         <div class="star"></div>
         <div class="star"></div>
+        <div class="star"></div>
         <div class="star sparkle"></div>
         <div class="star"></div>
         <div class="star"></div>
@@ -632,62 +623,33 @@
             document.getElementById('now-playing').textContent = '';
         });
 
-        // Debug cursor loading
-        function testCursorImage() {
-            const img = new Image();
-            img.onload = function() {
-                console.log('Cursor image loaded successfully:', this.width, 'x', this.height);
-                // Try to apply cursor after confirming image loads
-                document.body.style.cursor = `url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 8 8, auto`;
-            };
-            img.onerror = function() {
-                console.error('Cursor image failed to load');
-                // Fallback to a simple custom cursor
-                createCustomCursor();
-            };
-            img.src = 'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG';
-        }
-
-        // Fallback custom cursor using CSS
-        function createCustomCursor() {
-            console.log('Creating fallback custom cursor');
-            // Hide default cursor and create a custom one
-            document.body.style.cursor = 'none';
+        // Debug cursor functionality
+        function testCursorFunctionality() {
+            console.log('Testing basic cursor functionality...');
             
-            const cursor = document.createElement('div');
-            cursor.id = 'custom-cursor';
-            cursor.style.cssText = `
-                position: fixed;
-                width: 20px;
-                height: 20px;
-                background: white;
-                border: 2px solid #CCCCFF;
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                mix-blend-mode: difference;
-                transition: transform 0.1s ease;
-            `;
-            document.body.appendChild(cursor);
+            // Test 1: Can we change cursor to a built-in type?
+            setTimeout(() => {
+                document.body.style.cursor = 'wait';
+                console.log('Changed cursor to "wait" - you should see a loading cursor');
+            }, 2000);
             
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX - 10 + 'px';
-                cursor.style.top = e.clientY - 10 + 'px';
-            });
+            // Test 2: Try a simple colored cursor
+            setTimeout(() => {
+                document.body.style.cursor = 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\' viewBox=\'0 0 16 16\'><circle cx=\'8\' cy=\'8\' r=\'6\' fill=\'lime\' stroke=\'black\' stroke-width=\'1\'/></svg>") 8 8, auto';
+                console.log('Changed cursor to green circle - you should see a green dot cursor');
+            }, 4000);
             
-            document.addEventListener('mousedown', () => {
-                cursor.style.transform = 'scale(0.8)';
-            });
-            
-            document.addEventListener('mouseup', () => {
-                cursor.style.transform = 'scale(1)';
-            });
+            // Test 3: Try your original image again
+            setTimeout(() => {
+                document.body.style.cursor = 'url("https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG") 12 12, auto';
+                console.log('Trying your original image again');
+            }, 6000);
         }
 
         // Initialize on page load
         window.addEventListener('load', function() {
-            // Test cursor loading
-            testCursorImage();
+            // Test cursor functionality
+            testCursorFunctionality();
         });
     </script>
 </body>
