@@ -19,13 +19,22 @@
         
         /* Custom cursor for desktop */
         @media (min-width: 768px) {
+            * {
+                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, auto !important;
+            }
+            
             body, html {
-                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG'), auto;
+                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, auto !important;
             }
             
             /* Make sure cursor applies to all interactive elements */
-            a, button, .track-btn, .play-button {
-                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG'), pointer;
+            a, button, .track-btn, .play-button, input, textarea, select {
+                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, pointer !important;
+            }
+            
+            /* Ensure cursor shows on hover states */
+            a:hover, button:hover, .track-btn:hover, .play-button:hover {
+                cursor: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG') 16 16, pointer !important;
             }
         }
         
