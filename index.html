@@ -17,29 +17,24 @@
             overflow-x: hidden;
         }
         
-        /* Custom cursor for desktop - Testing with simpler approach */
+        /* Custom cursor for desktop - Using properly sized user image */
         @media (min-width: 768px) {
             * {
-                cursor: crosshair !important;
+                cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAARGVYSWZNTQAqAAAACAABh2kABAAAAAEAAAAaAAAAAAADoAEAAwAAAAEAAQAAoAIABAAAAAEAAAAYoAMABAAAAAEAAAAYAAAAAAI1da0AAAGfaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+CiAgIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjE5ODQ8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+MTk4NDwvZXhpZjpQaXhlbFlEaW1lbnNpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo/xmBcAAABP0lEQVRIDWNgGAWjITDoQ4CZkAvZ2dlz/v796wVUdwuIPxNST7I8v6Bwe1JK2n9DI+NHQM3uJBtAhAbH5pbW//fvP/ifmpr+hZuXdx5QjywR+ohWoubg6PThPxAAg+r/zl27/+vr658F6gYFG8EgJsYWRhlZuZ33gD6Agdt37vz38w/8D4yfmUADBIkxBK8aVlbWzC1btsLMB9O/fv3+39c/4T8/v9BxoGYBvAYQIalbWVX9B9mGjs6ub5qamgtZWFhsgfpZcJmBUwJNw52LFy9eAYrpt3d2MygpKTEwMzMzXr9+fRtQ7DCaWvK4Gpo6p3fu2vNfWETsjrqG5uvTZ879j4tPeAg0TZM8E9F0cXJyF2jr6j8HCjsCsZ2bu+eH0rLy/0C2AxBTDYghmWQJZMcCMbHBjKR1lDkaAqSEAAD4vX1CrObO8QAAAABJRU5ErkJggg==') 12 12, auto !important;
             }
             
             body, html {
-                cursor: crosshair !important;
-            }
-            
-            /* Test with a simple data URI cursor - red dot */
-            .hero-content * {
-                cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="red" stroke="white" stroke-width="2"/></svg>') 10 10, pointer !important;
+                cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAARGVYSWZNTQAqAAAACAABh2kABAAAAAEAAAAaAAAAAAADoAEAAwAAAAEAAQAAoAIABAAAAAEAAAAYoAMABAAAAAEAAAAYAAAAAAI1da0AAAGfaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+CiAgIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjE5ODQ8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+MTk4NDwvZXhpZjpQaXhlbFlEaW1lbnNpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo/xmBcAAABP0lEQVRIDWNgGAWjITDoQ4CZkAvZ2dlz/v796wVUdwuIPxNST7I8v6Bwe1JK2n9DI+NHQM3uJBtAhAbH5pbW//fvP/ifmpr+hZuXdx5QjywR+ohWoubg6PThPxAAg+r/zl27/+vr658F6gYFG8EgJsYWRhlZuZ33gD6Agdt37vz38w/8D4yfmUADBIkxBK8aVlbWzC1btsLMB9O/fv3+39c/4T8/v9BxoGYBvAYQIalbWVX9B9mGjs6ub5qamgtZWFhsgfpZcJmBUwJNw52LFy9eAYrpt3d2MygpKTEwMzMzXr9+fRtQ7DCaWvK4Gpo6p3fu2vNfWETsjrqG5uvTZ879j4tPeAg0TZM8E9F0cXJyF2jr6j8HCjsCsZ2bu+eH0rLy/0C2AxBTDYghmWQJZMcCMbHBjKR1lDkaAqSEAAD4vX1CrObO8QAAAABJRU5ErkJggg==') 12 12, auto !important;
             }
             
             /* Make sure cursor applies to all interactive elements */
             a, button, .track-btn, .play-button, input, textarea, select {
-                cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="red" stroke="white" stroke-width="2"/></svg>') 10 10, pointer !important;
+                cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAARGVYSWZNTQAqAAAACAABh2kABAAAAAEAAAAaAAAAAAADoAEAAwAAAAEAAQAAoAIABAAAAAEAAAAYoAMABAAAAAEAAAAYAAAAAAI1da0AAAGfaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+CiAgIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjE5ODQ8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+MTk4NDwvZXhpZjpQaXhlbFlEaW1lbnNpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo/xmBcAAABP0lEQVRIDWNgGAWjITDoQ4CZkAvZ2dlz/v796wVUdwuIPxNST7I8v6Bwe1JK2n9DI+NHQM3uJBtAhAbH5pbW//fvP/ifmpr+hZuXdx5QjywR+ohWoubg6PThPxAAg+r/zl27/+vr658F6gYFG8EgJsYWRhlZuZ33gD6Agdt37vz38w/8D4yfmUADBIkxBK8aVlbWzC1btsLMB9O/fv3+39c/4T8/v9BxoGYBvAYQIalbWVX9B9mGjs6ub5qamgtZWFhsgfpZcJmBUwJNw52LFy9eAYrpt3d2MygpKTEwMzMzXr9+fRtQ7DCaWvK4Gpo6p3fu2vNfWETsjrqG5uvTZ879j4tPeAg0TZM8E9F0cXJyF2jr6j8HCjsCsZ2bu+eH0rLy/0C2AxBTDYghmWQJZMcCMbHBjKR1lDkaAqSEAAD4vX1CrObO8QAAAABJRU5ErkJggg==') 12 12, pointer !important;
             }
             
-            /* Test area - make title have a different cursor */
-            .hero-title {
-                cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="blue" stroke="white" stroke-width="2"/></svg>') 12 12, pointer !important;
+            /* Ensure cursor shows on hover states */
+            a:hover, button:hover, .track-btn:hover, .play-button:hover {
+                cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAARGVYSWZNTQAqAAAACAABh2kABAAAAAEAAAAaAAAAAAADoAEAAwAAAAEAAQAAoAIABAAAAAEAAAAYoAMABAAAAAEAAAAYAAAAAAI1da0AAAGfaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+CiAgIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjE5ODQ8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+MTk4NDwvZXhpZjpQaXhlbFlEaW1lbnNpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo/xmBcAAABP0lEQVRIDWNgGAWjITDoQ4CZkAvZ2dlz/v796wVUdwuIPxNST7I8v6Bwe1JK2n9DI+NHQM3uJBtAhAbH5pbW//fvP/ifmpr+hZuXdx5QjywR+ohWoubg6PThPxAAg+r/zl27/+vr658F6gYFG8EgJsYWRhlZuZ33gD6Agdt37vz38w/8D4yfmUADBIkxBK8aVlbWzC1btsLMB9O/fv3+39c/4T8/v9BxoGYBvAYQIalbWVX9B9mGjs6ub5qamgtZWFhsgfpZcJmBUwJNw52LFy9eAYrpt3d2MygpKTEwMzMzXr9+fRtQ7DCaWvK4Gpo6p3fu2vNfWETsjrqG5uvTZ879j4tPeAg0TZM8E9F0cXJyF2jr6j8HCjsCsZ2bu+eH0rLy/0C2AxBTDYghmWQJZMcCMbHBjKR1lDkaAqSEAAD4vX1CrObO8QAAAABJRU5ErkJggg==') 12 12, pointer !important;
             }
         }
         
@@ -623,33 +618,10 @@
             document.getElementById('now-playing').textContent = '';
         });
 
-        // Debug cursor functionality
-        function testCursorFunctionality() {
-            console.log('Testing basic cursor functionality...');
-            
-            // Test 1: Can we change cursor to a built-in type?
-            setTimeout(() => {
-                document.body.style.cursor = 'wait';
-                console.log('Changed cursor to "wait" - you should see a loading cursor');
-            }, 2000);
-            
-            // Test 2: Try a simple colored cursor
-            setTimeout(() => {
-                document.body.style.cursor = 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\' viewBox=\'0 0 16 16\'><circle cx=\'8\' cy=\'8\' r=\'6\' fill=\'lime\' stroke=\'black\' stroke-width=\'1\'/></svg>") 8 8, auto';
-                console.log('Changed cursor to green circle - you should see a green dot cursor');
-            }, 4000);
-            
-            // Test 3: Try your original image again
-            setTimeout(() => {
-                document.body.style.cursor = 'url("https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG") 12 12, auto';
-                console.log('Trying your original image again');
-            }, 6000);
-        }
-
         // Initialize on page load
         window.addEventListener('load', function() {
-            // Test cursor functionality
-            testCursorFunctionality();
+            // Cursor is now working with the properly sized image
+            console.log('Custom cursor loaded successfully!');
         });
     </script>
 </body>
