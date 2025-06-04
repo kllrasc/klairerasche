@@ -123,111 +123,111 @@
             border-radius: 2px;
         }
         
-        /* Shooting stars spawning from random positions across entire page */
+        /* Shooting stars spawning from completely random positions with varied directions */
         .shooting-star:nth-child(26) { 
-            top: 8%; 
-            left: 15%; 
-            animation: shootFromPosition1 4.5s linear infinite;
-            animation-delay: 2s;
+            top: 12%; 
+            left: 5%; 
+            animation: shootRightDown 6s linear infinite;
+            animation-delay: 5s;
         }
         .shooting-star:nth-child(27) { 
-            top: 32%; 
-            left: 85%; 
-            animation: shootFromPosition2 4.2s linear infinite;
-            animation-delay: 8s;
+            top: 25%; 
+            left: 95%; 
+            animation: shootLeftDown 5.5s linear infinite;
+            animation-delay: 18s;
         }
         .shooting-star:nth-child(28) { 
-            top: 58%; 
-            left: 25%; 
-            animation: shootFromPosition3 4.8s linear infinite;
-            animation-delay: 14s;
+            top: 5%; 
+            left: 60%; 
+            animation: shootDownRight 6.2s linear infinite;
+            animation-delay: 35s;
         }
         .shooting-star:nth-child(29) { 
-            top: 17%; 
-            left: 70%; 
-            animation: shootFromPosition4 4.3s linear infinite;
-            animation-delay: 20s;
+            top: 40%; 
+            left: 2%; 
+            animation: shootAcrossRight 5.8s linear infinite;
+            animation-delay: 52s;
         }
         .shooting-star:nth-child(30) { 
-            top: 43%; 
-            left: 5%; 
-            animation: shootFromPosition5 4.6s linear infinite;
-            animation-delay: 26s;
+            top: 8%; 
+            left: 85%; 
+            animation: shootDownLeft 6.1s linear infinite;
+            animation-delay: 71s;
         }
         .shooting-star:nth-child(31) { 
-            top: 73%; 
-            left: 95%; 
-            animation: shootFromPosition6 4.1s linear infinite;
-            animation-delay: 32s;
+            top: 65%; 
+            left: 98%; 
+            animation: shootAcrossLeft 5.9s linear infinite;
+            animation-delay: 88s;
         }
         .shooting-star:nth-child(32) { 
-            top: 26%; 
-            left: 45%; 
-            animation: shootFromPosition7 4.7s linear infinite;
-            animation-delay: 38s;
+            top: 15%; 
+            left: 30%; 
+            animation: shootDiagonalDown 6.3s linear infinite;
+            animation-delay: 107s;
         }
         .shooting-star:nth-child(33) { 
-            top: 51%; 
-            left: 65%; 
-            animation: shootFromPosition8 4.4s linear infinite;
-            animation-delay: 44s;
+            top: 55%; 
+            left: 75%; 
+            animation: shootUpwardArc 5.7s linear infinite;
+            animation-delay: 125s;
         }
         
-        /* Different shooting animations for consistent downward-right direction */
-        @keyframes shootFromPosition1 {
-            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(35deg); }
-            5% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(300px) translateY(200px) rotate(35deg); }
-        }
-        
-        @keyframes shootFromPosition2 {
-            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(40deg); }
-            5% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(-350px) translateY(250px) rotate(40deg); }
-        }
-        
-        @keyframes shootFromPosition3 {
-            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(30deg); }
-            5% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(400px) translateY(180px) rotate(30deg); }
-        }
-        
-        @keyframes shootFromPosition4 {
-            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(45deg); }
-            5% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(-300px) translateY(220px) rotate(45deg); }
-        }
-        
-        @keyframes shootFromPosition5 {
+        /* Varied shooting star animations with different directions */
+        @keyframes shootRightDown {
             0% { opacity: 0; transform: translateX(0) translateY(0) rotate(25deg); }
-            5% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(450px) translateY(240px) rotate(25deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(500px) translateY(300px) rotate(25deg); }
         }
         
-        @keyframes shootFromPosition6 {
-            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(50deg); }
-            5% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(-380px) translateY(180px) rotate(50deg); }
+        @keyframes shootLeftDown {
+            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(155deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(-450px) translateY(280px) rotate(155deg); }
         }
         
-        @keyframes shootFromPosition7 {
-            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(35deg); }
-            5% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(320px) translateY(210px) rotate(35deg); }
+        @keyframes shootDownRight {
+            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(70deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(200px) translateY(450px) rotate(70deg); }
         }
         
-        @keyframes shootFromPosition8 {
-            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(40deg); }
-            5% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(-420px) translateY(260px) rotate(40deg); }
+        @keyframes shootAcrossRight {
+            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(10deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(600px) translateY(80px) rotate(10deg); }
+        }
+        
+        @keyframes shootDownLeft {
+            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(110deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(-250px) translateY(400px) rotate(110deg); }
+        }
+        
+        @keyframes shootAcrossLeft {
+            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(170deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(-550px) translateY(-50px) rotate(170deg); }
+        }
+        
+        @keyframes shootDiagonalDown {
+            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(45deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(350px) translateY(350px) rotate(45deg); }
+        }
+        
+        @keyframes shootUpwardArc {
+            0% { opacity: 0; transform: translateX(0) translateY(0) rotate(-20deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(-300px) translateY(-200px) rotate(-20deg); }
         }
         
         /* Desktop: flat page, no scrolling */
