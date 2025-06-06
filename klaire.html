@@ -28,13 +28,6 @@
             min-height: 100vh;
             position: relative;
             z-index: 10;
-            transition: all 1s ease-out;
-        }
-
-        .main-container.moved-up {
-            justify-content: flex-start;
-            padding-top: 0;
-            min-height: 100vh;
         }
 
         .name-text {
@@ -43,21 +36,12 @@
             color: white;
             text-transform: lowercase;
             letter-spacing: 0.1em;
-            opacity: 0;
-            transform: translateY(50px) scale(0.9);
-            animation: fadeInUp 2s ease-out forwards;
             text-align: center;
-            margin-bottom: 2rem;
-            transition: all 1s ease-out;
-        }
-
-        .name-text.moved-to-top {
-            position: absolute;
-            top: 4rem;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-bottom: 0;
-            z-index: 20;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.5s ease-out 0.5s forwards, moveToTop 1.2s ease-out 3s forwards;
+            position: relative;
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* Floating particles */
@@ -137,8 +121,9 @@
             width: 100%;
             padding: 0 2rem;
             opacity: 0;
-            animation: fadeInAccordion 1s ease-out 4s forwards;
-            margin-top: 8rem;
+            transform: translateY(50px);
+            animation: revealAccordion 1s ease-out 4.5s forwards;
+            margin-top: 2rem;
         }
 
         .accordion-item {
@@ -152,10 +137,10 @@
             transform: translateY(30px);
         }
 
-        .accordion-item:nth-child(1) { animation: slideInUp 0.6s ease-out 4.5s forwards; }
-        .accordion-item:nth-child(2) { animation: slideInUp 0.6s ease-out 4.8s forwards; }
-        .accordion-item:nth-child(3) { animation: slideInUp 0.6s ease-out 5.1s forwards; }
-        .accordion-item:nth-child(4) { animation: slideInUp 0.6s ease-out 5.4s forwards; }
+        .accordion-item:nth-child(1) { animation: slideInUp 0.6s ease-out 5s forwards; }
+        .accordion-item:nth-child(2) { animation: slideInUp 0.6s ease-out 5.2s forwards; }
+        .accordion-item:nth-child(3) { animation: slideInUp 0.6s ease-out 5.4s forwards; }
+        .accordion-item:nth-child(4) { animation: slideInUp 0.6s ease-out 5.6s forwards; }
 
         .accordion-header {
             padding: 1.5rem 2rem;
@@ -203,20 +188,38 @@
         @keyframes fadeInUp {
             0% {
                 opacity: 0;
-                transform: translateY(50px) scale(0.9);
+                transform: translateY(30px);
             }
             100% {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translateY(0);
             }
         }
 
-        @keyframes fadeInAccordion {
+        @keyframes moveToTop {
+            0% {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: translateY(0);
+            }
+            100% {
+                position: fixed;
+                top: 4rem;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 100;
+            }
+        }
+
+        @keyframes revealAccordion {
             0% {
                 opacity: 0;
+                transform: translateY(50px);
             }
             100% {
                 opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -253,6 +256,22 @@
             }
         }
 
+        /* Content spacer for when title moves to top */
+        .content-spacer {
+            height: 0;
+            transition: height 1.2s ease-out;
+            animation: createSpace 0.5s ease-out 4.2s forwards;
+        }
+
+        @keyframes createSpace {
+            0% {
+                height: 0;
+            }
+            100% {
+                height: 8rem;
+            }
+        }
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .name-text {
@@ -272,6 +291,22 @@
 
             .accordion-container {
                 padding: 0 1rem;
+            }
+
+            @keyframes moveToTop {
+                0% {
+                    position: relative;
+                    top: auto;
+                    left: auto;
+                    transform: translateY(0);
+                }
+                100% {
+                    position: fixed;
+                    top: 2rem;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    z-index: 100;
+                }
             }
         }
 
@@ -310,8 +345,9 @@
     <div class="glow-orb"></div>
 
     <!-- Main content -->
-    <div class="main-container" id="mainContainer">
+    <div class="main-container">
         <h1 class="name-text">klaire rasche</h1>
+        <div class="content-spacer"></div>
         
         <!-- Accordion -->
         <div class="accordion-container">
@@ -366,12 +402,6 @@
     </div>
 
     <script>
-        // Move content to top after initial animation
-        setTimeout(() => {
-            document.getElementById('mainContainer').classList.add('moved-up');
-            document.querySelector('.name-text').classList.add('moved-to-top');
-        }, 3500);
-
         // Accordion functionality
         function toggleAccordion(header) {
             const item = header.parentElement;
