@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>klaire rasche</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,41 +14,40 @@
 
         body, html {
             height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             background: linear-gradient(135deg, #CCCCFF 0%, #B8B8FF 50%, #A8A8FF 100%);
             font-family: 'Inter', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .main-container {
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
             position: relative;
             z-index: 10;
+            transition: all 1s ease-out;
+        }
+
+        .main-container.moved-up {
+            justify-content: flex-start;
+            padding-top: 3rem;
+            min-height: auto;
         }
 
         .name-text {
             font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 300;
+            font-weight: 900;
             color: white;
             text-transform: lowercase;
             letter-spacing: 0.1em;
             opacity: 0;
             transform: translateY(50px) scale(0.9);
             animation: fadeInUp 2s ease-out forwards;
-        }
-
-        .name-text::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: white;
-            transform: translate(-50%, -50%);
-            animation: expandLine 1.5s ease-out 1.5s forwards;
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
         /* Floating particles */
@@ -122,6 +121,74 @@
             z-index: 1;
         }
 
+        /* Accordion styles */
+        .accordion-container {
+            max-width: 800px;
+            width: 100%;
+            padding: 0 2rem;
+            opacity: 0;
+            animation: fadeInAccordion 1s ease-out 4s forwards;
+        }
+
+        .accordion-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .accordion-item:nth-child(1) { animation: slideInUp 0.6s ease-out 4.5s forwards; }
+        .accordion-item:nth-child(2) { animation: slideInUp 0.6s ease-out 4.8s forwards; }
+        .accordion-item:nth-child(3) { animation: slideInUp 0.6s ease-out 5.1s forwards; }
+        .accordion-item:nth-child(4) { animation: slideInUp 0.6s ease-out 5.4s forwards; }
+
+        .accordion-header {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .accordion-content.active {
+            max-height: 300px;
+        }
+
+        .accordion-text {
+            padding: 1.5rem 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
         @keyframes fadeInUp {
             0% {
                 opacity: 0;
@@ -133,12 +200,23 @@
             }
         }
 
-        @keyframes expandLine {
+        @keyframes fadeInAccordion {
             0% {
-                width: 0;
+                opacity: 0;
             }
             100% {
-                width: 100px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -171,17 +249,18 @@
                 letter-spacing: 0.05em;
             }
             
-            .name-text::before {
-                animation: expandLine 1.5s ease-out 1.5s forwards;
+            .accordion-header {
+                padding: 1.2rem 1.5rem;
+                font-size: 1rem;
             }
             
-            @keyframes expandLine {
-                0% {
-                    width: 0;
-                }
-                100% {
-                    width: 60px;
-                }
+            .accordion-text {
+                padding: 1.2rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .accordion-container {
+                padding: 0 1rem;
             }
         }
 
@@ -220,8 +299,90 @@
     <div class="glow-orb"></div>
 
     <!-- Main content -->
-    <div class="main-container">
+    <div class="main-container" id="mainContainer">
         <h1 class="name-text">klaire rasche</h1>
+        
+        <!-- Accordion -->
+        <div class="accordion-container">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>About Me</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        I'm a creative professional passionate about design, innovation, and bringing ideas to life through beautiful digital experiences.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>My Work</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        I specialize in creating engaging user experiences, visual design, and strategic creative solutions that make an impact.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>Experience</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        With years of experience in design and creative strategy, I've worked on diverse projects spanning digital design, branding, and user experience.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>Let's Connect</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        I'm always interested in new opportunities and collaborations. Feel free to reach out to discuss potential projects or just say hello!
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Move content to top after initial animation
+        setTimeout(() => {
+            document.getElementById('mainContainer').classList.add('moved-up');
+        }, 3500);
+
+        // Accordion functionality
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const content = item.querySelector('.accordion-content');
+            const isActive = item.classList.contains('active');
+
+            // Close all other accordions
+            document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.accordion-content').classList.remove('active');
+                }
+            });
+
+            // Toggle current accordion
+            if (isActive) {
+                item.classList.remove('active');
+                content.classList.remove('active');
+            } else {
+                item.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html> 
