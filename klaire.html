@@ -37,6 +37,7 @@
             text-transform: lowercase;
             letter-spacing: 0.1em;
             text-align: center;
+            white-space: nowrap;
             opacity: 0;
             animation: simpleAppear 1.5s ease-out forwards;
         }
@@ -44,8 +45,9 @@
         .name-text.move-to-top {
             position: fixed;
             top: 4rem;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
+            right: 0;
+            transform: none;
             z-index: 100;
             transition: all 1s ease-out;
         }
@@ -265,6 +267,9 @@
             
             .name-text.move-to-top {
                 top: 2rem;
+                left: 0;
+                right: 0;
+                transform: none;
             }
             
             .accordion-header {
