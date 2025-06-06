@@ -33,7 +33,7 @@
 
         .main-container.moved-up {
             justify-content: flex-start;
-            padding-top: 4rem;
+            padding-top: 0;
             min-height: 100vh;
         }
 
@@ -48,6 +48,16 @@
             animation: fadeInUp 2s ease-out forwards;
             text-align: center;
             margin-bottom: 2rem;
+            transition: all 1s ease-out;
+        }
+
+        .name-text.moved-to-top {
+            position: absolute;
+            top: 4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 0;
+            z-index: 20;
         }
 
         /* Floating particles */
@@ -128,6 +138,7 @@
             padding: 0 2rem;
             opacity: 0;
             animation: fadeInAccordion 1s ease-out 4s forwards;
+            margin-top: 8rem;
         }
 
         .accordion-item {
@@ -358,6 +369,7 @@
         // Move content to top after initial animation
         setTimeout(() => {
             document.getElementById('mainContainer').classList.add('moved-up');
+            document.querySelector('.name-text').classList.add('moved-to-top');
         }, 3500);
 
         // Accordion functionality
