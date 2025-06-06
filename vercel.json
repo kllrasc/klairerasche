@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/klaire",
+      "destination": "/klaire.html"
+    }
+  ]
+} 
