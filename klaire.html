@@ -39,7 +39,8 @@
             text-align: center;
             white-space: nowrap;
             opacity: 0;
-            animation: simpleAppear 1.5s ease-out forwards;
+            transform: scale(0.3);
+            animation: scaleAndAppear 2s ease-out forwards;
         }
 
         .name-text.move-to-top {
@@ -193,12 +194,18 @@
             font-size: 1rem;
         }
 
-        @keyframes simpleAppear {
+        @keyframes scaleAndAppear {
             0% {
                 opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(0.8);
             }
             100% {
                 opacity: 1;
+                transform: scale(1);
             }
         }
 
@@ -379,11 +386,11 @@
     </div>
 
     <script>
-        // Move text to top after it appears
+        // Move text to top after it appears and scales
         setTimeout(() => {
             document.querySelector('.name-text').classList.add('move-to-top');
             document.querySelector('.content-spacer').classList.add('active');
-        }, 2500);
+        }, 3000);
 
         // Accordion functionality
         function toggleAccordion(header) {
