@@ -8,13 +8,106 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            /* Light mode colors */
+            --bg-color: #CCCCFF;
+            --text-color: white;
+            --star-color: white;
+            --toggle-bg: rgba(255, 255, 255, 0.2);
+            --toggle-handle: white;
+        }
+
+        [data-theme="dark"] {
+            /* Dark mode colors */
+            --bg-color: #1a1a2e;
+            --text-color: #e0e0e0;
+            --star-color: #e0e0e0;
+            --toggle-bg: rgba(255, 255, 255, 0.1);
+            --toggle-handle: #e0e0e0;
+        }
+
+        /* Theme Toggle Switch */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--toggle-bg);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .toggle-handle {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: var(--toggle-handle);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.dark .toggle-handle {
+            transform: translateX(30px);
+        }
+
+        /* Hide default cursor more aggressively */
+        *, *:hover, *:active, *:focus, 
+        html, body, div, span, a, button, input, textarea, select,
+        .hero, .navbar, .social-links, .music-controls, .toggle-switch {
+            cursor: none !important;
+        }
+        
+        html {
+            cursor: none !important;
+        }
+        
+        body {
+            cursor: none !important;
+        }
+        
+        /* Custom cursor element */
+        .custom-cursor {
+            position: fixed;
+            width: 64px;
+            height: 64px;
+            background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+        }
+        
+        /* Scale up cursor when hovering clickable elements */
+        .custom-cursor.hover {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
         /* Override to prevent scrolling and ensure full height */
         body, html {
             margin: 0;
             padding: 0;
-            background-color: #CCCCFF;
+            background-color: var(--bg-color);
             position: relative;
             overflow-x: hidden;
+            transition: background-color 0.5s ease;
         }
         
         /* Stars background */
@@ -30,7 +123,7 @@
         
         .star {
             position: absolute;
-            background: white;
+            background: var(--star-color);
             border-radius: 50%;
             opacity: 0.9;
             animation: twinkle 2s ease-in-out infinite alternate;
@@ -46,7 +139,7 @@
         .star.sparkle::after {
             content: '';
             position: absolute;
-            background: white;
+            background: var(--star-color);
         }
         
         .star.sparkle::before {
@@ -106,7 +199,7 @@
             position: absolute;
             width: 3px;
             height: 3px;
-            background: white;
+            background: var(--star-color);
             border-radius: 50%;
             box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.8);
             opacity: 0;
@@ -119,7 +212,7 @@
             left: -40px;
             width: 40px;
             height: 2px;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), white);
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), var(--star-color));
             border-radius: 2px;
         }
         
@@ -243,7 +336,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: #CCCCFF;
+                background-color: var(--bg-color);
             }
             
             .hero-content {
@@ -263,7 +356,7 @@
                 display: flex;
                 align-items: flex-start;
                 justify-content: center;
-                background-color: #CCCCFF;
+                background-color: var(--bg-color);
                 padding: 40px 0 60px 0;
             }
             
@@ -303,7 +396,7 @@
         .nav-logo a {
             font-size: 1.5rem;
             text-transform: lowercase;
-            color: white;
+            color: var(--text-color);
             text-decoration: none;
         }
         
@@ -315,7 +408,7 @@
         }
         
         .social-links a {
-            color: white;
+            color: var(--text-color);
             font-size: 1.2rem;
             transition: opacity 0.3s ease;
         }
@@ -344,14 +437,14 @@
             line-height: 1.2;
             margin-bottom: 1rem;
             font-weight: 700;
-            color: white;
+            color: var(--text-color);
             text-transform: none;
         }
         
         .hero-description {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: white;
+            color: var(--text-color);
             margin-bottom: 0.25rem;
             max-width: 600px;
             margin-left: auto;
@@ -368,9 +461,9 @@
         }
         
         .play-button {
-            background: white;
+            background: var(--text-color);
             border: none;
-            color: #CCCCFF;
+            color: var(--bg-color);
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -397,7 +490,7 @@
         
         .track-selector label {
             font-size: 0.9rem;
-            color: white;
+            color: var(--text-color);
             margin-bottom: 0.25rem;
         }
         
@@ -408,8 +501,8 @@
         
         .track-btn {
             background: transparent;
-            border: 2px solid white;
-            color: white;
+            border: 2px solid var(--text-color);
+            color: var(--text-color);
             padding: 0.5rem 1rem;
             border-radius: 25px;
             cursor: pointer;
@@ -418,18 +511,18 @@
         }
         
         .track-btn.active {
-            background: white;
-            color: #CCCCFF;
+            background: var(--text-color);
+            color: var(--bg-color);
         }
         
         .track-btn:hover {
-            background: white;
-            color: #CCCCFF;
+            background: var(--text-color);
+            color: var(--bg-color);
         }
         
         .now-playing {
             font-size: 0.9rem;
-            color: white;
+            color: var(--text-color);
             margin-top: 0.5rem;
             font-style: italic;
         }
@@ -472,6 +565,16 @@
         <div class="shooting-star"></div>
         <div class="shooting-star"></div>
         <div class="shooting-star"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <div class="toggle-switch" onclick="toggleTheme()">
+            <div class="toggle-handle"></div>
+        </div>
     </div>
 
     <!-- Navigation -->
@@ -540,6 +643,78 @@
 
     <script src="script.js"></script>
     <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                toggleSwitch.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                toggleSwitch.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                toggleSwitch.classList.add('dark');
+            }
+        });
+
+        // Custom cursor functionality - initialize immediately
+        document.addEventListener('DOMContentLoaded', function() {
+            const customCursor = document.getElementById('customCursor');
+            
+            // Ensure cursor is visible and positioned immediately
+            customCursor.style.display = 'block';
+            
+            // Track mouse movement
+            document.addEventListener('mousemove', (e) => {
+                customCursor.style.left = e.clientX + 'px';
+                customCursor.style.top = e.clientY + 'px';
+            });
+            
+            // Additional cursor setup
+            setupCustomCursor();
+        });
+        
+        function setupCustomCursor() {
+            const customCursor = document.getElementById('customCursor');
+            
+            // Hide cursor when mouse leaves window
+            document.addEventListener('mouseleave', () => {
+                customCursor.style.display = 'none';
+            });
+            
+            // Show cursor when mouse enters window
+            document.addEventListener('mouseenter', () => {
+                customCursor.style.display = 'block';
+            });
+            
+            // Scale cursor on hover over clickable elements
+            const clickableElements = document.querySelectorAll('a, button, .toggle-switch, .play-button, .track-btn');
+            
+            clickableElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    customCursor.classList.add('hover');
+                });
+                
+                element.addEventListener('mouseleave', () => {
+                    customCursor.classList.remove('hover');
+                });
+            });
+        }
+
         let currentTrack = 1;
         let isPlaying = false;
         

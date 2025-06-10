@@ -6,6 +6,36 @@
     <title>klaire rasche</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* Light mode colors */
+            --bg-gradient: linear-gradient(135deg, #CCCCFF 0%, #B8B8FF 50%, #A8A8FF 100%);
+            --text-color: white;
+            --accordion-bg: rgba(255, 255, 255, 0.1);
+            --accordion-hover: rgba(255, 255, 255, 0.05);
+            --accordion-content-bg: rgba(255, 255, 255, 0.05);
+            --accordion-border: rgba(255, 255, 255, 0.2);
+            --accordion-text: rgba(255, 255, 255, 0.9);
+            --particle-color: rgba(255, 255, 255, 0.6);
+            --glow-color: rgba(255, 255, 255, 0.1);
+            --toggle-bg: rgba(255, 255, 255, 0.2);
+            --toggle-handle: white;
+        }
+
+        [data-theme="dark"] {
+            /* Dark mode colors */
+            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --text-color: #e0e0e0;
+            --accordion-bg: rgba(255, 255, 255, 0.05);
+            --accordion-hover: rgba(255, 255, 255, 0.03);
+            --accordion-content-bg: rgba(255, 255, 255, 0.03);
+            --accordion-border: rgba(255, 255, 255, 0.1);
+            --accordion-text: rgba(255, 255, 255, 0.8);
+            --particle-color: rgba(255, 255, 255, 0.4);
+            --glow-color: rgba(255, 255, 255, 0.05);
+            --toggle-bg: rgba(255, 255, 255, 0.1);
+            --toggle-handle: #e0e0e0;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -16,8 +46,54 @@
             height: 100vh;
             overflow-x: hidden;
             overflow-y: auto;
-            background: linear-gradient(135deg, #CCCCFF 0%, #B8B8FF 50%, #A8A8FF 100%);
+            background: var(--bg-gradient);
             font-family: 'Inter', sans-serif;
+            transition: background 0.5s ease;
+        }
+
+        /* Theme Toggle Switch */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-label {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--toggle-bg);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--accordion-border);
+        }
+
+        .toggle-handle {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: var(--toggle-handle);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.dark .toggle-handle {
+            transform: translateX(30px);
         }
 
         .main-container {
@@ -33,7 +109,7 @@
         .name-text {
             font-size: clamp(3rem, 8vw, 8rem);
             font-weight: 900;
-            color: white;
+            color: var(--text-color);
             text-transform: lowercase;
             letter-spacing: 0.1em;
             text-align: center;
@@ -60,7 +136,7 @@
         /* Floating particles */
         .particle {
             position: absolute;
-            background: rgba(255, 255, 255, 0.6);
+            background: var(--particle-color);
             border-radius: 50%;
             pointer-events: none;
             animation: float 6s ease-in-out infinite;
@@ -120,7 +196,7 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
             animation: glow 4s ease-in-out infinite alternate;
             top: 50%;
             left: 50%;
@@ -140,11 +216,11 @@
         }
 
         .accordion-item {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--accordion-bg);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             margin-bottom: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--accordion-border);
             overflow: hidden;
             opacity: 0;
             transform: translateY(30px);
@@ -161,14 +237,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: white;
+            color: var(--text-color);
             font-weight: 600;
             font-size: 1.1rem;
             transition: background-color 0.3s ease;
         }
 
         .accordion-header:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--accordion-hover);
         }
 
         .accordion-icon {
@@ -184,7 +260,7 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--accordion-content-bg);
         }
 
         .accordion-content.active {
@@ -193,7 +269,7 @@
 
         .accordion-text {
             padding: 1.5rem 2rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--accordion-text);
             line-height: 1.6;
             font-size: 1rem;
         }
@@ -271,6 +347,15 @@
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
+            .theme-toggle {
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+            
+            .toggle-label {
+                font-size: 0.8rem;
+            }
+            
             .name-text {
                 font-size: clamp(2.5rem, 10vw, 4rem);
                 letter-spacing: 0.05em;
@@ -320,6 +405,13 @@
     </style>
 </head>
 <body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <div class="toggle-switch" onclick="toggleTheme()">
+            <div class="toggle-handle"></div>
+        </div>
+    </div>
+
     <!-- Floating particles -->
     <div class="particle"></div>
     <div class="particle"></div>
@@ -389,6 +481,34 @@
     </div>
 
     <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                toggleSwitch.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                toggleSwitch.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                toggleSwitch.classList.add('dark');
+            }
+        });
+
         // Move text to top after it appears and scales
         setTimeout(() => {
             document.querySelector('.name-text').classList.add('move-to-top');
