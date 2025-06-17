@@ -526,6 +526,43 @@
             margin-top: 0.5rem;
             font-style: italic;
         }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .theme-toggle {
+                top: 1.5rem;
+                right: 5rem; /* Moved further right to avoid overlapping with social icons */
+            }
+            
+            .toggle-label {
+                font-size: 0.8rem;
+            }
+            
+            .name-text {
+                font-size: clamp(2.5rem, 10vw, 4rem);
+                letter-spacing: 0.05em;
+            }
+            
+            .name-text.move-to-top {
+                top: 2rem;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .accordion-header {
+                padding: 1.2rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .accordion-text {
+                padding: 1.2rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .accordion-container {
+                padding: 0 1rem;
+            }
+        }
     </style>
 </head>
 <body>
