@@ -352,7 +352,7 @@
                 customCursor.style.top = e.clientY + 'px';
             });
 
-            const clickableElements = document.querySelectorAll('a, button, .toggle-switch, .click-button');
+            const clickableElements = document.querySelectorAll('a, button, .toggle-switch, .click-button, .game-card');
             clickableElements.forEach(element => {
                 element.addEventListener('mouseenter', () => {
                     customCursor.classList.add('hover');
@@ -415,16 +415,18 @@
         <!-- Games Grid -->
         <div class="games-grid">
             <!-- Game 1 -->
-            <div class="game-card">
-                <div class="game-preview" style="background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Screenshot%202025-07-13%20at%209.58.24%20PM.png'); background-size: cover; background-position: center; font-size: 0;"></div>
-                <div class="game-content">
-                    <div class="game-title">Bakery Game</div>
-                    <div class="game-description">
-                        A fun bakery game about giving cats who are the customers delicious bakery items. Serve adorable feline customers their favorite treats in this cozy baking adventure!
+            <a href="games-bakery-game.html" style="text-decoration: none; color: inherit;">
+                <div class="game-card">
+                    <div class="game-preview" style="background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Screenshot%202025-07-13%20at%209.58.24%20PM.png'); background-size: cover; background-position: center; font-size: 0;"></div>
+                    <div class="game-content">
+                        <div class="game-title">Bakery Game</div>
+                        <div class="game-description">
+                            A fun bakery game about giving cats who are the customers delicious bakery items. Serve adorable feline customers their favorite treats in this cozy baking adventure!
+                        </div>
+                        <div class="game-status status-available">Available Now</div>
                     </div>
-                    <div class="game-status status-available">Available Now</div>
                 </div>
-            </div>
+            </a>
 
             <!-- Game 2 -->
             <div class="game-card">
