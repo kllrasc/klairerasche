@@ -188,28 +188,7 @@
             border: 2px solid var(--soft-green);
         }
 
-        .screenshot-section {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 2px solid var(--soft-green);
-            text-align: center;
-        }
 
-        .screenshot-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .game-screenshot {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border: 2px solid var(--soft-green);
-        }
 
         @media (max-width: 768px) {
             .bakery-container {
@@ -225,14 +204,14 @@
                 font-size: 2rem;
             }
             
-            .game-section,
-            .screenshot-section {
+            .game-section {
                 padding: 1.5rem;
             }
             
             .game-embed {
                 width: 100%;
-                max-width: 552px;
+                max-width: 640px;
+                height: 300px;
             }
             
             .theme-toggle {
@@ -329,23 +308,17 @@
             <div class="game-description">
                 A fun bakery game about giving cats who are the customers delicious bakery items. 
                 Run your own cozy bakery, serve adorable feline customers, and create the perfect treats 
-                to make every cat happy! Each customer has their own preferences - can you satisfy them all?
+                to make every cat happy!
             </div>
             
             <div class="game-embed-container">
-                <iframe class="game-embed" frameborder="0" src="https://itch.io/embed/3481119" width="552" height="167">
-                    <a href="https://kllrasciuedu.itch.io/g320-final-project">Bakery Game G320 Final Project Klaire by kllrasc@iu.edu</a>
+                <iframe class="game-embed" frameborder="0" src="https://itch.io/embed-upload/13618055?color=333333" allowfullscreen="" width="640" height="380">
+                    <a href="https://kllrasciuedu.itch.io/g320-final-project">Play Bakery Game G320 Final Project Klaire on itch.io</a>
                 </iframe>
             </div>
         </div>
 
-        <!-- Screenshot Section -->
-        <div class="screenshot-section">
-            <div class="screenshot-title">Game Preview</div>
-            <img src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Screenshot%202025-07-13%20at%209.58.24%20PM.png" 
-                 alt="Bakery Game Screenshot" 
-                 class="game-screenshot">
-        </div>
+
     </div>
 </body>
 </html> 
