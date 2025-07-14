@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>klaire's games - play & explore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light mode colors */
+            --periwinkle-bg: #CCCCFF;
+            --periwinkle-dark: #9999FF;
+            --periwinkle-light: #E6E6FF;
+            --soft-green: #B8B8FF;
+            --soft-mint: #D0D0FF;
+            --card-bg: #ffffff;
+            --text-dark: #000000;
+            --vintage-cream: #F5F5DC;
+        }
+
+        [data-theme="dark"] {
+            /* Dark mode colors */
+            --periwinkle-bg: #1a1a2e;
+            --periwinkle-dark: #2a2a4e;
+            --periwinkle-light: #3a3a6e;
+            --soft-green: #4a4a7a;
+            --soft-mint: #5a5a8a;
+            --card-bg: #2a2a2a;
+            --text-dark: #e0e0e0;
+            --vintage-cream: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--periwinkle-bg) 0%, var(--periwinkle-dark) 100%);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+
+        /* Hide default cursor */
+        * {
+            cursor: none !important;
+        }
+
+        /* Custom cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 64px;
+            height: 64px;
+            background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+        }
+
+        .custom-cursor.hover {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .toggle-switch {
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .toggle-handle {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.dark .toggle-handle {
+            transform: translateX(30px);
+        }
+
+        /* Main container */
+        .games-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .games-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .games-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            text-transform: lowercase;
+            letter-spacing: 0.1em;
+        }
+
+        .games-subtitle {
+            font-size: 1rem;
+            color: var(--text-dark);
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        .home-link:hover {
+            opacity: 1;
+        }
+
+        /* Games grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Game card */
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid var(--soft-green);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .game-preview {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--soft-green), var(--soft-mint));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+
+        .game-content {
+            padding: 1.5rem;
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .game-description {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            opacity: 0.8;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .game-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-coming-soon {
+            background: rgba(184, 184, 255, 0.2);
+            color: var(--soft-green);
+            border: 1px solid var(--soft-green);
+        }
+
+        .status-playable {
+            background: var(--soft-green);
+            color: var(--text-dark);
+        }
+
+        /* Interactive game section */
+        .interactive-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid var(--soft-green);
+            text-align: center;
+        }
+
+        .interactive-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .mini-game {
+            background: linear-gradient(135deg, var(--soft-green), var(--soft-mint));
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            color: var(--text-dark);
+        }
+
+        .click-counter {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .click-button {
+            background: var(--card-bg);
+            border: 2px solid var(--text-dark);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .click-button:hover {
+            transform: scale(1.1);
+            background: var(--soft-green);
+        }
+
+        .click-button:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 768px) {
+            .games-container {
+                padding: 1rem 0.5rem;
+            }
+            
+            .games-header {
+                margin-bottom: 2rem;
+                padding: 1rem 0;
+            }
+            
+            .games-title {
+                font-size: 2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .theme-toggle {
+                top: 0.5rem;
+                right: 1rem;
+            }
+            
+            .custom-cursor {
+                display: none;
+            }
+            
+            * {
+                cursor: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                toggleSwitch.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                toggleSwitch.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                toggleSwitch.classList.add('dark');
+            }
+        });
+
+        // Custom cursor functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const customCursor = document.getElementById('customCursor');
+            
+            document.addEventListener('mousemove', (e) => {
+                customCursor.style.left = e.clientX + 'px';
+                customCursor.style.top = e.clientY + 'px';
+            });
+
+            const clickableElements = document.querySelectorAll('a, button, .toggle-switch, .click-button');
+            clickableElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    customCursor.classList.add('hover');
+                });
+                element.addEventListener('mouseleave', () => {
+                    customCursor.classList.remove('hover');
+                });
+            });
+        });
+
+        // Mini-game functionality
+        let clickCount = 0;
+        function incrementCounter() {
+            clickCount++;
+            document.getElementById('clickCounter').textContent = clickCount;
+            
+            // Save to localStorage
+            localStorage.setItem('gameClickCount', clickCount);
+            
+            // Fun animation
+            const button = document.getElementById('clickButton');
+            button.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        // Load click count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedClicks = localStorage.getItem('gameClickCount');
+            if (savedClicks) {
+                clickCount = parseInt(savedClicks);
+                document.getElementById('clickCounter').textContent = clickCount;
+            }
+        });
+    </script>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <div class="toggle-switch" onclick="toggleTheme()">
+            <div class="toggle-handle"></div>
+        </div>
+    </div>
+
+    <!-- Main Games Container -->
+    <div class="games-container">
+        <!-- Header -->
+        <div class="games-header">
+            <div class="games-title">klaire's games</div>
+            <div class="games-subtitle">interactive experiences & digital playgrounds</div>
+            <div style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="klaire.html" class="home-link">← back to home</a>
+                <a href="blog.html" class="home-link">blog →</a>
+            </div>
+        </div>
+
+        <!-- Games Grid -->
+        <div class="games-grid">
+            <!-- Game 1 -->
+            <div class="game-card">
+                <div class="game-preview">🎮</div>
+                <div class="game-content">
+                    <div class="game-title">Memory Palace</div>
+                    <div class="game-description">
+                        A dreamy exploration game where you navigate through surreal environments and collect forgotten memories.
+                    </div>
+                    <div class="game-status status-coming-soon">Coming Soon</div>
+                </div>
+            </div>
+
+            <!-- Game 2 -->
+            <div class="game-card">
+                <div class="game-preview">🌸</div>
+                <div class="game-content">
+                    <div class="game-title">Flower Garden Simulator</div>
+                    <div class="game-description">
+                        Plant, grow, and tend to your virtual garden in this relaxing simulation experience.
+                    </div>
+                    <div class="game-status status-coming-soon">Coming Soon</div>
+                </div>
+            </div>
+
+            <!-- Game 3 -->
+            <div class="game-card">
+                <div class="game-preview">✨</div>
+                <div class="game-content">
+                    <div class="game-title">Aesthetic Puzzle</div>
+                    <div class="game-description">
+                        Solve beautiful, minimalist puzzles in a calming periwinkle-themed world.
+                    </div>
+                    <div class="game-status status-coming-soon">Coming Soon</div>
+                </div>
+            </div>
+
+            <!-- Game 4 -->
+            <div class="game-card">
+                <div class="game-preview">🎨</div>
+                <div class="game-content">
+                    <div class="game-title">Color Harmony</div>
+                    <div class="game-description">
+                        An interactive art creation tool where you paint with emotions and watch colors dance.
+                    </div>
+                    <div class="game-status status-coming-soon">Coming Soon</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Section -->
+        <div class="interactive-section">
+            <div class="interactive-title">Try This Mini-Game!</div>
+            <div class="mini-game">
+                <div class="click-counter" id="clickCounter">0</div>
+                <div>clicks collected</div>
+                <br>
+                <div class="click-button" id="clickButton" onclick="incrementCounter()">
+                    ✨
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
