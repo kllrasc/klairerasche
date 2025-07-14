@@ -494,7 +494,7 @@
             }
         }
 
-        // Load saved theme
+        // Load saved theme and likes
         document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('theme');
             const toggleSwitch = document.querySelector('.toggle-switch');
@@ -503,6 +503,9 @@
                 document.body.setAttribute('data-theme', 'dark');
                 toggleSwitch.classList.add('dark');
             }
+            
+            // Initialize like states from localStorage
+            initializeLikes();
         });
 
         // Custom cursor functionality
@@ -525,20 +528,61 @@
             });
         });
 
-        // Heart toggle functionality (Instagram-like)
+        // Heart toggle functionality (Instagram-like with persistence)
         function toggleHeart(element) {
+            const postCard = element.closest('.post-card');
+            const postId = postCard.getAttribute('data-post-id');
             const heartCount = element.querySelector('.heart-count');
             const currentCount = parseInt(heartCount.textContent);
             
             if (element.classList.contains('liked')) {
                 // Unlike
                 element.classList.remove('liked');
-                heartCount.textContent = currentCount - 1;
+                const newCount = currentCount - 1;
+                heartCount.textContent = newCount;
+                saveLikeState(postId, false, newCount);
             } else {
                 // Like
                 element.classList.add('liked');
-                heartCount.textContent = currentCount + 1;
+                const newCount = currentCount + 1;
+                heartCount.textContent = newCount;
+                saveLikeState(postId, true, newCount);
             }
+        }
+
+        // Save like state to localStorage
+        function saveLikeState(postId, isLiked, count) {
+            const likeData = {
+                isLiked: isLiked,
+                count: count
+            };
+            localStorage.setItem(`post-${postId}`, JSON.stringify(likeData));
+        }
+
+        // Load like state from localStorage
+        function loadLikeState(postId) {
+            const saved = localStorage.getItem(`post-${postId}`);
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            return { isLiked: false, count: 0 };
+        }
+
+        // Initialize all post likes from localStorage
+        function initializeLikes() {
+            const postCards = document.querySelectorAll('.post-card');
+            postCards.forEach(postCard => {
+                const postId = postCard.getAttribute('data-post-id');
+                const heartContainer = postCard.querySelector('.heart-container');
+                const heartCount = postCard.querySelector('.heart-count');
+                
+                const likeData = loadLikeState(postId);
+                heartCount.textContent = likeData.count;
+                
+                if (likeData.isLiked) {
+                    heartContainer.classList.add('liked');
+                }
+            });
         }
     </script>
     <!-- Custom Cursor -->
@@ -568,7 +612,7 @@
         <!-- Blog Posts -->
         <div class="blog-posts">
             <!-- Image Post -->
-            <div class="post-card">
+            <div class="post-card" data-post-id="photo-post">
                 <div class="post-header">
                     <div class="post-type">photo</div>
                 </div>
@@ -595,7 +639,7 @@
             </div>
 
             <!-- Text Post -->
-            <div class="post-card">
+            <div class="post-card" data-post-id="text-post">
                 <div class="post-header">
                     <div class="post-type">text</div>
                 </div>
@@ -644,7 +688,7 @@ Sometimes the strongest thing you can do is stand still long enough to feel ever
             </div>
 
             <!-- Quote Post -->
-            <div class="post-card">
+            <div class="post-card" data-post-id="quote-post">
                 <div class="post-header">
                     <div class="post-type">quote</div>
                 </div>
@@ -674,7 +718,7 @@ Sometimes the strongest thing you can do is stand still long enough to feel ever
             </div>
 
             <!-- Music Post -->
-            <div class="post-card">
+            <div class="post-card" data-post-id="music-post">
                 <div class="post-header">
                     <div class="post-type">music</div>
                 </div>
@@ -704,7 +748,7 @@ Sometimes the strongest thing you can do is stand still long enough to feel ever
             </div>
 
             <!-- Personal Post -->
-            <div class="post-card">
+            <div class="post-card" data-post-id="personal-post">
                 <div class="post-header">
                     <div class="post-type">personal</div>
                 </div>
