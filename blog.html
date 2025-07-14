@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>klaire's blog - vintage vibes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light mode colors */
+            --periwinkle-bg: #CCCCFF;
+            --periwinkle-dark: #9999FF;
+            --periwinkle-light: #E6E6FF;
+            --vintage-cream: #F5F5DC;
+            --vintage-gray: #C0C0C0;
+            --vintage-dark: #404040;
+            --vintage-border: #808080;
+            --text-dark: #000000;
+            --soft-green: #B8B8FF;
+            --soft-mint: #D0D0FF;
+            --card-bg: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            /* Dark mode colors */
+            --periwinkle-bg: #1a1a2e;
+            --periwinkle-dark: #2a2a4e;
+            --periwinkle-light: #3a3a6e;
+            --vintage-cream: #2a2a2a;
+            --vintage-gray: #404040;
+            --vintage-dark: #e0e0e0;
+            --vintage-border: #555555;
+            --text-dark: #e0e0e0;
+            --soft-green: #4a4a7a;
+            --soft-mint: #5a5a8a;
+            --card-bg: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--periwinkle-bg) 0%, var(--periwinkle-dark) 100%);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+
+        /* Hide default cursor */
+        * {
+            cursor: none !important;
+        }
+
+        /* Custom cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 64px;
+            height: 64px;
+            background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+        }
+
+        .custom-cursor.hover {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .toggle-switch {
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .toggle-handle {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.dark .toggle-handle {
+            transform: translateX(30px);
+        }
+
+        /* Main container */
+        .blog-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .blog-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            text-transform: lowercase;
+            letter-spacing: 0.1em;
+        }
+
+        .blog-subtitle {
+            font-size: 1rem;
+            color: var(--text-dark);
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        /* Blog search bar */
+        .search-bar {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--soft-green);
+            border-radius: 25px;
+            background: var(--card-bg);
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--soft-mint);
+            box-shadow: 0 0 0 3px rgba(184, 184, 255, 0.1);
+        }
+
+        /* Blog posts container */
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Individual post card */
+        .post-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid var(--soft-green);
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-header {
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, var(--soft-green), var(--soft-mint));
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+
+
+        .post-type {
+            font-weight: 600;
+            text-transform: lowercase;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .post-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .post-quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(184, 184, 255, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--soft-green);
+        }
+
+        /* Browser window styling */
+        .browser-window {
+            border: 2px solid var(--soft-green);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--card-bg);
+        }
+
+        .browser-header {
+            background: var(--soft-green);
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .browser-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .browser-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .browser-button.close {
+            background: #ff5f56;
+        }
+
+        .browser-button.minimize {
+            background: #ffbd2e;
+        }
+
+        .browser-button.maximize {
+            background: #27ca3f;
+        }
+
+        .browser-address-bar {
+            flex: 1;
+        }
+
+        .browser-address-bar input {
+            width: 100%;
+            padding: 0.3rem 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-dark);
+            font-size: 0.8rem;
+            outline: none;
+        }
+
+        .browser-content {
+            padding: 1.5rem;
+            background: var(--vintage-cream);
+            color: var(--text-dark);
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        [data-theme="dark"] .browser-content {
+            background: #2a2a2a;
+        }
+
+        /* Heart interaction */
+        .heart-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .heart-container:hover {
+            transform: scale(1.1);
+        }
+
+        .heart-outline {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            color: var(--text-dark);
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .heart-filled {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            color: var(--soft-green);
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .heart-container.liked .heart-outline {
+            opacity: 0;
+        }
+
+        .heart-container.liked .heart-filled {
+            opacity: 1;
+            transform: scale(1);
+            animation: heartPulse 0.6s ease-out;
+        }
+
+        .heart-count {
+            margin-left: 30px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        @keyframes heartPulse {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Post interactions */
+        .post-footer {
+            padding: 1rem 1.5rem;
+            background: rgba(184, 184, 255, 0.05);
+            border-top: 1px solid var(--soft-green);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+
+
+        .post-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+
+        .post-action:hover {
+            color: var(--soft-green);
+            transform: translateY(-1px);
+        }
+
+        .post-meta {
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            opacity: 0.6;
+        }
+
+        .home-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--periwinkle-bg);
+            color: var(--text-dark);
+            padding: 8px 16px;
+            border: 2px solid var(--vintage-border);
+            border-radius: 0;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 
+                inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+                inset -1px -1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .home-button:hover {
+            background: var(--periwinkle-light);
+        }
+
+        @media (max-width: 768px) {
+            .blog-container {
+                padding: 1rem 0.5rem;
+            }
+            
+            .blog-header {
+                margin-bottom: 2rem;
+                padding: 1rem 0;
+            }
+            
+            .blog-title {
+                font-size: 2rem;
+            }
+            
+            .blog-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .post-card {
+                margin-bottom: 1.5rem;
+            }
+            
+            .post-content {
+                padding: 1rem;
+            }
+            
+            .post-footer {
+                padding: 1rem;
+                justify-content: center;
+            }
+            
+            .theme-toggle {
+                top: 0.5rem;
+                right: 1rem;
+            }
+            
+            .custom-cursor {
+                display: none;
+            }
+            
+            * {
+                cursor: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                toggleSwitch.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                toggleSwitch.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                toggleSwitch.classList.add('dark');
+            }
+        });
+
+        // Custom cursor functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const customCursor = document.getElementById('customCursor');
+            
+            document.addEventListener('mousemove', (e) => {
+                customCursor.style.left = e.clientX + 'px';
+                customCursor.style.top = e.clientY + 'px';
+            });
+
+            const clickableElements = document.querySelectorAll('a, button, .toggle-switch, input, .heart-container');
+            clickableElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    customCursor.classList.add('hover');
+                });
+                element.addEventListener('mouseleave', () => {
+                    customCursor.classList.remove('hover');
+                });
+            });
+        });
+
+        // Heart toggle functionality (Instagram-like)
+        function toggleHeart(element) {
+            const heartCount = element.querySelector('.heart-count');
+            const currentCount = parseInt(heartCount.textContent);
+            
+            if (element.classList.contains('liked')) {
+                // Unlike
+                element.classList.remove('liked');
+                heartCount.textContent = currentCount - 1;
+            } else {
+                // Like
+                element.classList.add('liked');
+                heartCount.textContent = currentCount + 1;
+            }
+        }
+    </script>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <div class="toggle-switch" onclick="toggleTheme()">
+            <div class="toggle-handle"></div>
+        </div>
+    </div>
+
+    <!-- Main Blog Container -->
+    <div class="blog-container">
+        <!-- Header -->
+        <div class="blog-header">
+            <div class="blog-title">klaire's blog</div>
+            <div class="blog-subtitle">thoughts on design, life, and everything in between</div>
+            <a href="klaire.html" style="display: inline-block; margin-top: 1rem; color: var(--text-dark); text-decoration: none; font-size: 0.9rem; opacity: 0.7;">← back to home</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="search posts...">
+        </div>
+
+        <!-- Blog Posts -->
+        <div class="blog-posts">
+            <!-- Image Post -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-type">photo</div>
+                </div>
+                <div class="post-content">
+                    <img src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//0B1942F8-8C0E-4BF9-BB1D-F6E02B9B1FE1.JPG" alt="Photo" class="post-image">
+                </div>
+                <div class="post-footer">
+                    <div class="post-actions">
+                        <div class="heart-container" onclick="toggleHeart(this)">
+                            <div class="heart-outline">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <div class="heart-filled">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <span class="heart-count">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Post -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-type">text</div>
+                </div>
+                <div class="post-content">
+                    <div class="browser-window">
+                        <div class="browser-header">
+                            <div class="browser-controls">
+                                <div class="browser-button close"></div>
+                                <div class="browser-button minimize"></div>
+                                <div class="browser-button maximize"></div>
+                            </div>
+                            <div class="browser-address-bar">
+                                <input type="text" value="klaire.dev/thoughts" readonly>
+                            </div>
+                        </div>
+                        <div class="browser-content">
+                            <div class="post-text">
+                                Camus would say: this is the human condition — to long, to lose, and to continue anyway. I knew he was building a life somewhere else, and perhaps I should admire that, but what lingered was not admiration, it was the hollowing feeling of being forgotten in the pursuit of someone else's future. I loved him. Deeply. And even if he couldn't return that love in the way I needed, that doesn't make my love a waste, it makes it proof that I'm capable of a real connection. Which is a beautiful, terrifying, holy thing.
+
+I wasn't asking him to throw his dreams away. I was just hoping that someone who said he cared would care all the way through.
+
+I can be right that he was struggling, that he wasn't proud of where he was, that he couldn't handle love because he didn't love where he was in life. But I can also be right that I didn't deserve to be the collateral damage for his pain. I'm grieving a future that could never exist not because I wasn't enough or too much, but because he wasn't ready. And I don't have to punish myself for believing in someone too much.
+
+Sometimes the strongest thing you can do is stand still long enough to feel everything fully and then move forward with intention.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-footer">
+                    <div class="post-actions">
+                        <div class="heart-container" onclick="toggleHeart(this)">
+                            <div class="heart-outline">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <div class="heart-filled">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <span class="heart-count">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote Post -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-type">quote</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-quote">
+                        "I opened myself to the gentle indifference of the world."
+                    </div>
+                    <div class="post-text">— Albert Camus, The Stranger</div>
+                </div>
+                <div class="post-footer">
+                    <div class="post-actions">
+                        <div class="heart-container" onclick="toggleHeart(this)">
+                            <div class="heart-outline">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <div class="heart-filled">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <span class="heart-count">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Music Post -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-type">music</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-text">
+                        <h3 style="margin-bottom: 1rem; color: var(--text-dark);">what i've been listening to</h3>
+                        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/0IEGGuRHP8ylbCXausRF9p?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="post-footer">
+                    <div class="post-actions">
+                        <div class="heart-container" onclick="toggleHeart(this)">
+                            <div class="heart-outline">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <div class="heart-filled">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <span class="heart-count">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Post -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-type">personal</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-text">
+                        <h3 style="margin-bottom: 0.5rem; color: var(--text-dark);">welcome to my space</h3>
+                        My thoughts, feelings, ideas, etc. all in one place. Thanks for visiting! - klaire <3
+                    </div>
+                </div>
+                <div class="post-footer">
+                    <div class="post-actions">
+                        <div class="heart-container" onclick="toggleHeart(this)">
+                            <div class="heart-outline">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <div class="heart-filled">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <span class="heart-count">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

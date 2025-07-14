@@ -417,6 +417,29 @@
             opacity: 0.7;
         }
         
+        .blog-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .blog-link span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
         /* Hide hamburger menu on homepage */
         .hamburger {
             display: none;
@@ -621,6 +644,9 @@
                 <a href="#home">klaire rasche</a>
             </div>
             <div class="social-links">
+                <a href="blog.html" class="nav-link blog-link">
+                    <span>Blog</span>
+                </a>
                 <a href="https://www.instagram.com/klaire.ras" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-instagram"></i>
                 </a>

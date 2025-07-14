@@ -8,30 +8,16 @@
     <style>
         :root {
             /* Light mode colors */
-            --bg-gradient: linear-gradient(135deg, #CCCCFF 0%, #B8B8FF 50%, #A8A8FF 100%);
+            --bg-color: #CCCCFF;
             --text-color: white;
-            --accordion-bg: rgba(255, 255, 255, 0.1);
-            --accordion-hover: rgba(255, 255, 255, 0.05);
-            --accordion-content-bg: rgba(255, 255, 255, 0.05);
-            --accordion-border: rgba(255, 255, 255, 0.2);
-            --accordion-text: rgba(255, 255, 255, 0.9);
-            --particle-color: rgba(255, 255, 255, 0.6);
-            --glow-color: rgba(255, 255, 255, 0.1);
             --toggle-bg: rgba(255, 255, 255, 0.2);
             --toggle-handle: white;
         }
 
         [data-theme="dark"] {
             /* Dark mode colors */
-            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --bg-color: #1a1a2e;
             --text-color: #e0e0e0;
-            --accordion-bg: rgba(255, 255, 255, 0.05);
-            --accordion-hover: rgba(255, 255, 255, 0.03);
-            --accordion-content-bg: rgba(255, 255, 255, 0.03);
-            --accordion-border: rgba(255, 255, 255, 0.1);
-            --accordion-text: rgba(255, 255, 255, 0.8);
-            --particle-color: rgba(255, 255, 255, 0.4);
-            --glow-color: rgba(255, 255, 255, 0.05);
             --toggle-bg: rgba(255, 255, 255, 0.1);
             --toggle-handle: #e0e0e0;
         }
@@ -44,56 +30,26 @@
 
         body, html {
             height: 100vh;
-            overflow-x: hidden;
-            overflow-y: auto;
-            background: var(--bg-gradient);
+            overflow: hidden;
             font-family: 'Inter', sans-serif;
-            transition: background 0.5s ease;
+            background-color: var(--bg-color);
+            transition: background-color 0.5s ease, background-image 0.5s ease;
         }
 
-        /* Theme Toggle Switch */
-        .theme-toggle {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        /* Progressive background transitions for light mode only */
+        body.scroll-1 {
+            background: linear-gradient(135deg, #B8B8FF 0%, #A8A8FF 50%, #9898FF 100%);
         }
 
-        .toggle-label {
-            color: var(--text-color);
-            font-size: 0.9rem;
-            font-weight: 500;
+        body.scroll-2 {
+            background: linear-gradient(135deg, #A8A8FF 0%, #9898FF 50%, #8888FF 100%);
         }
 
-        .toggle-switch {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--toggle-bg);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--accordion-border);
-        }
-
-        .toggle-handle {
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 24px;
-            height: 24px;
-            background: var(--toggle-handle);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .toggle-switch.dark .toggle-handle {
-            transform: translateX(30px);
+        /* Dark mode keeps consistent background */
+        [data-theme="dark"] body,
+        [data-theme="dark"] body.scroll-1,
+        [data-theme="dark"] body.scroll-2 {
+            background-color: var(--bg-color) !important;
         }
 
         .main-container {
@@ -133,147 +89,6 @@
             transition: all 1s ease-out;
         }
 
-        /* Floating particles */
-        .particle {
-            position: absolute;
-            background: var(--particle-color);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .particle:nth-child(1) {
-            width: 4px;
-            height: 4px;
-            top: 20%;
-            left: 15%;
-            animation-delay: 0s;
-        }
-
-        .particle:nth-child(2) {
-            width: 6px;
-            height: 6px;
-            top: 30%;
-            left: 80%;
-            animation-delay: 1s;
-        }
-
-        .particle:nth-child(3) {
-            width: 3px;
-            height: 3px;
-            top: 60%;
-            left: 10%;
-            animation-delay: 2s;
-        }
-
-        .particle:nth-child(4) {
-            width: 5px;
-            height: 5px;
-            top: 70%;
-            left: 85%;
-            animation-delay: 3s;
-        }
-
-        .particle:nth-child(5) {
-            width: 4px;
-            height: 4px;
-            top: 10%;
-            left: 50%;
-            animation-delay: 4s;
-        }
-
-        .particle:nth-child(6) {
-            width: 3px;
-            height: 3px;
-            top: 80%;
-            left: 60%;
-            animation-delay: 5s;
-        }
-
-        /* Glow effect */
-        .glow-orb {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
-            animation: glow 4s ease-in-out infinite alternate;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-        }
-
-        /* Accordion styles */
-        .accordion-container {
-            max-width: 800px;
-            width: 100%;
-            padding: 0 2rem;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: revealAccordion 1s ease-out 4s forwards;
-            margin-top: 2rem;
-        }
-
-        .accordion-item {
-            background: var(--accordion-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            margin-bottom: 1rem;
-            border: 1px solid var(--accordion-border);
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .accordion-item:nth-child(1) { animation: slideInUp 0.6s ease-out 4.5s forwards; }
-        .accordion-item:nth-child(2) { animation: slideInUp 0.6s ease-out 4.7s forwards; }
-        .accordion-item:nth-child(3) { animation: slideInUp 0.6s ease-out 4.9s forwards; }
-        .accordion-item:nth-child(4) { animation: slideInUp 0.6s ease-out 5.1s forwards; }
-
-        .accordion-header {
-            padding: 1.5rem 2rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-color);
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            background: var(--accordion-hover);
-        }
-
-        .accordion-icon {
-            transition: transform 0.3s ease;
-            font-size: 1.2rem;
-        }
-
-        .accordion-item.active .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: var(--accordion-content-bg);
-        }
-
-        .accordion-content.active {
-            max-height: 300px;
-        }
-
-        .accordion-text {
-            padding: 1.5rem 2rem;
-            color: var(--accordion-text);
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
         @keyframes scaleAndAppear {
             0% {
                 opacity: 0;
@@ -289,50 +104,6 @@
             }
         }
 
-        @keyframes revealAccordion {
-            0% {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translateY(-20px) rotate(180deg);
-                opacity: 1;
-            }
-        }
-
-        @keyframes glow {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.3;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1.2);
-                opacity: 0.1;
-            }
-        }
-
         /* Content spacer for when title moves to top */
         .content-spacer {
             height: 0;
@@ -345,66 +116,158 @@
             transition: all 1s ease-out;
         }
 
-        /* Responsive adjustments */
+        /* Hero Section */
+        .hero-section {
+            max-width: 800px;
+            width: 100%;
+            padding: 0 2rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+            margin-top: 2rem;
+        }
+
+        .hero-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #f7b2ff;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #e48be6;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+            transform: translateY(-2px);
+        }
+
+
+
+        /* Theme toggle positioning */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .toggle-switch {
+            width: 60px;
+            height: 30px;
+            background: var(--toggle-bg);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .toggle-handle {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: var(--toggle-handle);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.dark .toggle-handle {
+            transform: translateX(30px);
+        }
+
+        /* Hide default cursor */
+        * {
+            cursor: none !important;
+        }
+
+        /* Custom cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 64px;
+            height: 64px;
+            background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//IMG_1582.PNG');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+        }
+
+        .custom-cursor.hover {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
         @media (max-width: 768px) {
             .theme-toggle {
-                top: 1.5rem;
-                right: 1.5rem;
+                top: 0.5rem;
+                right: 2rem;
             }
             
-            .toggle-label {
-                font-size: 0.8rem;
-            }
-            
-            .name-text {
-                font-size: clamp(2.5rem, 10vw, 4rem);
-                letter-spacing: 0.05em;
-            }
-            
-            .name-text.move-to-top {
-                top: 2rem;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            
-            .accordion-header {
-                padding: 1.2rem 1.5rem;
-                font-size: 1rem;
-            }
-            
-            .accordion-text {
-                padding: 1.2rem 1.5rem;
-                font-size: 0.9rem;
-            }
-
-            .accordion-container {
-                padding: 0 1rem;
-            }
-        }
-
-        /* Subtle background animation */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
-            animation: backgroundShift 8s ease-in-out infinite;
-        }
-
-        @keyframes backgroundShift {
-            0%, 100% {
-                transform: translateX(-100%);
-            }
-            50% {
-                transform: translateX(100%);
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+
     <!-- Theme Toggle -->
     <div class="theme-toggle">
         <div class="toggle-switch" onclick="toggleTheme()">
@@ -412,75 +275,99 @@
         </div>
     </div>
 
-    <!-- Floating particles -->
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-
-    <!-- Glow effect -->
-    <div class="glow-orb"></div>
-
     <!-- Main content -->
     <div class="main-container">
-        <h1 class="name-text">klaire rasche</h1>
+        <h1 class="name-text"><a href="index.html" style="color: inherit; text-decoration: none;">klaire rasche</a></h1>
         <div class="content-spacer"></div>
         
-        <!-- Accordion -->
-        <div class="accordion-container">
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>About Me</span>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-text">
-                        I'm a creative professional passionate about design, innovation, and bringing ideas to life through beautiful digital experiences.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>My Work</span>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-text">
-                        I specialize in creating engaging user experiences, visual design, and strategic creative solutions that make an impact.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>Experience</span>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-text">
-                        With years of experience in design and creative strategy, I've worked on diverse projects spanning digital design, branding, and user experience.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>Let's Connect</span>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-text">
-                        I'm always interested in new opportunities and collaborations. Feel free to reach out to discuss potential projects or just say hello!
-                    </div>
-                </div>
+        <!-- Hero Section -->
+        <div class="hero-section" id="heroSection">
+            <h2 class="hero-title">UI/UX Designer<br>Crafting Digital Experiences</h2>
+            <p class="hero-description">
+                I'm a creative and results-driven designer with a passion for blending aesthetics and functionality in every project. Specializing in graphic design, web design, and branding, I focus on crafting visually engaging and user-centered experiences.
+            </p>
+            <div class="hero-buttons">
+                <a href="blog.html" class="btn-primary">Read My Blog</a>
+                <a href="#contact" class="btn-secondary">Get In Touch</a>
             </div>
         </div>
+
+
     </div>
 
     <script>
+        let scrollStep = 0;
+        const maxScrollSteps = 6; // Updated to 6 for the 6 background images
+        let scrollTimeout;
+        let animationComplete = false;
+        let lastScrollTime = 0;
+        const scrollCooldown = 800; // 800ms cooldown between scrolls
+        
+        // Background images for light mode
+        const backgroundImages = [
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG6.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG5.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG4.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG3.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG2.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG1.jpg'
+        ];
+
+        // Wait for name animation to complete
+        setTimeout(() => {
+            document.querySelector('.name-text').classList.add('move-to-top');
+            document.querySelector('.content-spacer').classList.add('active');
+            animationComplete = true;
+            console.log('Animation complete, scrolling enabled');
+        }, 3000);
+
+        // Function to update background based on scroll progress
+        function updateBackground() {
+            const body = document.body;
+            const isDarkMode = body.getAttribute('data-theme') === 'dark';
+            
+            // Remove existing scroll classes
+            body.classList.remove('scroll-1', 'scroll-2');
+            
+            if (!isDarkMode) {
+                // Light mode: use background images
+                if (scrollStep === 0) {
+                    // Reset to original gradient background
+                    body.style.backgroundImage = 'none';
+                    body.style.backgroundColor = 'var(--bg-color)';
+                } else if (scrollStep <= backgroundImages.length) {
+                    // Set background image based on scroll step
+                    const imageUrl = backgroundImages[scrollStep - 1];
+                    body.style.backgroundImage = `url('${imageUrl}')`;
+                    body.style.backgroundSize = 'cover';
+                    body.style.backgroundPosition = 'center';
+                    body.style.backgroundRepeat = 'no-repeat';
+                    body.style.backgroundAttachment = 'fixed';
+                }
+            } else {
+                // Dark mode: keep solid background
+                body.style.backgroundImage = 'none';
+                body.style.backgroundColor = 'var(--bg-color)';
+            }
+            
+            console.log('Background updated, scrollStep:', scrollStep, 'isDarkMode:', isDarkMode);
+        }
+
+        // Function to show content based on scroll step
+        function showContent() {
+            console.log('showContent called, scrollStep:', scrollStep);
+            
+            const heroSection = document.getElementById('heroSection');
+            
+            if (scrollStep >= 2) {
+                heroSection.classList.add('show');
+                console.log('Hero section shown');
+            } else {
+                heroSection.classList.remove('show');
+                console.log('Hero section hidden');
+            }
+        }
+
         // Theme toggle functionality
         function toggleTheme() {
             const body = document.body;
@@ -496,9 +383,12 @@
                 toggleSwitch.classList.add('dark');
                 localStorage.setItem('theme', 'dark');
             }
+            
+            // Update background after theme change
+            updateBackground();
         }
 
-        // Load saved theme on page load
+        // Load saved theme
         document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('theme');
             const toggleSwitch = document.querySelector('.toggle-switch');
@@ -507,37 +397,127 @@
                 document.body.setAttribute('data-theme', 'dark');
                 toggleSwitch.classList.add('dark');
             }
+            
+            // Set initial background
+            updateBackground();
         });
 
-        // Move text to top after it appears and scales
-        setTimeout(() => {
-            document.querySelector('.name-text').classList.add('move-to-top');
-            document.querySelector('.content-spacer').classList.add('active');
-        }, 3000);
-
-        // Accordion functionality
-        function toggleAccordion(header) {
-            const item = header.parentElement;
-            const content = item.querySelector('.accordion-content');
-            const isActive = item.classList.contains('active');
-
-            // Close all other accordions
-            document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                    otherItem.querySelector('.accordion-content').classList.remove('active');
-                }
+        // Custom cursor functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const customCursor = document.getElementById('customCursor');
+            
+            document.addEventListener('mousemove', (e) => {
+                customCursor.style.left = e.clientX + 'px';
+                customCursor.style.top = e.clientY + 'px';
             });
 
-            // Toggle current accordion
-            if (isActive) {
-                item.classList.remove('active');
-                content.classList.remove('active');
-            } else {
-                item.classList.add('active');
-                content.classList.add('active');
+            const clickableElements = document.querySelectorAll('a, button, .toggle-switch');
+            clickableElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    customCursor.classList.add('hover');
+                });
+                element.addEventListener('mouseleave', () => {
+                    customCursor.classList.remove('hover');
+                });
+            });
+        });
+
+        // Slower scroll handling with cooldown
+        document.addEventListener('wheel', (e) => {
+            if (!animationComplete) {
+                console.log('Animation not complete yet, ignoring scroll');
+                return;
             }
-        }
+            
+            const currentTime = Date.now();
+            if (currentTime - lastScrollTime < scrollCooldown) {
+                console.log('Scroll cooldown active, ignoring scroll');
+                return;
+            }
+            
+            e.preventDefault();
+            console.log('Scroll detected, deltaY:', e.deltaY);
+            
+            if (e.deltaY > 50 && scrollStep < maxScrollSteps) {
+                // Scroll down (increased threshold)
+                scrollStep++;
+                lastScrollTime = currentTime;
+                console.log('Scrolling down to step:', scrollStep);
+                updateBackground();
+                showContent();
+            } else if (e.deltaY < -50 && scrollStep > 0) {
+                // Scroll up (increased threshold)
+                scrollStep--;
+                lastScrollTime = currentTime;
+                console.log('Scrolling up to step:', scrollStep);
+                updateBackground();
+                showContent();
+            }
+        }, { passive: false });
+
+        // Touch events for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            if (!animationComplete) return;
+            
+            const currentTime = Date.now();
+            if (currentTime - lastScrollTime < scrollCooldown) {
+                console.log('Touch cooldown active, ignoring touch');
+                return;
+            }
+            
+            touchEndY = e.changedTouches[0].screenY;
+            const touchDiff = touchStartY - touchEndY;
+            
+            console.log('Touch detected, diff:', touchDiff);
+            
+            if (touchDiff > 50 && scrollStep < maxScrollSteps) {
+                // Swipe up (scroll down)
+                scrollStep++;
+                lastScrollTime = currentTime;
+                console.log('Touch scroll down to step:', scrollStep);
+                updateBackground();
+                showContent();
+            } else if (touchDiff < -50 && scrollStep > 0) {
+                // Swipe down (scroll up)
+                scrollStep--;
+                lastScrollTime = currentTime;
+                console.log('Touch scroll up to step:', scrollStep);
+                updateBackground();
+                showContent();
+            }
+        });
+
+        // Debug: Test scroll functionality with keyboard
+        document.addEventListener('keydown', (e) => {
+            if (!animationComplete) return;
+            
+            const currentTime = Date.now();
+            if (currentTime - lastScrollTime < scrollCooldown) {
+                console.log('Keyboard cooldown active, ignoring keypress');
+                return;
+            }
+            
+            if (e.key === 'ArrowDown' && scrollStep < maxScrollSteps) {
+                scrollStep++;
+                lastScrollTime = currentTime;
+                console.log('Keyboard down to step:', scrollStep);
+                updateBackground();
+                showContent();
+            } else if (e.key === 'ArrowUp' && scrollStep > 0) {
+                scrollStep--;
+                lastScrollTime = currentTime;
+                console.log('Keyboard up to step:', scrollStep);
+                updateBackground();
+                showContent();
+            }
+        });
     </script>
 </body>
 </html> 
