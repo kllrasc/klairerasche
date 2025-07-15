@@ -254,6 +254,50 @@
             transform: translate(-50%, -50%) scale(1.2);
         }
 
+        /* Contact Header */
+        .contact-header {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .contact-header.active {
+            opacity: 1;
+        }
+
+        .contact-location-time {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            width: 300px;
+        }
+
+        .location {
+            color: #c44569;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .live-clock {
+            color: #c44569;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .contact-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #c44569;
+            margin: 0;
+            text-transform: lowercase;
+        }
+
         /* Contact Shapes Animation */
         .contact-shapes-container {
             position: fixed;
@@ -273,82 +317,184 @@
 
         .contact-shape {
             position: absolute;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: 700;
             color: white;
             cursor: pointer;
-            transform: translateY(-100px);
+            transform: translateY(-200px);
             transition: all 0.3s ease;
             user-select: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 120px;
+            min-width: 200px;
+            min-height: 80px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            left: 50%;
+            transform-origin: center;
         }
 
         .contact-shape:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
         }
 
         .shape-1 {
-            background: linear-gradient(135deg, #ff6b9d, #c44569);
-            left: 20%;
-            animation: fallAndBounce 2s ease-out 0.5s forwards;
+            background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
+            margin-left: -100px;
+            animation: fallAndPile1 2.5s ease-out 0.5s forwards;
         }
 
         .shape-2 {
-            background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
-            left: 40%;
-            animation: fallAndBounce 2s ease-out 1s forwards;
+            background: linear-gradient(135deg, #ffd93d, #ffb74d);
+            margin-left: -100px;
+            animation: fallAndPile2 2.5s ease-out 1s forwards;
         }
 
         .shape-3 {
-            background: linear-gradient(135deg, #ffd93d, #ffb74d);
-            left: 60%;
-            animation: fallAndBounce 2s ease-out 1.5s forwards;
+            background: linear-gradient(135deg, #a8457a, #8b4a8a);
+            margin-left: -100px;
+            animation: fallAndPile3 2.5s ease-out 1.5s forwards;
         }
 
         .shape-4 {
-            background: linear-gradient(135deg, #a8457a, #8b4a8a);
-            left: 25%;
-            animation: fallAndBounce 2s ease-out 2s forwards;
+            background: linear-gradient(135deg, #c44569, #ff6b9d);
+            margin-left: -100px;
+            animation: fallAndPile4 2.5s ease-out 2s forwards;
         }
 
         .shape-5 {
-            background: linear-gradient(135deg, #c44569, #ff6b9d);
-            left: 50%;
-            animation: fallAndBounce 2s ease-out 2.5s forwards;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            margin-left: -100px;
+            font-size: 32px;
+            animation: fallAndPile5 2.5s ease-out 2.5s forwards;
         }
 
         .shape-6 {
-            background: linear-gradient(135deg, #74b9ff, #0984e3);
-            left: 75%;
-            font-size: 24px;
-            animation: fallAndBounce 2s ease-out 3s forwards;
+            background: linear-gradient(135deg, #00b894, #00a085);
+            margin-left: -100px;
+            font-size: 32px;
+            animation: fallAndPile6 2.5s ease-out 3s forwards;
         }
 
-        @keyframes fallAndBounce {
+        @keyframes fallAndPile1 {
             0% {
-                transform: translateY(-100px);
+                transform: translateX(-50%) translateY(-200px) rotate(0deg);
                 opacity: 0;
             }
-            60% {
-                transform: translateY(calc(100vh - 120px));
+            70% {
+                transform: translateX(-50%) translateY(calc(100vh - 200px)) rotate(180deg);
                 opacity: 1;
             }
-            80% {
-                transform: translateY(calc(100vh - 150px));
+            85% {
+                transform: translateX(-50%) translateY(calc(100vh - 250px)) rotate(200deg);
             }
             100% {
-                transform: translateY(calc(100vh - 130px));
+                transform: translateX(-50%) translateY(calc(100vh - 220px)) rotate(180deg);
                 opacity: 1;
             }
         }
+
+        @keyframes fallAndPile2 {
+            0% {
+                transform: translateX(-50%) translateY(-200px) rotate(0deg);
+                opacity: 0;
+            }
+            70% {
+                transform: translateX(-40%) translateY(calc(100vh - 200px)) rotate(-160deg);
+                opacity: 1;
+            }
+            85% {
+                transform: translateX(-40%) translateY(calc(100vh - 250px)) rotate(-180deg);
+            }
+            100% {
+                transform: translateX(-40%) translateY(calc(100vh - 180px)) rotate(-160deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fallAndPile3 {
+            0% {
+                transform: translateX(-50%) translateY(-200px) rotate(0deg);
+                opacity: 0;
+            }
+            70% {
+                transform: translateX(-60%) translateY(calc(100vh - 200px)) rotate(220deg);
+                opacity: 1;
+            }
+            85% {
+                transform: translateX(-60%) translateY(calc(100vh - 250px)) rotate(240deg);
+            }
+            100% {
+                transform: translateX(-60%) translateY(calc(100vh - 160px)) rotate(220deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fallAndPile4 {
+            0% {
+                transform: translateX(-50%) translateY(-200px) rotate(0deg);
+                opacity: 0;
+            }
+            70% {
+                transform: translateX(-30%) translateY(calc(100vh - 200px)) rotate(-200deg);
+                opacity: 1;
+            }
+            85% {
+                transform: translateX(-30%) translateY(calc(100vh - 250px)) rotate(-220deg);
+            }
+            100% {
+                transform: translateX(-30%) translateY(calc(100vh - 140px)) rotate(-200deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fallAndPile5 {
+            0% {
+                transform: translateX(-50%) translateY(-200px) rotate(0deg);
+                opacity: 0;
+            }
+            70% {
+                transform: translateX(-70%) translateY(calc(100vh - 200px)) rotate(260deg);
+                opacity: 1;
+            }
+            85% {
+                transform: translateX(-70%) translateY(calc(100vh - 250px)) rotate(280deg);
+            }
+            100% {
+                transform: translateX(-70%) translateY(calc(100vh - 120px)) rotate(260deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fallAndPile6 {
+            0% {
+                transform: translateX(-50%) translateY(-200px) rotate(0deg);
+                opacity: 0;
+            }
+            70% {
+                transform: translateX(-20%) translateY(calc(100vh - 200px)) rotate(-240deg);
+                opacity: 1;
+            }
+            85% {
+                transform: translateX(-20%) translateY(calc(100vh - 250px)) rotate(-260deg);
+            }
+            100% {
+                transform: translateX(-20%) translateY(calc(100vh - 100px)) rotate(-240deg);
+                opacity: 1;
+            }
+        }
+
+        /* Stack shapes on top of each other */
+        .shape-1 { z-index: 51; }
+        .shape-2 { z-index: 52; }
+        .shape-3 { z-index: 53; }
+        .shape-4 { z-index: 54; }
+        .shape-5 { z-index: 55; }
+        .shape-6 { z-index: 56; }
 
         /* Contact Modal */
         .contact-modal {
@@ -533,9 +679,18 @@
             }
 
             .contact-shape {
-                font-size: 14px;
-                padding: 8px 16px;
-                min-width: 100px;
+                font-size: 16px;
+                padding: 12px 24px;
+                min-width: 140px;
+                min-height: 60px;
+            }
+
+            .contact-title {
+                font-size: 2rem;
+            }
+
+            .contact-location-time {
+                width: 250px;
             }
 
             .modal-content {
@@ -581,25 +736,34 @@
             </div>
         </div>
 
+        <!-- Contact Header -->
+        <div class="contact-header" id="contactHeader">
+            <div class="contact-location-time">
+                <span class="location">Los Angeles, CA</span>
+                <span class="live-clock" id="liveClock">08:41 PM</span>
+            </div>
+            <h1 class="contact-title">Let's work together!</h1>
+        </div>
+
         <!-- Falling Contact Shapes -->
         <div class="contact-shapes-container" id="contactShapes">
             <div class="contact-shape shape-1" onclick="openContactModal()">
-                <span>Let's work together!</span>
-            </div>
-            <div class="contact-shape shape-2" onclick="openContactModal()">
                 <span>Reach out</span>
             </div>
-            <div class="contact-shape shape-3" onclick="openContactModal()">
+            <div class="contact-shape shape-2" onclick="openContactModal()">
                 <span>Say hiii</span>
             </div>
-            <div class="contact-shape shape-4" onclick="openContactModal()">
+            <div class="contact-shape shape-3" onclick="openContactModal()">
                 <span>Let's chat</span>
             </div>
-            <div class="contact-shape shape-5" onclick="openContactModal()">
+            <div class="contact-shape shape-4" onclick="openContactModal()">
                 <span>Send a message</span>
             </div>
-            <div class="contact-shape shape-6" onclick="openContactModal()">
+            <div class="contact-shape shape-5" onclick="openContactModal()">
                 <span>💌</span>
+            </div>
+            <div class="contact-shape shape-6" onclick="openContactModal()">
+                <span>📞</span>
             </div>
         </div>
 
@@ -728,7 +892,9 @@
             
             // Start contact shapes animation
             setTimeout(() => {
+                document.getElementById('contactHeader').classList.add('active');
                 document.getElementById('contactShapes').classList.add('active');
+                startLiveClock();
             }, 1000);
         }, 3000);
 
@@ -822,7 +988,7 @@
                 customCursor.style.top = e.clientY + 'px';
             });
 
-            const clickableElements = document.querySelectorAll('a, button, .toggle-switch, .contact-shape, .close-btn, .submit-btn');
+            const clickableElements = document.querySelectorAll('a, button, .toggle-switch, .contact-shape, .close-btn, .submit-btn, .contact-header');
             clickableElements.forEach(element => {
                 element.addEventListener('mouseenter', () => {
                     customCursor.classList.add('hover');
@@ -997,6 +1163,35 @@
                 closeContactModal();
             }
         });
+
+        // Live Clock Functionality
+        function startLiveClock() {
+            function updateClock() {
+                const now = new Date();
+                let hours = now.getHours();
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                const seconds = now.getSeconds().toString().padStart(2, '0');
+                
+                // Convert to 12-hour format
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // 0 should be 12
+                const formattedHours = hours.toString().padStart(2, '0');
+                
+                const timeString = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
+                
+                const clockElement = document.getElementById('liveClock');
+                if (clockElement) {
+                    clockElement.textContent = timeString;
+                }
+            }
+            
+            // Update immediately
+            updateClock();
+            
+            // Update every second
+            setInterval(updateClock, 1000);
+        }
     </script>
 </body>
 </html> 
