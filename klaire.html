@@ -36,16 +36,10 @@
             transition: background-color 0.5s ease, background-image 0.5s ease;
         }
 
-        /* Progressive background transitions for light mode only */
-        body.scroll-1 {
-            background: linear-gradient(135deg, #B8B8FF 0%, #A8A8FF 50%, #9898FF 100%);
-        }
-
-        body.scroll-2 {
-            background: linear-gradient(135deg, #A8A8FF 0%, #9898FF 50%, #8888FF 100%);
-        }
-
-        /* Dark mode keeps consistent background */
+        /* Keep consistent periwinkle background */
+        body,
+        body.scroll-1,
+        body.scroll-2,
         [data-theme="dark"] body,
         [data-theme="dark"] body.scroll-1,
         [data-theme="dark"] body.scroll-2 {
@@ -257,7 +251,7 @@
         /* Contact Header */
         .contact-header {
             position: fixed;
-            top: 2rem;
+            top: 10rem;
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
@@ -270,32 +264,61 @@
             opacity: 1;
         }
 
-        .contact-location-time {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            width: 300px;
+        .contact-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: #6B46C1;
+            margin: 0;
+            text-transform: lowercase;
+            margin-bottom: 2rem;
         }
 
+        /* Dark mode title color */
+        [data-theme="dark"] .contact-title {
+            color: #B8B8FF;
+        }
+
+        /* Location and Time positioned at edges of container */
         .location {
-            color: #c44569;
-            font-weight: 600;
-            font-size: 1rem;
+            position: fixed;
+            top: 9.5rem;
+            left: 50px;
+            color: #6B46C1;
+            font-weight: 700;
+            font-size: 1.2rem;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .location.active {
+            opacity: 1;
+        }
+
+        /* Dark mode location color */
+        [data-theme="dark"] .location {
+            color: #E0E0E0;
         }
 
         .live-clock {
-            color: #c44569;
-            font-weight: 600;
-            font-size: 1rem;
+            position: fixed;
+            top: 9.5rem;
+            right: 50px;
+            color: #6B46C1;
+            font-weight: 700;
+            font-size: 1.2rem;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        .contact-title {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #c44569;
-            margin: 0;
-            text-transform: lowercase;
+        .live-clock.active {
+            opacity: 1;
+        }
+
+        /* Dark mode clock color */
+        [data-theme="dark"] .live-clock {
+            color: #E0E0E0;
         }
 
         /* Contact Shapes Animation */
@@ -315,25 +338,49 @@
             pointer-events: auto;
         }
 
+        /* Background container for pile area */
+        .pile-background {
+            position: fixed;
+            top: 9rem;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: #E6E6FA;
+            border-radius: 30px;
+            z-index: 49;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Dark mode container background */
+        [data-theme="dark"] .pile-background {
+            background: #2d2d4a;
+        }
+
+        .pile-background.active {
+            opacity: 1;
+        }
+
         .contact-shape {
             position: absolute;
-            padding: 20px 40px;
+            padding: 50px 90px;
             border-radius: 50px;
-            font-size: 24px;
+            font-size: 42px;
             font-weight: 700;
-            color: white;
+            color: #333333;
             cursor: pointer;
-            transform: translateY(-200px);
+            top: 9rem;
+            transform: translateX(-50%) translateY(0px);
             transition: all 0.3s ease;
             user-select: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 200px;
-            min-height: 80px;
+            min-width: 380px;
+            min-height: 140px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            left: 50%;
             transform-origin: center;
         }
 
@@ -342,159 +389,33 @@
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
         }
 
-        .shape-1 {
-            background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
-            margin-left: -100px;
-            animation: fallAndPile1 2.5s ease-out 0.5s forwards;
-        }
-
         .shape-2 {
-            background: linear-gradient(135deg, #ffd93d, #ffb74d);
-            margin-left: -100px;
-            animation: fallAndPile2 2.5s ease-out 1s forwards;
-        }
-
-        .shape-3 {
-            background: linear-gradient(135deg, #a8457a, #8b4a8a);
-            margin-left: -100px;
-            animation: fallAndPile3 2.5s ease-out 1.5s forwards;
-        }
-
-        .shape-4 {
-            background: linear-gradient(135deg, #c44569, #ff6b9d);
-            margin-left: -100px;
-            animation: fallAndPile4 2.5s ease-out 2s forwards;
-        }
-
-        .shape-5 {
-            background: linear-gradient(135deg, #74b9ff, #0984e3);
-            margin-left: -100px;
-            font-size: 32px;
-            animation: fallAndPile5 2.5s ease-out 2.5s forwards;
-        }
-
-        .shape-6 {
-            background: linear-gradient(135deg, #00b894, #00a085);
-            margin-left: -100px;
-            font-size: 32px;
-            animation: fallAndPile6 2.5s ease-out 3s forwards;
-        }
-
-        @keyframes fallAndPile1 {
-            0% {
-                transform: translateX(-50%) translateY(-200px) rotate(0deg);
-                opacity: 0;
-            }
-            70% {
-                transform: translateX(-50%) translateY(calc(100vh - 200px)) rotate(180deg);
-                opacity: 1;
-            }
-            85% {
-                transform: translateX(-50%) translateY(calc(100vh - 250px)) rotate(200deg);
-            }
-            100% {
-                transform: translateX(-50%) translateY(calc(100vh - 220px)) rotate(180deg);
-                opacity: 1;
-            }
+            background: #B8B8FF;
+            left: 50%;
+            animation: fallAndPile2 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3.7s forwards;
         }
 
         @keyframes fallAndPile2 {
             0% {
-                transform: translateX(-50%) translateY(-200px) rotate(0deg);
-                opacity: 0;
+                transform: translateX(-50%) translateY(0px) rotate(0deg);
             }
-            70% {
-                transform: translateX(-40%) translateY(calc(100vh - 200px)) rotate(-160deg);
-                opacity: 1;
+            75% {
+                transform: translateX(-50%) translateY(450px) rotate(0deg);
             }
-            85% {
-                transform: translateX(-40%) translateY(calc(100vh - 250px)) rotate(-180deg);
+            90% {
+                transform: translateX(-50%) translateY(425px) rotate(0deg);
             }
             100% {
-                transform: translateX(-40%) translateY(calc(100vh - 180px)) rotate(-160deg);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fallAndPile3 {
-            0% {
-                transform: translateX(-50%) translateY(-200px) rotate(0deg);
-                opacity: 0;
-            }
-            70% {
-                transform: translateX(-60%) translateY(calc(100vh - 200px)) rotate(220deg);
-                opacity: 1;
-            }
-            85% {
-                transform: translateX(-60%) translateY(calc(100vh - 250px)) rotate(240deg);
-            }
-            100% {
-                transform: translateX(-60%) translateY(calc(100vh - 160px)) rotate(220deg);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fallAndPile4 {
-            0% {
-                transform: translateX(-50%) translateY(-200px) rotate(0deg);
-                opacity: 0;
-            }
-            70% {
-                transform: translateX(-30%) translateY(calc(100vh - 200px)) rotate(-200deg);
-                opacity: 1;
-            }
-            85% {
-                transform: translateX(-30%) translateY(calc(100vh - 250px)) rotate(-220deg);
-            }
-            100% {
-                transform: translateX(-30%) translateY(calc(100vh - 140px)) rotate(-200deg);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fallAndPile5 {
-            0% {
-                transform: translateX(-50%) translateY(-200px) rotate(0deg);
-                opacity: 0;
-            }
-            70% {
-                transform: translateX(-70%) translateY(calc(100vh - 200px)) rotate(260deg);
-                opacity: 1;
-            }
-            85% {
-                transform: translateX(-70%) translateY(calc(100vh - 250px)) rotate(280deg);
-            }
-            100% {
-                transform: translateX(-70%) translateY(calc(100vh - 120px)) rotate(260deg);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fallAndPile6 {
-            0% {
-                transform: translateX(-50%) translateY(-200px) rotate(0deg);
-                opacity: 0;
-            }
-            70% {
-                transform: translateX(-20%) translateY(calc(100vh - 200px)) rotate(-240deg);
-                opacity: 1;
-            }
-            85% {
-                transform: translateX(-20%) translateY(calc(100vh - 250px)) rotate(-260deg);
-            }
-            100% {
-                transform: translateX(-20%) translateY(calc(100vh - 100px)) rotate(-240deg);
-                opacity: 1;
+                transform: translateX(-50%) translateY(450px) rotate(0deg);
             }
         }
 
         /* Stack shapes on top of each other */
-        .shape-1 { z-index: 51; }
-        .shape-2 { z-index: 52; }
-        .shape-3 { z-index: 53; }
-        .shape-4 { z-index: 54; }
-        .shape-5 { z-index: 55; }
-        .shape-6 { z-index: 56; }
+        .shape-2 { z-index: 53; }
+
+
+
+
 
         /* Contact Modal */
         .contact-modal {
@@ -679,18 +600,49 @@
             }
 
             .contact-shape {
-                font-size: 16px;
-                padding: 12px 24px;
-                min-width: 140px;
-                min-height: 60px;
+                font-size: 32px;
+                padding: 40px 60px;
+                min-width: 320px;
+                min-height: 120px;
+                top: 6rem;
+            }
+
+
+
+            /* Mobile animation adjustments */
+            @keyframes fallAndPile2 {
+                0% {
+                    transform: translateX(-50%) translateY(0px) rotate(0deg);
+                }
+                75% {
+                    transform: translateX(-50%) translateY(450px) rotate(0deg);
+                }
+                90% {
+                    transform: translateX(-50%) translateY(425px) rotate(0deg);
+                }
+                100% {
+                    transform: translateX(-50%) translateY(450px) rotate(0deg);
+                }
             }
 
             .contact-title {
-                font-size: 2rem;
+                font-size: 3.5rem;
             }
 
-            .contact-location-time {
-                width: 250px;
+            .contact-header {
+                top: 7rem;
+            }
+
+            .location {
+                top: 6.5rem;
+                left: 30px;
+                font-size: 1rem;
+            }
+
+            .live-clock {
+                top: 6.5rem;
+                right: 30px;
+                font-size: 1rem;
             }
 
             .modal-content {
@@ -704,6 +656,15 @@
 
             .modal-header h2 {
                 font-size: 2rem;
+            }
+
+
+
+            .pile-background {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                top: 6rem;
             }
         }
     </style>
@@ -738,34 +699,26 @@
 
         <!-- Contact Header -->
         <div class="contact-header" id="contactHeader">
-            <div class="contact-location-time">
-                <span class="location">Los Angeles, CA</span>
-                <span class="live-clock" id="liveClock">08:41 PM</span>
-            </div>
             <h1 class="contact-title">Let's work together!</h1>
         </div>
 
+        <!-- Location and Time at edges of container -->
+        <div class="location" id="location">Austin, TX</div>
+        <div class="live-clock" id="liveClock">08:41 PM</div>
+
+        <!-- Pile Background Container -->
+        <div class="pile-background" id="pileBackground"></div>
+
         <!-- Falling Contact Shapes -->
         <div class="contact-shapes-container" id="contactShapes">
-            <div class="contact-shape shape-1" onclick="openContactModal()">
-                <span>Reach out</span>
-            </div>
             <div class="contact-shape shape-2" onclick="openContactModal()">
                 <span>Say hiii</span>
             </div>
-            <div class="contact-shape shape-3" onclick="openContactModal()">
-                <span>Let's chat</span>
-            </div>
-            <div class="contact-shape shape-4" onclick="openContactModal()">
-                <span>Send a message</span>
-            </div>
-            <div class="contact-shape shape-5" onclick="openContactModal()">
-                <span>💌</span>
-            </div>
-            <div class="contact-shape shape-6" onclick="openContactModal()">
-                <span>📞</span>
-            </div>
         </div>
+
+
+
+
 
         <!-- Contact Modal -->
         <div class="contact-modal" id="contactModal">
@@ -894,6 +847,9 @@
             setTimeout(() => {
                 document.getElementById('contactHeader').classList.add('active');
                 document.getElementById('contactShapes').classList.add('active');
+                document.getElementById('pileBackground').classList.add('active');
+                document.getElementById('location').classList.add('active');
+                document.getElementById('liveClock').classList.add('active');
                 startLiveClock();
             }, 1000);
         }, 3000);
@@ -901,33 +857,12 @@
         // Function to update background based on scroll progress
         function updateBackground() {
             const body = document.body;
-            const isDarkMode = body.getAttribute('data-theme') === 'dark';
             
-            // Remove existing scroll classes
-            body.classList.remove('scroll-1', 'scroll-2');
+            // Keep consistent periwinkle background
+            body.style.backgroundImage = 'none';
+            body.style.backgroundColor = 'var(--bg-color)';
             
-            if (!isDarkMode) {
-                // Light mode: use background images
-                if (scrollStep === 0) {
-                    // Reset to original gradient background
-                    body.style.backgroundImage = 'none';
-                    body.style.backgroundColor = 'var(--bg-color)';
-                } else if (scrollStep <= backgroundImages.length) {
-                    // Set background image based on scroll step
-                    const imageUrl = backgroundImages[scrollStep - 1];
-                    body.style.backgroundImage = `url('${imageUrl}')`;
-                    body.style.backgroundSize = 'cover';
-                    body.style.backgroundPosition = 'center';
-                    body.style.backgroundRepeat = 'no-repeat';
-                    body.style.backgroundAttachment = 'fixed';
-                }
-            } else {
-                // Dark mode: keep solid background
-                body.style.backgroundImage = 'none';
-                body.style.backgroundColor = 'var(--bg-color)';
-            }
-            
-            console.log('Background updated, scrollStep:', scrollStep, 'isDarkMode:', isDarkMode);
+            console.log('Background updated, scrollStep:', scrollStep);
         }
 
         // Function to show content based on scroll step
