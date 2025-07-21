@@ -210,14 +210,16 @@
             display: flex;
             gap: 0.5rem;
             margin-bottom: 0.5rem;
+            justify-content: space-between;
         }
 
         .hover-image {
-            width: 50%;
+            width: calc(50% - 0.25rem);
             height: 120px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid var(--soft-green);
+            flex: 1;
         }
 
         .hover-title {
