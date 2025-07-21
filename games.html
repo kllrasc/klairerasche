@@ -299,11 +299,99 @@
         }
 
         .mini-game {
-            background: linear-gradient(135deg, var(--soft-green), var(--soft-mint));
+            background: linear-gradient(135deg, #f4d03f, #f39c12);
             border-radius: 10px;
             padding: 2rem;
             margin: 1rem 0;
             color: var(--text-dark);
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .game-container {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to bottom, #87CEEB 0%, #f4d03f 70%, #8B4513 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #8B4513;
+        }
+
+        .player {
+            width: 30px;
+            height: 30px;
+            background: #4A90E2;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            transition: bottom 0.3s ease;
+        }
+
+        .player::before {
+            content: "🐰";
+            font-size: 20px;
+            position: absolute;
+            top: -5px;
+            left: 5px;
+        }
+
+        .obstacle {
+            width: 20px;
+            height: 40px;
+            background: #8B4513;
+            position: absolute;
+            bottom: 0;
+            right: -20px;
+            border-radius: 4px;
+        }
+
+        .obstacle::before {
+            content: "🌵";
+            font-size: 16px;
+            position: absolute;
+            top: -8px;
+            left: 2px;
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20px;
+            background: #8B4513;
+        }
+
+        .score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e74c3c;
+            display: none;
+        }
+
+        .start-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            color: #333;
+            text-align: center;
         }
 
         .click-counter {
@@ -438,28 +526,122 @@
         });
 
         // Mini-game functionality
-        let clickCount = 0;
-        function incrementCounter() {
-            clickCount++;
-            document.getElementById('clickCounter').textContent = clickCount;
-            
-            // Save to localStorage
-            localStorage.setItem('gameClickCount', clickCount);
-            
-            // Fun animation
-            const button = document.getElementById('clickButton');
-            button.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                button.style.transform = 'scale(1)';
-            }, 100);
+        let gameRunning = false;
+        let gameScore = 0;
+        let playerJumping = false;
+        let obstacles = [];
+        let animationId;
+        let gameSpeed = 5;
+
+        function startGame() {
+            gameRunning = true;
+            gameScore = 0;
+            obstacles = [];
+            gameSpeed = 5;
+            document.getElementById('startMessage').style.display = 'none';
+            document.getElementById('gameOver').style.display = 'none';
+            document.getElementById('gameScore').textContent = 'Score: 0';
+            gameLoop();
         }
 
-        // Load click count on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedClicks = localStorage.getItem('gameClickCount');
-            if (savedClicks) {
-                clickCount = parseInt(savedClicks);
-                document.getElementById('clickCounter').textContent = clickCount;
+        function gameLoop() {
+            if (!gameRunning) return;
+
+            // Move obstacles
+            obstacles.forEach((obstacle, index) => {
+                obstacle.style.left = (obstacle.offsetLeft - gameSpeed) + 'px';
+                
+                // Remove obstacles that are off screen
+                if (obstacle.offsetLeft < -20) {
+                    obstacle.remove();
+                    obstacles.splice(index, 1);
+                    gameScore++;
+                    document.getElementById('gameScore').textContent = 'Score: ' + gameScore;
+                }
+            });
+
+            // Generate new obstacles
+            if (Math.random() < 0.02) {
+                createObstacle();
+            }
+
+            // Check collisions
+            checkCollisions();
+
+            // Increase speed over time
+            if (gameScore % 10 === 0 && gameScore > 0) {
+                gameSpeed += 0.5;
+            }
+
+            animationId = requestAnimationFrame(gameLoop);
+        }
+
+        function createObstacle() {
+            const obstacle = document.createElement('div');
+            obstacle.className = 'obstacle';
+            document.querySelector('.game-container').appendChild(obstacle);
+            obstacles.push(obstacle);
+        }
+
+        function jump() {
+            if (!playerJumping && gameRunning) {
+                playerJumping = true;
+                const player = document.getElementById('player');
+                player.style.bottom = '60px';
+                
+                setTimeout(() => {
+                    player.style.bottom = '0px';
+                    setTimeout(() => {
+                        playerJumping = false;
+                    }, 300);
+                }, 300);
+            }
+        }
+
+        function checkCollisions() {
+            const player = document.getElementById('player');
+            const playerRect = player.getBoundingClientRect();
+
+            obstacles.forEach(obstacle => {
+                const obstacleRect = obstacle.getBoundingClientRect();
+                
+                if (playerRect.left < obstacleRect.right &&
+                    playerRect.right > obstacleRect.left &&
+                    playerRect.top < obstacleRect.bottom &&
+                    playerRect.bottom > obstacleRect.top) {
+                    gameOver();
+                }
+            });
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            cancelAnimationFrame(animationId);
+            document.getElementById('gameOver').style.display = 'block';
+            
+            // Clear obstacles
+            obstacles.forEach(obstacle => obstacle.remove());
+            obstacles = [];
+        }
+
+        // Event listeners
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (!gameRunning) {
+                    startGame();
+                } else {
+                    jump();
+                }
+            }
+        });
+
+        // Touch support for mobile
+        document.querySelector('.game-container').addEventListener('click', function() {
+            if (!gameRunning) {
+                startGame();
+            } else {
+                jump();
             }
         });
     </script>
@@ -552,11 +734,12 @@
         <div class="interactive-section">
             <div class="interactive-title">Try This Mini-Game!</div>
             <div class="mini-game">
-                <div class="click-counter" id="clickCounter">0</div>
-                <div>clicks collected</div>
-                <br>
-                <div class="click-button" id="clickButton" onclick="incrementCounter()">
-                    ✨
+                <div class="game-container">
+                    <div class="score" id="gameScore">Score: 0</div>
+                    <div class="player" id="player"></div>
+                    <div class="ground"></div>
+                    <div class="game-over" id="gameOver">Game Over!<br>Press Space to restart</div>
+                    <div class="start-message" id="startMessage">Press Space to start!<br>Jump over the cacti!</div>
                 </div>
             </div>
         </div>
