@@ -56,7 +56,7 @@ export default function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
-      const { postId, action } = req.body;
+      const { postId, action, userId } = req.body;
       
       if (!postId || !action) {
         return res.status(400).json({ error: 'Missing postId or action' });
@@ -65,15 +65,25 @@ export default function handler(req, res) {
       const likes = readLikes();
       
       if (!likes[postId]) {
-        likes[postId] = { count: 0, liked: false };
+        likes[postId] = { count: 0, likedBy: [] };
       }
 
+      // Generate a simple user ID if not provided (based on IP or random)
+      const currentUserId = userId || req.headers['x-forwarded-for'] || 'anonymous';
+
       if (action === 'like') {
-        likes[postId].count += 1;
-        likes[postId].liked = true;
+        // Only increment if this user hasn't liked it before
+        if (!likes[postId].likedBy.includes(currentUserId)) {
+          likes[postId].count += 1;
+          likes[postId].likedBy.push(currentUserId);
+        }
       } else if (action === 'unlike') {
-        likes[postId].count = Math.max(0, likes[postId].count - 1);
-        likes[postId].liked = false;
+        // Only decrement if this user has liked it before
+        const userIndex = likes[postId].likedBy.indexOf(currentUserId);
+        if (userIndex > -1) {
+          likes[postId].count = Math.max(0, likes[postId].count - 1);
+          likes[postId].likedBy.splice(userIndex, 1);
+        }
       }
 
       writeLikes(likes);
@@ -82,7 +92,7 @@ export default function handler(req, res) {
         success: true, 
         postId, 
         count: likes[postId].count,
-        liked: likes[postId].liked 
+        liked: likes[postId].likedBy.includes(currentUserId)
       });
     } catch (error) {
       console.error('Error handling like:', error);

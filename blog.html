@@ -494,6 +494,16 @@
             }
         }
 
+        // Generate a unique user ID for this session
+        function generateUserId() {
+            let userId = localStorage.getItem('blogUserId');
+            if (!userId) {
+                userId = 'user_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+                localStorage.setItem('blogUserId', userId);
+            }
+            return userId;
+        }
+
         // Load saved theme and likes
         document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('theme');
@@ -504,7 +514,7 @@
                 toggleSwitch.classList.add('dark');
             }
             
-            // Initialize like states from localStorage
+            // Initialize like states from server
             initializeLikes();
         });
 
@@ -534,6 +544,7 @@
             const postId = postCard.getAttribute('data-post-id');
             const heartCount = element.querySelector('.heart-count');
             const currentCount = parseInt(heartCount.textContent);
+            const userId = generateUserId();
             
             try {
                 if (element.classList.contains('liked')) {
@@ -545,7 +556,8 @@
                         },
                         body: JSON.stringify({
                             postId: postId,
-                            action: 'unlike'
+                            action: 'unlike',
+                            userId: userId
                         })
                     });
                     
@@ -563,7 +575,8 @@
                         },
                         body: JSON.stringify({
                             postId: postId,
-                            action: 'like'
+                            action: 'like',
+                            userId: userId
                         })
                     });
                     
@@ -592,6 +605,7 @@
                 const response = await fetch('/api/likes');
                 if (response.ok) {
                     const likes = await response.json();
+                    const userId = generateUserId();
                     
                     const postCards = document.querySelectorAll('.post-card');
                     postCards.forEach(postCard => {
@@ -601,8 +615,11 @@
                         
                         if (likes[postId]) {
                             heartCount.textContent = likes[postId].count;
-                            if (likes[postId].liked) {
+                            // Check if current user has liked this post
+                            if (likes[postId].likedBy && likes[postId].likedBy.includes(userId)) {
                                 heartContainer.classList.add('liked');
+                            } else {
+                                heartContainer.classList.remove('liked');
                             }
                         }
                     });
