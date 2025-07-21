@@ -188,12 +188,17 @@
             border-radius: 15px;
             padding: 1rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
+            z-index: 9999;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
             width: 300px;
             max-width: 90vw;
+            pointer-events: none;
+        }
+
+        .game-card {
+            position: relative;
         }
 
         .game-card:hover .game-preview-hover {
