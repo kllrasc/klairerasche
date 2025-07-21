@@ -528,61 +528,93 @@
             });
         });
 
-        // Heart toggle functionality (Instagram-like with persistence)
-        function toggleHeart(element) {
+        // Heart toggle functionality with server-side persistence
+        async function toggleHeart(element) {
             const postCard = element.closest('.post-card');
             const postId = postCard.getAttribute('data-post-id');
             const heartCount = element.querySelector('.heart-count');
             const currentCount = parseInt(heartCount.textContent);
             
-            if (element.classList.contains('liked')) {
-                // Unlike
-                element.classList.remove('liked');
-                const newCount = currentCount - 1;
-                heartCount.textContent = newCount;
-                saveLikeState(postId, false, newCount);
-            } else {
-                // Like
-                element.classList.add('liked');
-                const newCount = currentCount + 1;
-                heartCount.textContent = newCount;
-                saveLikeState(postId, true, newCount);
-            }
-        }
-
-        // Save like state to localStorage
-        function saveLikeState(postId, isLiked, count) {
-            const likeData = {
-                isLiked: isLiked,
-                count: count
-            };
-            localStorage.setItem(`post-${postId}`, JSON.stringify(likeData));
-        }
-
-        // Load like state from localStorage
-        function loadLikeState(postId) {
-            const saved = localStorage.getItem(`post-${postId}`);
-            if (saved) {
-                return JSON.parse(saved);
-            }
-            return { isLiked: false, count: 0 };
-        }
-
-        // Initialize all post likes from localStorage
-        function initializeLikes() {
-            const postCards = document.querySelectorAll('.post-card');
-            postCards.forEach(postCard => {
-                const postId = postCard.getAttribute('data-post-id');
-                const heartContainer = postCard.querySelector('.heart-container');
-                const heartCount = postCard.querySelector('.heart-count');
-                
-                const likeData = loadLikeState(postId);
-                heartCount.textContent = likeData.count;
-                
-                if (likeData.isLiked) {
-                    heartContainer.classList.add('liked');
+            try {
+                if (element.classList.contains('liked')) {
+                    // Unlike
+                    const response = await fetch('/api/likes', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            postId: postId,
+                            action: 'unlike'
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        element.classList.remove('liked');
+                        heartCount.textContent = data.count;
+                    }
+                } else {
+                    // Like
+                    const response = await fetch('/api/likes', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            postId: postId,
+                            action: 'like'
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        element.classList.add('liked');
+                        heartCount.textContent = data.count;
+                    }
                 }
-            });
+            } catch (error) {
+                console.error('Error toggling like:', error);
+                // Fallback to local state if API fails
+                if (element.classList.contains('liked')) {
+                    element.classList.remove('liked');
+                    heartCount.textContent = Math.max(0, currentCount - 1);
+                } else {
+                    element.classList.add('liked');
+                    heartCount.textContent = currentCount + 1;
+                }
+            }
+        }
+
+        // Load all likes from server
+        async function loadAllLikes() {
+            try {
+                const response = await fetch('/api/likes');
+                if (response.ok) {
+                    const likes = await response.json();
+                    
+                    const postCards = document.querySelectorAll('.post-card');
+                    postCards.forEach(postCard => {
+                        const postId = postCard.getAttribute('data-post-id');
+                        const heartContainer = postCard.querySelector('.heart-container');
+                        const heartCount = postCard.querySelector('.heart-count');
+                        
+                        if (likes[postId]) {
+                            heartCount.textContent = likes[postId].count;
+                            if (likes[postId].liked) {
+                                heartContainer.classList.add('liked');
+                            }
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading likes:', error);
+            }
+        }
+
+        // Initialize all post likes from server
+        function initializeLikes() {
+            loadAllLikes();
         }
     </script>
     <!-- Custom Cursor -->
