@@ -180,7 +180,7 @@
         /* Hover tooltip/panel for bakery game */
         .game-preview-hover {
             position: absolute;
-            top: -120px;
+            bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
             background: var(--card-bg);
@@ -194,12 +194,12 @@
             transition: all 0.3s ease;
             width: 300px;
             max-width: 90vw;
+            margin-bottom: 20px;
         }
 
         .game-card:hover .game-preview-hover {
             opacity: 1;
             visibility: visible;
-            top: -130px;
         }
 
         .hover-images {
