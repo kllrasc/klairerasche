@@ -197,11 +197,11 @@
             pointer-events: none;
         }
 
-        .game-card {
+        .game-card-container {
             position: relative;
         }
 
-        .game-card:hover .game-preview-hover {
+        .game-card-container:hover .game-preview-hover {
             opacity: 1;
             visibility: visible;
         }
@@ -487,25 +487,27 @@
         <!-- Games Grid -->
         <div class="games-grid">
             <!-- Game 1 -->
-            <a href="games-bakery-game.html" style="text-decoration: none; color: inherit;">
-                <div class="game-card">
-                    <div class="game-preview-hover">
-                        <div class="hover-images">
-                            <img src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Screenshot%202025-07-20%20at%209.59.11%20PM.png" alt="Bakery Game Screenshot 1" class="hover-image">
-                            <img src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Screenshot%202025-07-20%20at%209.59.25%20PM.png" alt="Bakery Game Screenshot 2" class="hover-image">
-                        </div>
-                        <div class="hover-title">gameplay preview</div>
+            <div class="game-card-container">
+                <div class="game-preview-hover">
+                    <div class="hover-images">
+                        <img src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Screenshot%202025-07-20%20at%209.59.11%20PM.png" alt="Bakery Game Screenshot 1" class="hover-image">
+                        <img src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Screenshot%202025-07-20%20at%209.59.25%20PM.png" alt="Bakery Game Screenshot 2" class="hover-image">
                     </div>
-                    <div class="game-preview" style="background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Screenshot%202025-07-20%20at%209.34.14%20PM.png'); background-size: cover; background-position: center; font-size: 0;"></div>
-                    <div class="game-content">
-                        <div class="game-title">Bakery Game</div>
-                        <div class="game-description">
-                            A fun bakery game about giving cats who are the customers delicious bakery items. Serve adorable feline customers their favorite treats in this cozy baking adventure!
-                        </div>
-                        <div class="game-status status-available">Available Now</div>
-                    </div>
+                    <div class="hover-title">gameplay preview</div>
                 </div>
-            </a>
+                <a href="games-bakery-game.html" style="text-decoration: none; color: inherit;">
+                    <div class="game-card">
+                        <div class="game-preview" style="background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Screenshot%202025-07-20%20at%209.34.14%20PM.png'); background-size: cover; background-position: center; font-size: 0;"></div>
+                        <div class="game-content">
+                            <div class="game-title">Bakery Game</div>
+                            <div class="game-description">
+                                A fun bakery game about giving cats who are the customers delicious bakery items. Serve adorable feline customers their favorite treats in this cozy baking adventure!
+                            </div>
+                            <div class="game-status status-available">Available Now</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
             <!-- Game 2 -->
             <div class="game-card">
