@@ -29,8 +29,8 @@
         }
 
         body, html {
-            min-height: 100vh;
-            overflow-x: hidden;
+            height: 100vh;
+            overflow: hidden;
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             transition: background-color 0.5s ease, background-image 0.5s ease;
@@ -54,17 +54,6 @@
             min-height: 100vh;
             position: relative;
             z-index: 10;
-        }
-
-        .content-section {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            position: relative;
         }
 
         .name-text {
@@ -136,6 +125,32 @@
         .hero-section.show {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Intro Description Section */
+        .intro-section {
+            max-width: 600px;
+            width: 100%;
+            padding: 0 2rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .intro-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            line-height: 1.7;
+            opacity: 0.9;
+            font-weight: 400;
         }
 
         .hero-title {
@@ -259,68 +274,16 @@
             transform: translate(-50%, -50%) scale(1.2);
         }
 
-        /* Profile Banner Section */
-        .profile-banner {
-            width: 80%;
-            max-width: 800px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            margin-bottom: 2rem;
-        }
-
-        .profile-banner.active {
-            opacity: 1;
-        }
-
-        .profile-banner-container {
-            background: linear-gradient(135deg, #B8B8FF, #E6E6FA);
-            border-radius: 30px;
-            padding: 3rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            border: 3px solid rgba(255, 255, 255, 0.6);
-        }
-
-        /* Dark mode banner background */
-        [data-theme="dark"] .profile-banner-container {
-            background: linear-gradient(135deg, #6B46C1, #8B7EC8);
-        }
-
-        .profile-description {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: white;
-            font-style: italic;
-            margin-bottom: 2rem;
-            line-height: 1.4;
-        }
-
-        .profile-info {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .profile-info-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: white;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .profile-info-icon {
-            font-size: 1.2rem;
-        }
-
         /* Contact Header */
         .contact-header {
+            position: fixed;
+            top: 10rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
             text-align: center;
             opacity: 0;
             transition: opacity 0.5s ease;
-            margin-bottom: 2rem;
         }
 
         .contact-header.active {
@@ -341,22 +304,15 @@
             color: #B8B8FF;
         }
 
-        /* Location and Time positioned at edges of contact container */
-        .contact-info {
-            position: absolute;
-            top: 2rem;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 3rem;
-            z-index: 101;
-        }
-
+        /* Location and Time positioned at edges of container */
         .location {
+            position: fixed;
+            top: 9.5rem;
+            left: 50px;
             color: #6B46C1;
             font-weight: 700;
             font-size: 1.2rem;
+            z-index: 100;
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -371,9 +327,13 @@
         }
 
         .live-clock {
+            position: fixed;
+            top: 9.5rem;
+            right: 50px;
             color: #6B46C1;
             font-weight: 700;
             font-size: 1.2rem;
+            z-index: 100;
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -404,41 +364,41 @@
             pointer-events: auto;
         }
 
-        /* Background container for contact area */
-        .contact-background {
-            width: 100%;
-            min-height: 100vh;
+        /* Background container for pile area */
+        .pile-background {
+            position: fixed;
+            top: 9rem;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
             background: #E6E6FA;
             border-radius: 30px;
-            position: relative;
+            z-index: 49;
             opacity: 0;
             transition: opacity 0.5s ease;
             border: 3px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem;
-            margin: 2rem;
         }
 
         /* Dark mode container background */
-        [data-theme="dark"] .contact-background {
+        [data-theme="dark"] .pile-background {
             background: #2d2d4a;
         }
 
-        .contact-background.active {
+        .pile-background.active {
             opacity: 1;
         }
 
         .contact-shape {
+            position: absolute;
             padding: 50px 90px;
             border-radius: 50px;
             font-size: 42px;
             font-weight: 700;
             color: #333333;
             cursor: pointer;
+            top: 9rem;
+            transform: translateX(-50%) translateY(0px);
             transition: all 0.3s ease;
             user-select: none;
             display: flex;
@@ -751,6 +711,13 @@
         <h1 class="name-text"><a href="index.html" style="color: inherit; text-decoration: none;">klaire rasche</a></h1>
         <div class="content-spacer"></div>
         
+        <!-- Intro Description Section -->
+        <div class="intro-section" id="introSection">
+            <p class="intro-text">
+                Welcome to my digital playground! I'm a creative designer who loves turning ideas into beautiful, functional experiences. When I'm not crafting pixels, you'll find me exploring new coffee shops, experimenting with photography, or getting lost in a good book.
+            </p>
+        </div>
+        
         <!-- Hero Section -->
         <div class="hero-section" id="heroSection">
             <h2 class="hero-title">UI/UX Designer<br>Crafting Digital Experiences</h2>
@@ -763,47 +730,22 @@
             </div>
         </div>
 
-        <!-- Profile Banner Section -->
-        <div class="content-section">
-            <div class="profile-banner" id="profileBanner">
-                <div class="profile-banner-container">
-                    <p class="profile-description">
-                        Klaire is a creative designer with a passion for crafting beautiful yet intuitive digital experiences that connect and inspire.
-                    </p>
-                    <div class="profile-info">
-                        <div class="profile-info-item">
-                            <span class="profile-info-icon">📍</span>
-                            <span>Austin, TX</span>
-                        </div>
-                        <div class="profile-info-item">
-                            <span class="profile-info-icon">💼</span>
-                            <span>Freelance Designer</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Contact Header -->
+        <div class="contact-header" id="contactHeader">
+            <h1 class="contact-title">Let's work together!</h1>
         </div>
 
-        <!-- Contact Section -->
-        <div class="content-section">
-            <div class="contact-background" id="contactBackground">
-                <!-- Location and Time at edges of contact container -->
-                <div class="contact-info">
-                    <div class="location" id="location">Austin, TX</div>
-                    <div class="live-clock" id="liveClock">08:41 PM</div>
-                </div>
+        <!-- Location and Time at edges of container -->
+        <div class="location" id="location">Austin, TX</div>
+        <div class="live-clock" id="liveClock">08:41 PM</div>
 
-                <!-- Contact Header -->
-                <div class="contact-header" id="contactHeader">
-                    <h1 class="contact-title">Let's work together!</h1>
-                </div>
+        <!-- Pile Background Container -->
+        <div class="pile-background" id="pileBackground"></div>
 
-                <!-- Contact Shapes -->
-                <div class="contact-shapes-container" id="contactShapes">
-                    <div class="contact-shape shape-2" onclick="openContactModal()">
-                        <span>Say hiii</span>
-                    </div>
-                </div>
+        <!-- Falling Contact Shapes -->
+        <div class="contact-shapes-container" id="contactShapes">
+            <div class="contact-shape shape-2" onclick="openContactModal()">
+                <span>Say hiii</span>
             </div>
         </div>
 
@@ -910,45 +852,74 @@
     </div>
 
     <script>
+        let scrollStep = 0;
+        const maxScrollSteps = 6; // Updated to 6 for the 6 background images
+        let scrollTimeout;
         let animationComplete = false;
+        let lastScrollTime = 0;
+        const scrollCooldown = 800; // 800ms cooldown between scrolls
+        
+        // Background images for light mode
+        const backgroundImages = [
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG6.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG5.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG4.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG3.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG2.jpg',
+            'https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//BG1.jpg'
+        ];
 
         // Wait for name animation to complete
         setTimeout(() => {
             document.querySelector('.name-text').classList.add('move-to-top');
             document.querySelector('.content-spacer').classList.add('active');
             animationComplete = true;
-            console.log('Animation complete');
+            console.log('Animation complete, scrolling enabled');
             
-            // Show profile banner
+            // Start contact shapes animation
             setTimeout(() => {
-                document.getElementById('profileBanner').classList.add('active');
+                document.getElementById('contactHeader').classList.add('active');
+                document.getElementById('contactShapes').classList.add('active');
+                document.getElementById('pileBackground').classList.add('active');
+                document.getElementById('location').classList.add('active');
+                document.getElementById('liveClock').classList.add('active');
                 startLiveClock();
-                
-                // Set up intersection observer for contact section
-                setupScrollObserver();
             }, 1000);
         }, 3000);
 
-        // Set up intersection observer for contact section
-        function setupScrollObserver() {
-            const contactBackground = document.getElementById('contactBackground');
+        // Function to update background based on scroll progress
+        function updateBackground() {
+            const body = document.body;
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Show contact section elements
-                        contactBackground.classList.add('active');
-                        document.getElementById('contactHeader').classList.add('active');
-                        document.getElementById('contactShapes').classList.add('active');
-                        document.getElementById('location').classList.add('active');
-                        document.getElementById('liveClock').classList.add('active');
-                    }
-                });
-            }, {
-                threshold: 0.3 // Trigger when 30% of the element is visible
-            });
+            // Keep consistent periwinkle background
+            body.style.backgroundImage = 'none';
+            body.style.backgroundColor = 'var(--bg-color)';
             
-            observer.observe(contactBackground);
+            console.log('Background updated, scrollStep:', scrollStep);
+        }
+
+        // Function to show content based on scroll step
+        function showContent() {
+            console.log('showContent called, scrollStep:', scrollStep);
+            
+            const introSection = document.getElementById('introSection');
+            const heroSection = document.getElementById('heroSection');
+            
+            if (scrollStep >= 1) {
+                introSection.classList.add('show');
+                console.log('Intro section shown');
+            } else {
+                introSection.classList.remove('show');
+                console.log('Intro section hidden');
+            }
+            
+            if (scrollStep >= 2) {
+                heroSection.classList.add('show');
+                console.log('Hero section shown');
+            } else {
+                heroSection.classList.remove('show');
+                console.log('Hero section hidden');
+            }
         }
 
         // Theme toggle functionality
@@ -966,6 +937,9 @@
                 toggleSwitch.classList.add('dark');
                 localStorage.setItem('theme', 'dark');
             }
+            
+            // Update background after theme change
+            updateBackground();
         }
 
         // Load saved theme
@@ -977,6 +951,9 @@
                 document.body.setAttribute('data-theme', 'dark');
                 toggleSwitch.classList.add('dark');
             }
+            
+            // Set initial background
+            updateBackground();
         });
 
         // Custom cursor functionality
@@ -999,7 +976,102 @@
             });
         });
 
+        // Slower scroll handling with cooldown
+        document.addEventListener('wheel', (e) => {
+            if (!animationComplete) {
+                console.log('Animation not complete yet, ignoring scroll');
+                return;
+            }
+            
+            const currentTime = Date.now();
+            if (currentTime - lastScrollTime < scrollCooldown) {
+                console.log('Scroll cooldown active, ignoring scroll');
+                return;
+            }
+            
+            e.preventDefault();
+            console.log('Scroll detected, deltaY:', e.deltaY);
+            
+            if (e.deltaY > 50 && scrollStep < maxScrollSteps) {
+                // Scroll down (increased threshold)
+                scrollStep++;
+                lastScrollTime = currentTime;
+                console.log('Scrolling down to step:', scrollStep);
+                updateBackground();
+                showContent();
+            } else if (e.deltaY < -50 && scrollStep > 0) {
+                // Scroll up (increased threshold)
+                scrollStep--;
+                lastScrollTime = currentTime;
+                console.log('Scrolling up to step:', scrollStep);
+                updateBackground();
+                showContent();
+            }
+        }, { passive: false });
 
+        // Touch events for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            if (!animationComplete) return;
+            
+            const currentTime = Date.now();
+            if (currentTime - lastScrollTime < scrollCooldown) {
+                console.log('Touch cooldown active, ignoring touch');
+                return;
+            }
+            
+            touchEndY = e.changedTouches[0].screenY;
+            const touchDiff = touchStartY - touchEndY;
+            
+            console.log('Touch detected, diff:', touchDiff);
+            
+            if (touchDiff > 50 && scrollStep < maxScrollSteps) {
+                // Swipe up (scroll down)
+                scrollStep++;
+                lastScrollTime = currentTime;
+                console.log('Touch scroll down to step:', scrollStep);
+                updateBackground();
+                showContent();
+            } else if (touchDiff < -50 && scrollStep > 0) {
+                // Swipe down (scroll up)
+                scrollStep--;
+                lastScrollTime = currentTime;
+                console.log('Touch scroll up to step:', scrollStep);
+                updateBackground();
+                showContent();
+            }
+        });
+
+        // Debug: Test scroll functionality with keyboard
+        document.addEventListener('keydown', (e) => {
+            if (!animationComplete) return;
+            
+            const currentTime = Date.now();
+            if (currentTime - lastScrollTime < scrollCooldown) {
+                console.log('Keyboard cooldown active, ignoring keypress');
+                return;
+            }
+            
+            if (e.key === 'ArrowDown' && scrollStep < maxScrollSteps) {
+                scrollStep++;
+                lastScrollTime = currentTime;
+                console.log('Keyboard down to step:', scrollStep);
+                updateBackground();
+                showContent();
+            } else if (e.key === 'ArrowUp' && scrollStep > 0) {
+                scrollStep--;
+                lastScrollTime = currentTime;
+                console.log('Keyboard up to step:', scrollStep);
+                updateBackground();
+                showContent();
+            }
+        });
 
         // Contact Modal Functions
         function openContactModal() {
