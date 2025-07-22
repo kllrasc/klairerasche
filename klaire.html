@@ -258,11 +258,16 @@
             width: 80%;
             max-width: 800px;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: all 0.5s ease;
         }
 
         .profile-banner.active {
             opacity: 1;
+        }
+
+        .profile-banner.scroll-down {
+            transform: translateX(-50%) translateY(-100vh);
+            opacity: 0;
         }
 
         .profile-banner-container {
@@ -311,17 +316,22 @@
         /* Contact Header */
         .contact-header {
             position: fixed;
-            top: 22rem;
+            top: 10rem;
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
             text-align: center;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: all 0.5s ease;
         }
 
         .contact-header.active {
             opacity: 1;
+        }
+
+        .contact-header.show-contact {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         .contact-title {
@@ -401,7 +411,7 @@
         /* Background container for pile area */
         .pile-background {
             position: fixed;
-            top: 21rem;
+            top: 9rem;
             bottom: 20px;
             left: 20px;
             right: 20px;
@@ -431,7 +441,7 @@
             font-weight: 700;
             color: #333333;
             cursor: pointer;
-            top: 21rem;
+            top: 9rem;
             transform: translateX(-50%) translateY(0px);
             transition: all 0.3s ease;
             user-select: none;
@@ -922,14 +932,11 @@
             animationComplete = true;
             console.log('Animation complete, scrolling enabled');
             
-            // Start contact shapes animation
+            // Start with profile banner visible
             setTimeout(() => {
                 document.getElementById('profileBanner').classList.add('active');
-                document.getElementById('contactHeader').classList.add('active');
-                document.getElementById('contactShapes').classList.add('active');
-                document.getElementById('pileBackground').classList.add('active');
-                document.getElementById('location').classList.add('active');
-                document.getElementById('liveClock').classList.add('active');
+                scrollStep = 0; // Start at step 0 to show profile banner first
+                showContent();
                 startLiveClock();
             }, 1000);
         }, 3000);
@@ -950,13 +957,39 @@
             console.log('showContent called, scrollStep:', scrollStep);
             
             const heroSection = document.getElementById('heroSection');
+            const profileBanner = document.getElementById('profileBanner');
+            const contactHeader = document.getElementById('contactHeader');
+            const contactShapes = document.getElementById('contactShapes');
+            const pileBackground = document.getElementById('pileBackground');
+            const location = document.getElementById('location');
+            const liveClock = document.getElementById('liveClock');
             
-            if (scrollStep >= 2) {
+            if (scrollStep === 0) {
+                // Show profile banner only
+                profileBanner.classList.remove('scroll-down');
+                contactHeader.classList.remove('show-contact');
+                contactShapes.classList.remove('active');
+                pileBackground.classList.remove('active');
+                heroSection.classList.remove('show');
+            } else if (scrollStep === 1) {
+                // Hide profile banner, show contact section
+                profileBanner.classList.add('scroll-down');
+                contactHeader.classList.add('show-contact');
+                contactShapes.classList.add('active');
+                pileBackground.classList.add('active');
+                location.classList.add('active');
+                liveClock.classList.add('active');
+                heroSection.classList.remove('show');
+            } else if (scrollStep >= 2) {
+                // Show hero section
+                profileBanner.classList.add('scroll-down');
+                contactHeader.classList.remove('show-contact');
+                contactShapes.classList.remove('active');
+                pileBackground.classList.remove('active');
+                location.classList.remove('active');
+                liveClock.classList.remove('active');
                 heroSection.classList.add('show');
                 console.log('Hero section shown');
-            } else {
-                heroSection.classList.remove('show');
-                console.log('Hero section hidden');
             }
         }
 
