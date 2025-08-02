@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>klaire rasche - portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             /* Light mode colors */
-            --bg-color: #CCCCFF;
-            --text-color: white;
+            --bg-color: #FFCAD4;
+            --text-color: #000000;
             --toggle-bg: rgba(255, 255, 255, 0.2);
             --toggle-handle: white;
         }
 
         [data-theme="dark"] {
             /* Dark mode colors */
-            --bg-color: #1a1a2e;
+            --bg-color: #B6465F;
             --text-color: #e0e0e0;
             --toggle-bg: rgba(255, 255, 255, 0.1);
             --toggle-handle: #e0e0e0;
@@ -31,10 +34,12 @@
         body, html {
             min-height: 100vh;
             overflow-x: hidden;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Merriweather', serif;
             background-color: var(--bg-color);
             transition: background-color 0.5s ease;
             scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
         }
 
         .main-container {
@@ -45,31 +50,105 @@
             min-height: 100vh;
             position: relative;
             z-index: 10;
+            padding-top: 0;
+            margin-top: 0;
         }
 
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
 
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-logo a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        /* Social links in header */
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: opacity 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+        
+        .blog-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .blog-link span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-family: 'Merriweather', serif;
+        }
 
         .name-text {
+            font-family: 'Playfair Display', serif;
             font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 900;
+            font-weight: 700;
             color: var(--text-color);
-            text-transform: lowercase;
-            letter-spacing: 0.1em;
+            text-transform: none;
+            letter-spacing: 0.05em;
             text-align: center;
             white-space: nowrap;
             opacity: 0;
             transform: scale(0.3);
             animation: scaleAndAppear 2s ease-out forwards;
-            position: absolute;
-            top: 40%;
+            position: fixed;
+            top: 50vh;
             left: 50%;
             transform-origin: center;
             transform: translate(-50%, -50%) scale(0.3);
+            font-style: italic;
         }
 
         .name-text.move-to-top {
             position: fixed;
-            top: 4rem;
+            top: 8rem;
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
@@ -98,7 +177,7 @@
         }
 
         .content-spacer.active {
-            height: 9rem;
+            height: 13rem;
             opacity: 1;
             transition: all 1s ease-out;
         }
@@ -119,7 +198,7 @@
 
         /* Hero section */
         .hero-section {
-            background: #E6E6FA;
+            background: #EBD4CB;
             border-radius: 40px;
             margin: 2rem auto;
             padding: 2.5rem 5rem;
@@ -132,9 +211,10 @@
         }
 
         .hero-text {
+            font-family: 'Merriweather', serif;
             font-size: clamp(1.4rem, 3vw, 2.2rem);
             font-weight: 300;
-            color: #6B46C1;
+            color: var(--text-color);
             line-height: 1.4;
             font-style: italic;
             margin: 0;
@@ -145,6 +225,28 @@
 
         .hero-text strong {
             font-weight: 600;
+        }
+
+        .cycling-word-container {
+            display: inline-block;
+            position: relative;
+            margin: 0 1.5rem;
+            width: 140px;
+            text-align: center;
+        }
+
+        .cycling-word {
+            display: inline-block;
+            font-style: italic;
+            font-family: 'Merriweather', serif;
+            color: var(--text-color);
+            background: rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--text-color);
+            border-radius: 25px;
+            padding: 0.2rem 0.8rem;
+            position: relative;
+            transition: all 0.3s ease;
+            min-width: 80px;
         }
 
         /* Scrolling ticker */
@@ -164,10 +266,11 @@
             display: inline-block;
             animation: scroll 30s linear infinite;
             padding: 0;
-            color: #333;
+            color: #000000;
             font-weight: 600;
             font-size: 1.2rem;
             letter-spacing: 0.1em;
+            font-family: 'Merriweather', serif;
         }
 
         @keyframes scroll {
@@ -196,7 +299,7 @@
         }
 
         .portfolio-card {
-            background: #E6E6FA;
+            background: #EBD4CB;
             border-radius: 30px;
             overflow: hidden;
             transition: all 0.3s ease;
@@ -219,10 +322,11 @@
         }
 
         .card-number {
+            font-family: 'Merriweather', serif;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #6B46C1;
-            background: rgba(107, 70, 193, 0.1);
+            color: var(--text-color);
+            background: rgba(0, 0, 0, 0.1);
             padding: 0.5rem 1rem;
             border-radius: 20px;
         }
@@ -235,17 +339,20 @@
         }
 
         .card-title {
+            font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            font-weight: 800;
-            color: #6B46C1;
+            font-weight: 700;
+            color: var(--text-color);
             margin-bottom: 1.5rem;
             line-height: 1.1;
             margin-top: -0.5rem;
+            font-style: italic;
         }
 
         .card-description {
+            font-family: 'Merriweather', serif;
             font-size: 1.1rem;
-            color: #6B46C1;
+            color: var(--text-color);
             line-height: 1.6;
             margin-bottom: 2rem;
             flex-grow: 1;
@@ -259,8 +366,9 @@
         }
 
         .card-tag {
-            background: #6B46C1;
-            color: white;
+            font-family: 'Merriweather', serif;
+            background: var(--text-color);
+            color: var(--bg-color);
             padding: 0.6rem 1.2rem;
             border-radius: 25px;
             font-size: 0.9rem;
@@ -271,7 +379,8 @@
         }
 
         .card-tag:hover {
-            background: #5B36B1;
+            background: var(--text-color);
+            opacity: 0.8;
             transform: translateY(-2px);
         }
 
@@ -280,7 +389,7 @@
             position: fixed;
             top: 1rem;
             right: 2rem;
-            z-index: 1000;
+            z-index: 1001;
         }
 
         .toggle-switch {
@@ -340,24 +449,24 @@
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
-            background: #B8B8FF;
+            background: #FF8FA3;
             border-radius: 50px;
             padding: 1rem 2rem;
             display: flex;
             align-items: center;
             gap: 1rem;
-            box-shadow: 0 8px 25px rgba(184, 184, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(255, 143, 163, 0.3);
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 1000;
             border: none;
-            font-family: inherit;
+            font-family: 'Merriweather', serif;
         }
 
         .contact-button:hover {
             transform: translateX(-50%) translateY(-3px);
-            box-shadow: 0 12px 35px rgba(184, 184, 255, 0.4);
-            background: #A8A8FF;
+            box-shadow: 0 12px 35px rgba(255, 143, 163, 0.4);
+            background: #FF7A8F;
         }
 
         .contact-avatar {
@@ -371,19 +480,20 @@
         }
 
         .contact-text {
-            color: #333333;
+            color: var(--text-color);
             font-size: 1.1rem;
             font-weight: 600;
             margin: 0;
+            font-family: 'Merriweather', serif;
         }
 
         /* Dark mode contact button */
         [data-theme="dark"] .contact-button {
-            background: #2d2d4a;
+            background: #A4133C;
         }
 
         [data-theme="dark"] .contact-button:hover {
-            background: #3d3d5a;
+            background: #B4244C;
         }
 
         [data-theme="dark"] .contact-text {
@@ -394,6 +504,11 @@
         .iphone-showcase {
             padding: 4rem 0;
             text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin: 2rem auto;
+            max-width: 1400px;
+            width: 99%;
         }
 
         .iphone-grid {
@@ -403,6 +518,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+            align-items: start;
         }
 
         .iphone-container {
@@ -412,52 +528,8 @@
             gap: 1.5rem;
         }
 
-        .iphone {
-            position: relative;
-            width: 180px;
-            height: 360px;
-            background: linear-gradient(145deg, #2c2c2e, #1c1c1e);
-            border-radius: 40px;
-            padding: 8px;
-            box-shadow: 
-                0 0 0 1px #3a3a3c,
-                0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .iphone-screen {
-            width: 100%;
-            height: 100%;
-            background: #000;
-            border-radius: 32px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .iphone-notch {
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 24px;
-            background: #000;
-            border-radius: 12px;
-            z-index: 10;
-        }
-
-        .iphone-content {
-            width: 100%;
-            height: 100%;
-            background: #000;
-            border-radius: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-align: center;
-            position: relative;
+        .iphone-container:hover .iphone-image {
+            transform: scale(1.05);
         }
 
         .company-logo {
@@ -476,36 +548,262 @@
             background: transparent;
         }
 
-        /* Dark mode hero section and cards */
-        [data-theme="dark"] .hero-section {
-            background: #404269;
+        .iphone-with-video {
+            position: relative;
+            display: inline-block;
         }
 
-        [data-theme="dark"] .hero-text {
-            color: #B8B8FF;
+        .iphone-frame {
+            width: 220px;
+            height: 440px;
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            border: 4px solid #333;
+            border-radius: 40px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            margin: 0 auto;
+            min-width: 220px;
+            min-height: 440px;
+            flex-shrink: 0;
+        }
+
+        /* Add a notch to make it look more like an iPhone */
+        .iphone-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 20px;
+            background: #333;
+            border-radius: 0 0 10px 10px;
+            z-index: 3;
+        }
+
+        .iphone-container:hover .iphone-frame {
+            transform: scale(1.05);
+        }
+
+
+
+        .iphone-video-overlay {
+            position: absolute;
+            top: 12px;
+            left: 8px;
+            width: calc(100% - 16px);
+            height: calc(100% - 24px);
+            object-fit: cover;
+            border-radius: 32px;
+            z-index: 2;
+            background: #000;
+            pointer-events: none;
+        }
+
+        .iphone-image {
+            position: relative;
+            z-index: 1;
+            width: 220px;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+            border: 2px solid #ccc;
+            border-radius: 40px;
+            background: #f0f0f0;
+        }
+
+        /* Fallback iPhone frame if image doesn't load */
+        .iphone-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid #333;
+            border-radius: 40px;
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            z-index: -1;
+        }
+
+        /* Dark mode hero section and cards */
+        [data-theme="dark"] .hero-section {
+            background: #E8B8B0;
         }
 
         [data-theme="dark"] .portfolio-card {
-            background: #404269;
+            background: #E8B8B0;
         }
 
         [data-theme="dark"] .card-number {
-            color: #B8B8FF;
-            background: rgba(184, 184, 255, 0.1);
-        }
-
-        [data-theme="dark"] .card-title,
-        [data-theme="dark"] .card-description {
-            color: #B8B8FF;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         [data-theme="dark"] .card-tag {
-            background: #B8B8FF;
-            color: #404269;
+            background: var(--text-color);
+            color: var(--bg-color);
         }
 
         [data-theme="dark"] .card-tag:hover {
-            background: #A8A8FF;
+            background: var(--text-color);
+            opacity: 0.8;
+        }
+
+        /* Case Studies Modal */
+        .case-studies-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .case-studies-modal.active {
+            display: flex;
+        }
+
+        .case-studies-modal .modal-content {
+            background: var(--bg-color);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 1000px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .case-studies-modal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .case-studies-modal .modal-header h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-color);
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .case-studies-modal .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .case-studies-modal .close-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .case-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .case-study-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .case-study-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .case-study-preview {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .case-study-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: white;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .case-study-content h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+            font-style: italic;
+        }
+
+        .case-study-content p {
+            font-family: 'Merriweather', serif;
+            color: var(--text-color);
+            opacity: 0.8;
+            margin: 0 0 1rem 0;
+            font-size: 1rem;
+        }
+
+        .case-study-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .case-study-tags span {
+            font-family: 'Merriweather', serif;
+            background: rgba(107, 70, 193, 0.2);
+            color: var(--text-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Dark mode case studies */
+        [data-theme="dark"] .case-study-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .case-study-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         /* iPhone showcase responsive */
@@ -515,45 +813,78 @@
                 gap: 1.5rem;
             }
             
-            .iphone {
-                width: 140px;
-                height: 280px;
-                padding: 6px;
+            .iphone-image {
+                width: 170px;
             }
             
-            .iphone-notch {
-                width: 60px;
-                height: 18px;
+            .iphone-video-overlay {
                 top: 6px;
+                left: 6px;
+                width: calc(100% - 12px);
+                height: calc(100% - 12px);
+            }
+            
+            .case-studies-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
         }
 
         @media (max-width: 768px) {
+            .navbar {
+                padding: 0.5rem 0;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-logo a {
+                font-size: 1.2rem;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+
+            .blog-link {
+                padding: 0.4rem 0.8rem;
+            }
+
+            .blog-link span {
+                font-size: 0.8rem;
+            }
+
             .iphone-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
             }
             
-            .iphone {
-                width: 120px;
-                height: 240px;
-                padding: 4px;
+            .iphone-image {
+                width: 150px;
             }
             
-            .iphone-notch {
-                width: 50px;
-                height: 15px;
+            .iphone-video-overlay {
                 top: 4px;
+                left: 4px;
+                width: calc(100% - 8px);
+                height: calc(100% - 8px);
             }
             
             .company-logo {
                 width: 60px;
                 height: 30px;
             }
-        }
 
-        /* Responsive design */
-        @media (max-width: 768px) {
+            .case-studies-modal .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            .case-studies-modal .modal-header h2 {
+                font-size: 1.5rem;
+            }
+
             .hero-section {
                 margin: 1rem auto;
                 padding: 2.5rem 2rem;
@@ -568,8 +899,6 @@
                 max-width: none;
                 padding: 1rem 0;
             }
-
-
 
             .portfolio-grid {
                 grid-template-columns: 1fr;
@@ -594,8 +923,6 @@
             .card-title {
                 font-size: 2rem;
             }
-
-
 
             .card-tags {
                 gap: 0.5rem;
@@ -652,6 +979,29 @@
         </div>
     </div>
 
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">klaire rasche</a>
+            </div>
+            <div class="social-links">
+                <a href="blog.html" class="nav-link blog-link">
+                    <span>Blog</span>
+                </a>
+                <a href="games.html" class="nav-link blog-link">
+                    <span>Games</span>
+                </a>
+                <a href="https://www.instagram.com/klaire.ras" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/klairerasche" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <!-- Main content -->
     <div class="main-container">
         <h1 class="name-text"><a href="index.html" style="color: inherit; text-decoration: none;">klaire rasche</a></h1>
@@ -662,22 +1012,26 @@
         <!-- Hero Section -->
         <div class="hero-section">
             <p class="hero-text">
-                <strong>klaire</strong> is a creative professional with a passion for crafting 
-                beautiful and strategic <strong>brand experiences at scale.</strong>
+                <strong>klaire</strong> is a 
+                <span class="cycling-word-container">
+                    <span class="cycling-word" id="cyclingWord">graphic</span>
+                </span> 
+                designer with a passion for crafting 
+                beautiful and strategic <strong>digital experiences at scale.</strong>
             </p>
         </div>
 
         <!-- Scrolling Ticker -->
         <div class="ticker-container">
             <div class="ticker">
-                <span class="ticker-text">CASE STUDIES</span>
-                <span class="ticker-text">BRAND MARKETING</span>
+                <span class="ticker-text">UI/UX DESIGN</span>
+                <span class="ticker-text">PRODUCT DESIGN</span>
+                <span class="ticker-text">BRAND DIRECTION</span>
                 <span class="ticker-text">ART DIRECTION</span>
-                <span class="ticker-text">DESIGN PROCESS</span>
-                <span class="ticker-text">CASE STUDIES</span>
-                <span class="ticker-text">BRAND MARKETING</span>
+                <span class="ticker-text">UI/UX DESIGN</span>
+                <span class="ticker-text">PRODUCT DESIGN</span>
+                <span class="ticker-text">BRAND DIRECTION</span>
                 <span class="ticker-text">ART DIRECTION</span>
-                <span class="ticker-text">DESIGN PROCESS</span>
             </div>
         </div>
 
@@ -685,64 +1039,58 @@
         <div class="iphone-showcase">
             <div class="iphone-grid">
                 <div class="iphone-container">
-                    <div class="iphone">
-                        <div class="iphone-screen">
-                            <div class="iphone-notch"></div>
-                            <div class="iphone-content">
-                                <!-- Video content will go here -->
-                                <div style="color: #666; font-size: 0.8rem;">Video Content</div>
-                            </div>
+                    <div class="iphone-with-video">
+                        <div class="iphone-frame">
+                            <video class="iphone-video-overlay" autoplay muted loop playsinline>
+                                <source src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//snaptik_7307682365491416363.MP4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                     </div>
                     <div class="company-logo" style="background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Remove%20background%20project.png');"></div>
                 </div>
 
                 <div class="iphone-container">
-                    <div class="iphone">
-                        <div class="iphone-screen">
-                            <div class="iphone-notch"></div>
-                            <div class="iphone-content">
-                                <!-- Video content will go here -->
-                                <div style="color: #666; font-size: 0.8rem;">Video Content</div>
-                            </div>
+                    <div class="iphone-with-video">
+                        <div class="iphone-frame">
+                            <video class="iphone-video-overlay" autoplay muted loop playsinline>
+                                <source src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Untitled.mov" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                     </div>
                     <div class="company-logo" style="background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Screenshot%202025-07-25%20at%206.16.37%20PM.png');"></div>
                 </div>
 
                 <div class="iphone-container">
-                    <div class="iphone">
-                        <div class="iphone-screen">
-                            <div class="iphone-notch"></div>
-                            <div class="iphone-content">
-                                <!-- Video content will go here -->
-                                <div style="color: #666; font-size: 0.8rem;">Video Content</div>
-                            </div>
+                    <div class="iphone-with-video">
+                        <div class="iphone-frame">
+                            <video class="iphone-video-overlay" autoplay muted loop playsinline>
+                                <source src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//ScreenRecording_07-30-2025%2019.mov" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                     </div>
                     <div class="company-logo" style="background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Remove%20background%20project%20(1).png');"></div>
                 </div>
 
                 <div class="iphone-container">
-                    <div class="iphone">
-                        <div class="iphone-screen">
-                            <div class="iphone-notch"></div>
-                            <div class="iphone-content">
-                                <!-- Video content will go here -->
-                                <div style="color: #666; font-size: 0.8rem;">Video Content</div>
-                            </div>
+                    <div class="iphone-with-video">
+                        <div class="iphone-frame">
+                            <video class="iphone-video-overlay" autoplay muted loop playsinline>
+                                <source src="https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//ScreenRecording_07-30-2025%2018-46-37_1.mov" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                     </div>
                     <div class="company-logo" style="background-image: url('https://cxsmusbbgiiiywalaord.supabase.co/storage/v1/object/public/portfolio//Remove%20background%20project%20(2).png');"></div>
                 </div>
 
                 <div class="iphone-container">
-                    <div class="iphone">
-                        <div class="iphone-screen">
-                            <div class="iphone-notch"></div>
-                            <div class="iphone-content">
-                                <!-- Video content will go here -->
-                                <div style="color: #666; font-size: 0.8rem;">Video Content</div>
+                    <div class="iphone-with-video">
+                        <div class="iphone-frame">
+                            <div class="iphone-video-overlay" style="background: #000; display: flex; align-items: center; justify-content: center; color: white; font-family: 'Merriweather', serif;">
+                                <span>Coming Soon</span>
                             </div>
                         </div>
                     </div>
@@ -753,21 +1101,21 @@
 
         <!-- Portfolio Grid -->
         <div class="portfolio-grid">
-            <div class="portfolio-card">
+            <div class="portfolio-card" onclick="openCaseStudies()" style="cursor: pointer;">
                 <div class="card-header">
                     <div></div>
                     <div class="card-number">(01)</div>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Content Strategy</h3>
+                    <h3 class="card-title">UI/UX & Product Design</h3>
                     <p class="card-description">
-                        I create social strategies to maximize reach, engagement, and conversions through data-driven insights and creative execution.
+                        User-centered digital experiences that blend beautiful design with intuitive functionality.
                     </p>
                     <div class="card-tags">
-                        <button class="card-tag">Research & Insights</button>
-                        <button class="card-tag">Brand Voice</button>
-                        <button class="card-tag">Value Propositions</button>
-                        <button class="card-tag">Personality Traits</button>
+                        <button class="card-tag">User Research</button>
+                        <button class="card-tag">Wireframing</button>
+                        <button class="card-tag">Prototyping</button>
+                        <button class="card-tag">UI Design</button>
                     </div>
                 </div>
             </div>
@@ -778,15 +1126,15 @@
                     <div class="card-number">(02)</div>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Brand Marketing</h3>
+                    <h3 class="card-title">Brand Direction</h3>
                     <p class="card-description">
-                        Developing comprehensive brand strategies and marketing campaigns that resonate with target audiences and drive meaningful engagement.
+                        Strategic brand positioning and identity development that creates lasting connections.
                     </p>
                     <div class="card-tags">
                         <button class="card-tag">Brand Strategy</button>
-                        <button class="card-tag">Campaign Development</button>
+                        <button class="card-tag">Brand Identity</button>
+                        <button class="card-tag">Positioning</button>
                         <button class="card-tag">Market Research</button>
-                        <button class="card-tag">Audience Analysis</button>
                     </div>
                 </div>
             </div>
@@ -816,15 +1164,71 @@
                     <div class="card-number">(04)</div>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Design</h3>
+                    <h3 class="card-title">Content Strategy</h3>
                     <p class="card-description">
-                        Creating stunning visual identities, digital designs, and brand assets that capture the essence of your brand and connect with your audience.
+                        I create social strategies to maximize reach, engagement, and conversions through data-driven insights and creative execution.
                     </p>
                     <div class="card-tags">
-                        <button class="card-tag">Visual Identity</button>
-                        <button class="card-tag">Digital Design</button>
-                        <button class="card-tag">Brand Assets</button>
-                        <button class="card-tag">UI/UX Design</button>
+                        <button class="card-tag">Research & Insights</button>
+                        <button class="card-tag">Brand Voice</button>
+                        <button class="card-tag">Value Propositions</button>
+                        <button class="card-tag">Personality Traits</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Studies Modal -->
+        <div class="case-studies-modal" id="caseStudiesModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>UI/UX & Product Design Case Studies</h2>
+                    <button class="close-btn" onclick="closeCaseStudies()">×</button>
+                </div>
+                <div class="case-studies-grid">
+                    <div class="case-study-card" onclick="window.open('case-study-1.html', '_blank')">
+                        <div class="case-study-preview">
+                            <div class="case-study-number">01</div>
+                        </div>
+                        <div class="case-study-content">
+                            <h3>Halter Ranch Winery</h3>
+                            <p>Redesign for a Winery Booking Flow</p>
+                            <div class="case-study-tags">
+                                <span>UX Research</span>
+                                <span>Booking Flow</span>
+                                <span>Winery</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-study-card" onclick="window.open('case-study-2.html', '_blank')">
+                        <div class="case-study-preview">
+                            <div class="case-study-number">02</div>
+                        </div>
+                        <div class="case-study-content">
+                            <h3>Season Magazine</h3>
+                            <p>Campus Magazine Website/App</p>
+                            <div class="case-study-tags">
+                                <span>Digital Magazine</span>
+                                <span>Mobile App</span>
+                                <span>Content Design</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-study-card" onclick="window.open('case-study-3.html', '_blank')">
+                        <div class="case-study-preview">
+                            <div class="case-study-number">03</div>
+                        </div>
+                        <div class="case-study-content">
+                            <h3>Glow Recipe</h3>
+                            <p>Beauty E-commerce Experience</p>
+                            <div class="case-study-tags">
+                                <span>E-commerce</span>
+                                <span>Beauty</span>
+                                <span>Product Design</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -843,7 +1247,32 @@
         // Page initialization
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Portfolio page loaded');
+            startWordCycling();
         });
+
+        // Word cycling functionality
+        function startWordCycling() {
+            const words = ['graphic', 'product', 'brand', 'ui/ux'];
+            const cyclingWord = document.getElementById('cyclingWord');
+            let currentIndex = 0;
+
+            function cycleWord() {
+                cyclingWord.style.opacity = '0';
+                cyclingWord.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % words.length;
+                    cyclingWord.textContent = words[currentIndex];
+                    cyclingWord.style.opacity = '1';
+                    cyclingWord.style.transform = 'translateY(0)';
+                }, 300);
+            }
+
+            // Start cycling after initial delay
+            setTimeout(() => {
+                setInterval(cycleWord, 2000); // Change word every 2 seconds
+            }, 1000);
+        }
 
         // Wait for name animation to complete (exactly like klaire.html)
         setTimeout(() => {
@@ -872,6 +1301,25 @@
                 localStorage.setItem('theme', 'dark');
             }
         }
+
+        // Case Studies Modal Functions
+        function openCaseStudies() {
+            document.getElementById('caseStudiesModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCaseStudies() {
+            document.getElementById('caseStudiesModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('caseStudiesModal');
+            if (e.target === modal) {
+                closeCaseStudies();
+            }
+        });
 
         // Load saved theme
         document.addEventListener('DOMContentLoaded', function() {

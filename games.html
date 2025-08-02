@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>klaire's games - play & explore</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             /* Light mode colors */
@@ -74,7 +75,7 @@
             position: fixed;
             top: 1rem;
             right: 2rem;
-            z-index: 1000;
+            z-index: 1001;
         }
 
         .toggle-switch {
@@ -105,12 +106,83 @@
             transform: translateX(30px);
         }
 
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-logo a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Social links in header */
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .social-links a {
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            transition: opacity 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+        
+        .blog-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .blog-link span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
         /* Main container */
         .games-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 1rem;
             min-height: 100vh;
+            margin-top: 6rem;
         }
 
         /* Header */
@@ -655,6 +727,29 @@
             <div class="toggle-handle"></div>
         </div>
     </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">klaire rasche</a>
+            </div>
+            <div class="social-links">
+                <a href="blog.html" class="nav-link blog-link">
+                    <span>Blog</span>
+                </a>
+                <a href="games.html" class="nav-link blog-link">
+                    <span>Games</span>
+                </a>
+                <a href="https://www.instagram.com/klaire.ras" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/klairerasche" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Main Games Container -->
     <div class="games-container">
