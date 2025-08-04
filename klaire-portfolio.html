@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -169,6 +171,17 @@
                 transform: translate(-50%, -50%) scale(1);
             }
         }
+
+        .name-text.move-to-top {
+            position: fixed;
+            top: 8rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            transition: all 1s ease-out;
+        }
+
+
 
         /* Content spacer for when title moves to top */
         .content-spacer {
@@ -1246,7 +1259,8 @@
     <script>
         // Page initialization
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Portfolio page loaded');
+            console.log('Portfolio page loaded - animation should start');
+            console.log('Name element:', document.querySelector('.name-text'));
             startWordCycling();
         });
 
